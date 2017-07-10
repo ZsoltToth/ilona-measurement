@@ -44,6 +44,13 @@ public class MeasurementController {
 	@Autowired
 	private MeasurementService measurementManagerService;
 
+	
+	
+	@RequestMapping("/")
+	public ModelAndView loadHomePage() {
+		ModelAndView result = new ModelAndView("index");
+		return result;
+	}
 	/**
 	 * Lists the available measurements based on the zoneID which is not
 	 * necessarily required.
@@ -142,28 +149,6 @@ public class MeasurementController {
 		return true;
 	}
 
-	// @RequestMapping("/getLocation")
-	// @ResponseBody
-	// public Zone getLocation(
-	// @ModelAttribute("values") RSSMapWrapper rssMapWrapper) {
-	// Zone result = null;
-	// Map<String, Double> rss = rssMapWrapper.getValues();
-	// System.out.println("getLocation");
-	// System.out.println("Received Values");
-	// if (rss != null) {
-	// for (String key : rss.keySet()) {
-	// System.out.println(key + ": " + rss.get(key));
-	// }
-	// } else {
-	// System.out.println("Parameter is null!");
-	// }
-	// System.out.println("Positioning is Done!");
-	// result = positioningService.determinePosition(rss);
-	// if (result == null) {
-	// result = new Zone("Unknown Position");
-	// }
-	// return result;
-	// }
 /**
  * 
  * @author bogdandy

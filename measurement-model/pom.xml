@@ -6,11 +6,9 @@
 	<parent>
 		<groupId>uni.miskolc.ips.ilona</groupId>
 		<artifactId>measurement</artifactId>
-		<version>0.1.1-SNAPSHOT</version>
+		<version>0.2.0-SNAPSHOT</version>
 	</parent>
-	<groupId>uni.miskolc.ips.ilona</groupId>
 	<artifactId>measurement-model</artifactId>
-	<version>0.1.1-SNAPSHOT</version>
 	<name>measurement-model</name>
 	<url>http://maven.apache.org</url>
 	<properties>
@@ -26,7 +24,7 @@
 		<dependency>
 			<groupId>uni.miskolc.ips.ilona</groupId>
 			<artifactId>measurement-util</artifactId>
-			<version>0.1.1-SNAPSHOT</version>
+			<version>0.2.0-SNAPSHOT</version>
 		</dependency>
 
 		<dependency>
