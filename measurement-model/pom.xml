@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>uni.miskolc.ips.ilona</groupId>
 		<artifactId>measurement</artifactId>
-		<version>0.2.0-SNAPSHOT</version>
+		<version>1.0.0</version>
 	</parent>
 	<artifactId>measurement-model</artifactId>
 	<name>measurement-model</name>
@@ -24,7 +24,7 @@
 		<dependency>
 			<groupId>uni.miskolc.ips.ilona</groupId>
 			<artifactId>measurement-util</artifactId>
-			<version>0.2.0-SNAPSHOT</version>
+			<version>1.0.0</version>
 		</dependency>
 
 		<dependency>

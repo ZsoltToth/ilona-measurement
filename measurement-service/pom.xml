@@ -5,10 +5,10 @@
   <parent>
     <groupId>uni.miskolc.ips.ilona</groupId>
     <artifactId>measurement</artifactId>
-    <version>0.2.0-SNAPSHOT</version>
+    <version>1.0.0</version>
   </parent>
   <artifactId>measurement-service</artifactId>
-  <version>0.1.2-SNAPSHOT</version>
+  <version>1.0.0</version>
   <name>measurement-service</name>
   <url>http://maven.apache.org</url>
   <properties>
@@ -24,7 +24,7 @@
     <dependency>
     	<groupId>uni.miskolc.ips.ilona</groupId>
     	<artifactId>measurement-model</artifactId>
-    	<version>0.2.0-SNAPSHOT</version>
+    	<version>1.0.0</version>
     </dependency>
   </dependencies>
 </project>
