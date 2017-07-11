@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>uni.miskolc.ips.ilona</groupId>
 		<artifactId>measurement</artifactId>
-		<version>1.0.0</version>
+		<version>${uni.miskolc.ips.ilona.version}</version>
 	</parent>
 	<artifactId>measurement-model</artifactId>
 	<name>measurement-model</name>
@@ -18,24 +18,24 @@
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>4.12</version>
+			<version>${junit.version}</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>uni.miskolc.ips.ilona</groupId>
 			<artifactId>measurement-util</artifactId>
-			<version>1.0.0</version>
+			<version>${uni.miskolc.ips.ilona.version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>gov.nist.math</groupId>
 			<artifactId>jama</artifactId>
-			<version>1.0.3</version>
+			<version>${gov.nist.math.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-math</artifactId>
-			<version>2.2</version>
+			<version>${org.apache.commons.version}</version>
 		</dependency>
 	</dependencies>
 </project>
