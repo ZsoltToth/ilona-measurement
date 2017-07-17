@@ -6,15 +6,13 @@
 	<parent>
 		<groupId>uni.miskolc.ips.ilona</groupId>
 		<artifactId>measurement</artifactId>
-		<version>1.0.1-SNAPSHOT</version>
+		<version>${uni.miskolc.ips.ilona.version}</version>
 	</parent>
 	<artifactId>measurement-controller</artifactId>
 	<name>measurement-controller</name>
 	<url>http://maven.apache.org</url>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<spring.version>4.1.3.RELEASE</spring.version>
-		<jackson.version>2.5.1</jackson.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -27,7 +25,7 @@
 		<dependency>
 			<groupId>uni.miskolc.ips.ilona</groupId>
 			<artifactId>measurement-service</artifactId>
-			<version>1.0.0-SNAPSHOT</version>
+			<version>${uni.miskolc.ips.ilona.version}</version>
 		</dependency>
 	<!--	<dependency>
 			<groupId>uni.miskolc.ips.ilona</groupId>
@@ -71,13 +69,13 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context</artifactId>
-			<version>4.3.1.RELEASE</version>
+			<version>${org.springframework.version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>uni.miskolc.ips.ilona</groupId>
 			<artifactId>measurement-persist</artifactId>
-			<version>1.0.1-SNAPSHOT</version>
+			<version>${uni.miskolc.ips.ilona.version}</version>
 		</dependency>
 	</dependencies>
 </project>

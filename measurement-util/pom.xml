@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>uni.miskolc.ips.ilona</groupId>
 		<artifactId>measurement</artifactId>
-		<version>1.0.1-SNAPSHOT</version>
+		<version>${uni.miskolc.ips.ilona.version}</version>
 	</parent>
 	<artifactId>measurement-util</artifactId>
 	<name>measurement-util</name>
@@ -18,24 +18,24 @@
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>4.12</version>
+			<version>${junit.version}</version>
 			<scope>test</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>org.apache.logging.log4j</groupId>
 			<artifactId>log4j-api</artifactId>
-			<version>2.8.2</version>
+			<version>${org.apache.logging.log4j.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.logging.log4j</groupId>
 			<artifactId>log4j-core</artifactId>
-			<version>2.8.2</version>
+			<version>${org.apache.logging.log4j.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.logging.log4j</groupId>
 			<artifactId>log4j-iostreams</artifactId>
-			<version>2.8.2</version>
+			<version>${org.apache.logging.log4j.version}</version>
 		</dependency>
 	</dependencies>
 
@@ -45,7 +45,7 @@
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-remote-resources-plugin</artifactId>
-					<version>1.5</version>
+					<version>${org.apache.maven.plugins.version}</version>
 				</plugin>
 			</plugins>
 		</pluginManagement>
