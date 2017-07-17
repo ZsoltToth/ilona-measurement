@@ -1,13 +1,13 @@
 package uni.miskolc.ips.ilona.measurement.controller;
 
+import java.awt.*;
 import java.util.Collection;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import uni.miskolc.ips.ilona.measurement.model.position.Zone;
@@ -24,9 +24,15 @@ public class ZoneController {
 /**
  * 
  */
-	@Autowired
+
 	private ZoneService zoneManagerService;
-/**
+
+	@Autowired
+	public ZoneController(ZoneService zoneManagerService) {
+		this.zoneManagerService = zoneManagerService;
+	}
+
+	/**
  * 
  * @return Returns the list of zones.
  */
@@ -70,8 +76,8 @@ public class ZoneController {
  * @return Returns true if successful, or exception if not.
  */
 	@RequestMapping("/deleteZone")
-	public @ResponseBody
-	final boolean deleteZone(@RequestParam("id") final String id) {
+	@ResponseBody
+	public final boolean deleteZone(@RequestParam("id") final String id) {
 		UUID uuid = UUID.fromString(id);
 
 		Zone zone = new Zone();
@@ -89,7 +95,31 @@ public class ZoneController {
 
 		return true;
 	}
-/**
+
+
+	/**
+	 * Retrieves a zone based on the zone ID.
+	 * @param id The ID of the zone that needs to be retrieved
+	 * @return Returns the Zone if successful.
+	 */
+
+	@RequestMapping(value = "/zones/{id}", method = RequestMethod.GET)
+	public @ResponseBody
+	final Zone getZone(@PathVariable("id") final String id) {
+		UUID uuid = UUID.fromString(id);
+		Zone result = Zone.UNKNOWN_POSITION;
+		try {
+			result = this.zoneManagerService.getZone(uuid);
+		} catch (DatabaseUnavailableException e) {
+			e.printStackTrace();
+		} catch (ZoneNotFoundException e) {
+			e.printStackTrace();
+		}
+
+		return result;
+	}
+
+	/**
  * Loads  zonemanagement.jps page.
  * @return Returns the results of the getZones() method
  */

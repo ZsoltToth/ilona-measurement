@@ -41,11 +41,14 @@ public class MeasurementController {
 	/**
 	 * Reads data from context.xml automatically.
 	 */
-	@Autowired
+
 	private MeasurementService measurementManagerService;
 
-	
-	
+	@Autowired
+	public MeasurementController(MeasurementService measurementManagerService) {
+		this.measurementManagerService = measurementManagerService;
+	}
+
 	@RequestMapping("/")
 	public ModelAndView loadHomePage() {
 		ModelAndView result = new ModelAndView("index");
