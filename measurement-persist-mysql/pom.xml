@@ -6,10 +6,10 @@
 	<parent>
 		<groupId>uni.miskolc.ips.ilona</groupId>
 		<artifactId>measurement</artifactId>
-		<version>${uni.miskolc.ips.ilona.version}</version>
+		<version>1.0.1-SNAPSHOT</version>
 	</parent>
 	<artifactId>measurement-persist-mysql</artifactId>
-	<version>${measurement-persist-mysql.version}</version>
+
 	<name>measurement-persist-mysql</name>
 	<url>http://maven.apache.org</url>
 	<properties>
@@ -31,7 +31,7 @@
 		<dependency>
 			<groupId>uni.miskolc.ips.ilona</groupId>
 			<artifactId>measurement-persist</artifactId>
-			<version>${uni.miskolc.ips.ilona.version}</version>
+			<version>${version}</version>
 		</dependency>
 		<!-- Data Access Dependencies -->
 		<dependency>

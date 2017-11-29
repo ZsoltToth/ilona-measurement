@@ -4,7 +4,8 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>uni.miskolc.ips.ilona</groupId>
 	<artifactId>measurement</artifactId>
-	<version>${uni.miskolc.ips.ilona.version}</version>
+	<version>1.0.1-SNAPSHOT</version>
+
 	<packaging>pom</packaging>
 	<name>ILONA - Measurement Subsystem</name>
 	<properties>
@@ -14,11 +15,6 @@
 		<jackson.version>2.5.1</jackson.version>
 		<junit.version>4.12</junit.version>
 		<gov.nist.math.version>1.0.3</gov.nist.math.version>
-		<uni.miskolc.ips.ilona.version>1.0.1-SNAPSHOT</uni.miskolc.ips.ilona.version>
-		<measurement-persist.version>1.0.1-SNAPSHOT</measurement-persist.version>
-		<measurement-persist-mysql.version>1.0.1-SNAPSHOT</measurement-persist-mysql.version>
-		<measurement-service.version>1.0.1-SNAPSHOT</measurement-service.version>
-		<measurement-service-impl.version>1.0.1-SNAPSHOT</measurement-service-impl.version>
 		<org.apache.commons.version>2.2</org.apache.commons.version>
 		<org.springframework.version>4.3.1.RELEASE</org.springframework.version>
 		<org.easymock.version>3.4</org.easymock.version>

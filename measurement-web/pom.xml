@@ -6,11 +6,11 @@
 	<parent>
 		<groupId>uni.miskolc.ips.ilona</groupId>
 		<artifactId>measurement</artifactId>
-		<version>${uni.miskolc.ips.ilona.version}</version>
+		<version>1.0.1-SNAPSHOT</version>
 	</parent>
 	<groupId>uni.miskolc.ips.ilona</groupId>
 	<artifactId>measurement-web</artifactId>
-	<version>${uni.miskolc.ips.ilona.version}</version>
+
 	<packaging>war</packaging>
 	<name>measurement-web Maven Webapp</name>
 	<url>http://maven.apache.org</url>
@@ -24,6 +24,24 @@
 			<version>${junit.version}</version>
 			<scope>test</scope>
 		</dependency>
+
+
+		<dependency>
+			<groupId>uni.miskolc.ips.ilona</groupId>
+			<artifactId>measurement-controller</artifactId>
+			<version>${version}</version>
+		</dependency>
+		<dependency>
+			<groupId>uni.miskolc.ips.ilona</groupId>
+			<artifactId>measurement-service-impl</artifactId>
+			<version>${version}</version>
+		</dependency>
+		<dependency>
+			<groupId>uni.miskolc.ips.ilona</groupId>
+			<artifactId>measurement-persist-mysql</artifactId>
+			<version>${version}</version>
+		</dependency>
+
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
@@ -35,22 +53,6 @@
 			<groupId>jstl</groupId>
 			<artifactId>jstl</artifactId>
 			<version>${jstl.version}</version>
-		</dependency>
-
-		<dependency>
-			<groupId>uni.miskolc.ips.ilona</groupId>
-			<artifactId>measurement-controller</artifactId>
-			<version>${uni.miskolc.ips.ilona.version}</version>
-		</dependency>
-			<dependency>
-			<groupId>uni.miskolc.ips.ilona</groupId>
-			<artifactId>measurement-service-impl</artifactId>
-			<version>${uni.miskolc.ips.ilona.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>uni.miskolc.ips.ilona</groupId>
-			<artifactId>measurement-persist-mysql</artifactId>
-			<version>${uni.miskolc.ips.ilona.version}</version>
 		</dependency>
 
 

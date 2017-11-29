@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>uni.miskolc.ips.ilona</groupId>
 		<artifactId>measurement</artifactId>
-		<version>${uni.miskolc.ips.ilona.version}</version>
+		<version>1.0.1-SNAPSHOT</version>
 	</parent>
 	<artifactId>measurement-controller</artifactId>
 	<name>measurement-controller</name>
@@ -25,7 +25,12 @@
 		<dependency>
 			<groupId>uni.miskolc.ips.ilona</groupId>
 			<artifactId>measurement-service</artifactId>
-			<version>${uni.miskolc.ips.ilona.version}</version>
+			<version>${version}</version>
+		</dependency>
+		<dependency>
+			<groupId>uni.miskolc.ips.ilona</groupId>
+			<artifactId>measurement-persist</artifactId>
+			<version>${version}</version>
 		</dependency>
 	<!--	<dependency>
 			<groupId>uni.miskolc.ips.ilona</groupId>
@@ -72,10 +77,6 @@
 			<version>${org.springframework.version}</version>
 		</dependency>
 
-		<dependency>
-			<groupId>uni.miskolc.ips.ilona</groupId>
-			<artifactId>measurement-persist</artifactId>
-			<version>${uni.miskolc.ips.ilona.version}</version>
-		</dependency>
+
 	</dependencies>
 </project>
