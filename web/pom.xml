@@ -1,0 +1,123 @@
+<?xml version="1.0"?>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>uni.miskolc.ips.ilona.measurement</groupId>
+		<artifactId>bundle</artifactId>
+		<version>1.0.2-SNAPSHOT</version>
+	</parent>
+
+	<artifactId>web</artifactId>
+
+	<packaging>war</packaging>
+	<name>measurement-web Maven Webapp</name>
+	<url>http://maven.apache.org</url>
+		<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>${junit.version}</version>
+			<scope>test</scope>
+		</dependency>
+
+
+		<dependency>
+			<groupId>uni.miskolc.ips.ilona.measurement</groupId>
+			<artifactId>controller</artifactId>
+			<version>${version}</version>
+		</dependency>
+		<dependency>
+			<groupId>uni.miskolc.ips.ilona.measurement</groupId>
+			<artifactId>service.impl</artifactId>
+			<version>${version}</version>
+		</dependency>
+		<dependency>
+			<groupId>uni.miskolc.ips.ilona.measurement</groupId>
+			<artifactId>persist.mysql</artifactId>
+			<version>${version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>${javax.servlet.version}</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>jstl</groupId>
+			<artifactId>jstl</artifactId>
+			<version>${jstl.version}</version>
+		</dependency>
+
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+			<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-taglibs</artifactId>
+			<version>${spring.security.version}</version>
+		</dependency>
+
+	</dependencies>
+	<repositories>
+		<repository>
+			<id>spring-snapshot</id>
+			<name>Spring Snapshot Repository</name>
+			<url>http://repo.spring.io/snapshot</url>
+		</repository>
+		<repository>
+			<id>safranek</id>
+			<name>ILONA - Snapshot</name>
+			<url>http://safranek.iit.uni-miskolc.hu:8081/nexus/content/repositories/ILONA-Snapshots/</url>
+		</repository>
+	</repositories>
+
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>${org.apache.maven.plugins.version}</version>
+				<configuration>
+					<source>1.7</source>
+					<target>1.7</target>
+					<encoding>${project.build.sourceEncoding}</encoding>
+					<!-- <encoding>${project.build.sourceEncoding}</encoding> -->
+				</configuration>
+			</plugin>
+		</plugins>
+		<finalName>ilona-measurement</finalName>
+
+	</build>
+</project>
