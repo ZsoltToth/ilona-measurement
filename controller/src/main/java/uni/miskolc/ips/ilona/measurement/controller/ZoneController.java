@@ -1,6 +1,7 @@
 package uni.miskolc.ips.ilona.measurement.controller;
 
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.UUID;
 
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import uni.miskolc.ips.ilona.measurement.controller.dto.ZoneDTO;
 import uni.miskolc.ips.ilona.measurement.model.position.Zone;
 import uni.miskolc.ips.ilona.measurement.service.ZoneService;
 import uni.miskolc.ips.ilona.measurement.service.exception.DatabaseUnavailableException;
@@ -38,10 +40,15 @@ public class ZoneController {
  */
 	@RequestMapping(value = { "/listZones", "/resource/zones" })
 	public @ResponseBody
-	final Collection<Zone> listZones() {
-		Collection<Zone> result = null;
+	final Collection<ZoneDTO> listZones() {
+		Collection<ZoneDTO> result = new ArrayList<>();
 		try {
-			result = this.zoneManagerService.getZones();
+			for(Zone zone : this.zoneManagerService.getZones()){
+				ZoneDTO dto = new ZoneDTO();
+				dto.setId(zone.getId().toString());
+				dto.setName(zone.getName());
+				result.add(dto);
+			}
 		} catch (DatabaseUnavailableException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -55,7 +62,7 @@ public class ZoneController {
  */
 	@RequestMapping("/addZone")
 	public @ResponseBody boolean addZone(@RequestParam("name")final String name) {
-
+		//TODO return with void
 		Zone zone = new Zone(name);
 
 		try {
@@ -77,7 +84,7 @@ public class ZoneController {
  */
 	@RequestMapping("/deleteZone")
 	@ResponseBody
-	public final boolean deleteZone(@RequestParam("id") final String id) {
+	public final boolean deleteZone(@RequestParam("id") final String id) { //TODO throw exception boolean -> void
 		UUID uuid = UUID.fromString(id);
 
 		Zone zone = new Zone();
@@ -105,11 +112,13 @@ public class ZoneController {
 
 	@RequestMapping(value = "/zones/{id}", method = RequestMethod.GET)
 	public @ResponseBody
-	final Zone getZone(@PathVariable("id") final String id) {
+	final ZoneDTO getZone(@PathVariable("id") final String id) { //TODO throw excepton
 		UUID uuid = UUID.fromString(id);
-		Zone result = Zone.UNKNOWN_POSITION;
+		ZoneDTO result = new ZoneDTO();
 		try {
-			result = this.zoneManagerService.getZone(uuid);
+			Zone zone = zoneManagerService.getZone(uuid) != null? zoneManagerService.getZone(uuid) : Zone.UNKNOWN_POSITION;
+			result.setId(zone.getId().toString());
+			result.setName(zone.getName());
 		} catch (DatabaseUnavailableException e) {
 			e.printStackTrace();
 		} catch (ZoneNotFoundException e) {
