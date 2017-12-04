@@ -2,9 +2,9 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>uni.miskolc.ips.ilona</groupId>
-	<artifactId>measurement</artifactId>
-	<version>1.0.1-SNAPSHOT</version>
+	<groupId>uni.miskolc.ips.ilona.measurement</groupId>
+	<artifactId>bundle</artifactId>
+	<version>1.0.2-SNAPSHOT</version>
 
 	<packaging>pom</packaging>
 	<name>ILONA - Measurement Subsystem</name>
@@ -68,14 +68,14 @@
 	</build>
 
 	<modules>
-		<module>measurement-model</module>
-		<module>measurement-persist</module>
-		<module>measurement-persist-mysql</module>
-		<module>measurement-service</module>
-		<module>measurement-service-impl</module>
-		<module>measurement-controller</module>
-		<module>measurement-util</module>
-		<module>measurement-web</module>
+		<module>model</module>
+		<module>persist</module>
+		<module>persist.mysql</module>
+		<module>service</module>
+		<module>service.impl</module>
+		<module>controller</module>
+		<module>util</module>
+		<module>web</module>
 	</modules>
 
 	<distributionManagement>
@@ -93,7 +93,7 @@
 
 
 	<scm>
-		<url>https://github.com/ZsoltToth/ilona.git</url>
+		<url>https://github.com/ZsoltToth/ilona-measurement.git</url>
 	</scm>
 
 </project>
