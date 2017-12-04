@@ -81,30 +81,6 @@ public class MeasurementController {
         return result;
     }
 
-    /**
-     * It loads the measurement.jsp view.
-     *
-     * @return return loads the measurement.jsp page
-     */
-    @RequestMapping("/measurementManagement")
-    public final ModelAndView loadMeasurementManagementPage() {
-        ModelAndView result = new ModelAndView("measurements");
-        Set<String> aps = new HashSet<String>();
-        Collection<Measurement> measurements = null;
-        try {
-            measurements = measurementManagerService.readMeasurements();
-        } catch (DatabaseUnavailableException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-
-        // for(Measurement meas : measurements){
-        // aps.addAll(meas.getValues().keySet());
-        // }
-        result.addObject("accessPoints", new ArrayList<String>(aps));
-        result.addObject("measurements", measurements);
-        return result;
-    }
 
     /**
      * Calls the measurement manager service to create a measurement.
