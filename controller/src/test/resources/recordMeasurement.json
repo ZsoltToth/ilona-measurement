@@ -1,0 +1,61 @@
+{
+  "position" : {
+    "id" : "d42594e8-e41b-485d-9ac4-a6d94361b27d",
+    "zone" : {"id":"d42594e8-e41b-485d-9ac4-a6d94361b27d","name":"alma"}
+  },
+  "wifiRSSI": {
+    "ap": [{
+      "value": -78.0,
+      "ssid": "dd"
+    }, {
+      "value": -83.0,
+      "ssid": "aut-sams-1"
+    }, {
+      "value": -72.0,
+      "ssid": "doa208"
+    }, {
+      "value": -78.0,
+      "ssid": "TP-LINK_B2765A"
+    }, {
+      "value": -89.0,
+      "ssid": "IITAP3"
+    }, {
+      "value": -92.0,
+      "ssid": "doa200"
+    }, {
+      "value": -84.0,
+      "ssid": "GEIAKFSZ"
+    }, {
+      "value": -81.0,
+      "ssid": "IITAP2"
+    }, {
+      "value": -84.0,
+      "ssid": "IITAP1"
+    }, {
+      "value": -87.0,
+      "ssid": "IITAP3-GUEST"
+    }, {
+      "value": -65.0,
+      "ssid": "109"
+    }, {
+      "value": -89.0,
+      "ssid": "IITAP1-GUEST"
+    }, {
+      "value": -81.0,
+      "ssid": "Lab106"
+    }]
+  },
+  "magnetometer": {
+    "radian": 0.0,
+    "xaxis": -0.37788116931915283,
+    "yaxis": 0.7767557501792908,
+    "zaxis": -0.5038415789604187
+  },
+  "bluetoothTags": {
+    "bluetoothTag": ["HUAWEI Y560-L01 94:FE:22:2C:86:AB", "ev3 00:16:53:4C:E7:FD", "GK 00:16:53:4C:FA:60", "Honor 8 5C:A8:6A:01:97:9A", "RK_MMT_REDS 00:16:53:4C:B2:02", "EV3 00:16:53:4C:FA:67", "BB 00:16:53:4C:F9:A4", "MMT_REDS 00:16:53:4C:E9:1D"]
+  },
+  "gpsCoordinates": null,
+  "rfidtags": {
+    "rfidTag": []
+  }
+}
