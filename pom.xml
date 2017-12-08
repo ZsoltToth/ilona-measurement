@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>uni.miskolc.ips.ilona.measurement</groupId>
 	<artifactId>bundle</artifactId>
-	<version>1.0.2-SNAPSHOT</version>
+	<version>1.0.3-SNAPSHOT</version>
 
 	<packaging>pom</packaging>
 	<name>ILONA - Measurement Subsystem</name>
