@@ -6,6 +6,7 @@ import java.util.Collection;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -40,67 +41,37 @@ public class ZoneController {
  */
 	@RequestMapping(value = { "/listZones", "/resource/zones" })
 	public @ResponseBody
-	final Collection<ZoneDTO> listZones() {
+	final Collection<ZoneDTO> listZones() throws DatabaseUnavailableException {
 		Collection<ZoneDTO> result = new ArrayList<>();
-		try {
 			for(Zone zone : this.zoneManagerService.getZones()){
 				ZoneDTO dto = new ZoneDTO();
 				dto.setId(zone.getId().toString());
 				dto.setName(zone.getName());
 				result.add(dto);
 			}
-		} catch (DatabaseUnavailableException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		return result;
 	}
 /**
  * Adds a new zone to the list of zones.
  * @param name The name of the new zone
- * @return Returns true if successful, or an exception if not.
  */
 	@RequestMapping("/addZone")
-	public @ResponseBody boolean addZone(@RequestParam("name")final String name) {
-		//TODO return with void
+	@ResponseBody
+	public void addZone(@RequestParam("name")final String name) throws ZoneNotFoundException, DatabaseUnavailableException {
 		Zone zone = new Zone(name);
-
-		try {
-			this.zoneManagerService.createZone(zone);
-		} catch (DatabaseUnavailableException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ZoneNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		return true;
+		zoneManagerService.createZone(zone);
 	}
 /**
  * Deletes a zone based on the zone ID.
  * @param id The ID of the zone that needs to be deleted
- * @return Returns true if successful, or exception if not.
  */
 	@RequestMapping("/deleteZone")
 	@ResponseBody
-	public final boolean deleteZone(@RequestParam("id") final String id) { //TODO throw exception boolean -> void
+	public void deleteZone(@RequestParam("id") final String id) throws ZoneNotFoundException, DatabaseUnavailableException {
 		UUID uuid = UUID.fromString(id);
-
 		Zone zone = new Zone();
 		zone.setId(uuid);
-
-		try {
-			this.zoneManagerService.deleteZone(zone);
-		} catch (DatabaseUnavailableException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ZoneNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		return true;
+		this.zoneManagerService.deleteZone(zone);
 	}
 
 
@@ -112,18 +83,13 @@ public class ZoneController {
 
 	@RequestMapping(value = "/zones/{id}", method = RequestMethod.GET)
 	public @ResponseBody
-	final ZoneDTO getZone(@PathVariable("id") final String id) { //TODO throw excepton
+	final ZoneDTO getZone(@PathVariable("id") final String id) throws ZoneNotFoundException, DatabaseUnavailableException {
 		UUID uuid = UUID.fromString(id);
 		ZoneDTO result = new ZoneDTO();
-		try {
-			Zone zone = zoneManagerService.getZone(uuid) != null? zoneManagerService.getZone(uuid) : Zone.UNKNOWN_POSITION;
-			result.setId(zone.getId().toString());
-			result.setName(zone.getName());
-		} catch (DatabaseUnavailableException e) {
-			e.printStackTrace();
-		} catch (ZoneNotFoundException e) {
-			e.printStackTrace();
-		}
+
+		Zone zone = zoneManagerService.getZone(uuid) != null? zoneManagerService.getZone(uuid) : Zone.UNKNOWN_POSITION;
+		result.setId(zone.getId().toString());
+		result.setName(zone.getName());
 
 		return result;
 	}
@@ -144,4 +110,13 @@ public class ZoneController {
 		return result;
 	}
 
+	@ResponseStatus(value= HttpStatus.INSUFFICIENT_STORAGE, reason = "Database is Unavailable")
+	@ExceptionHandler(DatabaseUnavailableException.class)
+	public void databaseUnavailableExceptionHandler(){	}
+
+	@ResponseStatus(value=HttpStatus.CONFLICT)
+	@ExceptionHandler(ZoneNotFoundException.class)
+	public String zoneNotFoundExceptionHandler(Exception ex){
+		return ex.getMessage();
+	}
 }
