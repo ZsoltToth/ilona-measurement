@@ -5,12 +5,9 @@ import java.util.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import uni.miskolc.ips.ilona.measurement.controller.dto.*;
@@ -49,8 +46,7 @@ public class MeasurementController {
 
     @RequestMapping("/")
     public ModelAndView loadHomePage() {
-        ModelAndView result = new ModelAndView("index");
-        return result;
+        return new ModelAndView("index");
     }
 
     /**
@@ -62,22 +58,15 @@ public class MeasurementController {
      */
     @RequestMapping("/resources/listMeasurements")
     @ResponseBody
-    public List<MeasurementDTO> listMeasurements(@RequestParam(value = "zoneId", required = false) final UUID zoneId) throws DatatypeConfigurationException {
-        List<MeasurementDTO> result = new ArrayList<MeasurementDTO>();
-        try {
-            Collection<Measurement> measurements = measurementManagerService.readMeasurements();
-            for (Measurement measurement : measurements) {
-                if (zoneId != null && measurement.getPosition().getZone().getId().equals(zoneId) == false) {
-                    continue;
-                }
-                result.add(assembleMeasurementDTO(measurement));
+    public List<MeasurementDTO> listMeasurements(@RequestParam(value = "zoneId", required = false) final UUID zoneId) throws DatatypeConfigurationException, DatabaseUnavailableException {
+        List<MeasurementDTO> result = new ArrayList<>();
+        Collection<Measurement> measurements = measurementManagerService.readMeasurements();
+        for (Measurement measurement : measurements) {
+            if (zoneId != null && !measurement.getPosition().getZone().getId().equals(zoneId)) {
+                continue;
             }
-        } catch (DatabaseUnavailableException e) {
-            // TODO Auto-generated catch block
-            LOG.info(e.getMessage());
-            e.printStackTrace();
+            result.add(assembleMeasurementDTO(measurement));
         }
-
         return result;
     }
 
@@ -87,11 +76,10 @@ public class MeasurementController {
      * It accepts only post requests.
      *
      * @param measurementRegistrationRequest measurement data
-     * @return returns true if the operation is successful.
      */
     @RequestMapping(value = "/recordMeasurement", method = RequestMethod.POST)
     @ResponseBody
-    public final boolean recordMeasurement(@RequestBody final MeasurementRegistrationRequest measurementRegistrationRequest) {
+    public void recordMeasurement(@RequestBody final MeasurementRegistrationRequest measurementRegistrationRequest) throws InconsistentMeasurementException, DatabaseUnavailableException {
         Measurement measurement = new Measurement();
         measurement.setId(UUID.randomUUID());
         measurement.setTimestamp(new Date());
@@ -131,17 +119,7 @@ public class MeasurementController {
         if (measurementRegistrationRequest.getRfidtags() != null) {
             measurement.setRfidtags(new RFIDTags(new HashSet<byte[]>(measurementRegistrationRequest.getRfidtags().getRfidTag())));
         }
-        try {
-            this.measurementManagerService.recordMeasurement(measurement);
-        } catch (DatabaseUnavailableException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (InconsistentMeasurementException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-
-        return true;
+        this.measurementManagerService.recordMeasurement(measurement);
     }
 
     /**
@@ -154,18 +132,8 @@ public class MeasurementController {
      */
     @RequestMapping("/deleteMeasurement")
     @ResponseBody
-    public final boolean deleteMeasurement(@RequestParam("timestamp") final long timestamp) {
-        try {
-            measurementManagerService.deleteMeasurement(new Date(timestamp));
-        } catch (DatabaseUnavailableException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (TimeStampNotFoundException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-
-        return true;
+    public void deleteMeasurement(@RequestParam("timestamp") final long timestamp) throws TimeStampNotFoundException, DatabaseUnavailableException {
+        measurementManagerService.deleteMeasurement(new Date(timestamp));
     }
 
     private MeasurementDTO assembleMeasurementDTO(Measurement measurement) throws DatatypeConfigurationException {
@@ -236,13 +204,25 @@ public class MeasurementController {
     private Position dispersePositionDTO(MeasurementRegistrationRequest.Position dto) {
         Coordinate coordinate = null;
         Zone zone = null;
-        if(dto.getCoordinate() != null){
+        if (dto.getCoordinate() != null) {
             coordinate = new Coordinate(dto.getCoordinate().getX(), dto.getCoordinate().getY(), dto.getCoordinate().getZ());
         }
-        if(dto.getZone() != null) {
+        if (dto.getZone() != null) {
             zone = new Zone(dto.getZone().getName());
             zone.setId(UUID.fromString(dto.getZone().getId()));
         }
-        return new Position(coordinate,zone);
+        return new Position(coordinate, zone);
+    }
+
+    @ResponseStatus(value = HttpStatus.UNSUPPORTED_MEDIA_TYPE, reason = "Measurement was Inconsistent.")
+    @ExceptionHandler(InconsistentMeasurementException.class)
+    public void inconsistentMeasurementExceptionHandler(Exception ex){
+        LOG.info(ex.getMessage());
+    }
+
+    @ResponseStatus(value = HttpStatus.NOT_FOUND)
+    @ExceptionHandler(TimeStampNotFoundException.class)
+    public void timeStampNotFoundExceptionHandler(Exception ex){
+        LOG.info(ex.getMessage());
     }
 }

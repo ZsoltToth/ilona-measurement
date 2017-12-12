@@ -110,10 +110,6 @@ public class ZoneController {
 		return result;
 	}
 
-	@ResponseStatus(value= HttpStatus.INSUFFICIENT_STORAGE, reason = "Database is Unavailable")
-	@ExceptionHandler(DatabaseUnavailableException.class)
-	public void databaseUnavailableExceptionHandler(){	}
-
 	@ResponseStatus(value=HttpStatus.CONFLICT)
 	@ExceptionHandler(ZoneNotFoundException.class)
 	public String zoneNotFoundExceptionHandler(Exception ex){
