@@ -117,7 +117,8 @@ public class MeasurementController {
             measurement.setGpsCoordinates(gpsCoordinate);
         }
         if (measurementRegistrationRequest.getRfidtags() != null) {
-            measurement.setRfidtags(new RFIDTags(new HashSet<byte[]>(measurementRegistrationRequest.getRfidtags().getRfidTag())));
+            RFIDTags rfidTags = new RFIDTags(new HashSet<byte[]>(measurementRegistrationRequest.getRfidtags().getRfidTag()));
+            measurement.setRfidtags(rfidTags);
         }
         this.measurementManagerService.recordMeasurement(measurement);
     }

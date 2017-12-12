@@ -29,7 +29,7 @@ public interface ZoneService {
 	 * @throws ZoneNotFoundException
 	 *             Occurs, when the zone does not exists.
 	 */
-	void createZone(Zone zone) throws DatabaseUnavailableException, ZoneNotFoundException;
+	void createZone(Zone zone) throws DatabaseUnavailableException;
 
 	/**
 	 * Retrieves a collection of zone data from the database.

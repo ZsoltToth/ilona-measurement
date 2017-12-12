@@ -57,7 +57,7 @@ public class ZoneController {
  */
 	@RequestMapping("/addZone")
 	@ResponseBody
-	public void addZone(@RequestParam("name")final String name) throws ZoneNotFoundException, DatabaseUnavailableException {
+	public void addZone(@RequestParam("name")final String name) throws DatabaseUnavailableException {
 		Zone zone = new Zone(name);
 		zoneManagerService.createZone(zone);
 	}
