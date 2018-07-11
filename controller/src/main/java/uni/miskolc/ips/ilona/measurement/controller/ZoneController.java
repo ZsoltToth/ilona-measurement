@@ -87,7 +87,9 @@ public class ZoneController {
 		UUID uuid = UUID.fromString(id);
 		ZoneDTO result = new ZoneDTO();
 
-		Zone zone = zoneManagerService.getZone(uuid) != null? zoneManagerService.getZone(uuid) : Zone.UNKNOWN_POSITION;
+		Zone zone;
+		zone = zoneManagerService.getZone(uuid);
+
 		result.setId(zone.getId().toString());
 		result.setName(zone.getName());
 
