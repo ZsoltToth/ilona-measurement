@@ -19,6 +19,7 @@ import uni.miskolc.ips.ilona.measurement.service.MeasurementService;
 import uni.miskolc.ips.ilona.measurement.service.exception.DatabaseUnavailableException;
 import uni.miskolc.ips.ilona.measurement.service.exception.InconsistentMeasurementException;
 import uni.miskolc.ips.ilona.measurement.service.exception.TimeStampNotFoundException;
+import uni.miskolc.ips.ilona.measurement.service.exception.ZoneNotFoundException;
 
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
@@ -133,7 +134,7 @@ public class MeasurementController {
      */
     @RequestMapping("/deleteMeasurement")
     @ResponseBody
-    public void deleteMeasurement(@RequestParam("timestamp") final long timestamp) throws TimeStampNotFoundException, DatabaseUnavailableException {
+    public void deleteMeasurement(@RequestParam("timestamp") final long timestamp) throws TimeStampNotFoundException, DatabaseUnavailableException, ZoneNotFoundException {
         measurementManagerService.deleteMeasurement(new Date(timestamp));
     }
 
@@ -224,6 +225,12 @@ public class MeasurementController {
     @ResponseStatus(value = HttpStatus.NOT_FOUND)
     @ExceptionHandler(TimeStampNotFoundException.class)
     public void timeStampNotFoundExceptionHandler(Exception ex){
+        LOG.info(ex.getMessage());
+    }
+
+    @ResponseStatus(value = HttpStatus.NOT_FOUND)
+    @ExceptionHandler(ZoneNotFoundException.class)
+    public void zoneNotFoundExceptionHandler(Exception ex){
         LOG.info(ex.getMessage());
     }
 }

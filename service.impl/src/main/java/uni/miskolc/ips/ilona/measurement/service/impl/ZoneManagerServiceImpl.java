@@ -66,8 +66,12 @@ public class ZoneManagerServiceImpl implements ZoneService {
 	 * @param name   is the selection criterion.
 	 * @return with the collection of Zones that fulfills the criterion
 	 */
-	public final Collection<Zone> getZones(final String name) {
-		return zoneDAO.readZones(name);
+	public final Collection<Zone> getZones(final String name) throws ZoneNotFoundException {
+		Collection<Zone> result = zoneDAO.readZones(name);
+		if (result == null){
+			throw new ZoneNotFoundException();
+		}
+		return result;
 	}
 
 	
@@ -75,12 +79,14 @@ public class ZoneManagerServiceImpl implements ZoneService {
 	 * The deleteZone method delete the given Zone from the database.
 	 * @param zone which Zone need to be deleted.
 	 */
-	public final void deleteZone(final Zone zone) {
+	public final void deleteZone(final Zone zone) throws ZoneNotFoundException {
 		try {
 			zoneDAO.deleteZone(zone);
 		} catch (RecordNotFoundException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			//e.printStackTrace();
+			throw new ZoneNotFoundException();
+
 		}
 
 	}
@@ -92,7 +98,7 @@ public class ZoneManagerServiceImpl implements ZoneService {
 		try{
 			result = zoneDAO.readZone(value);
 		}catch(RecordNotFoundException e){
-			result = Zone.UNKNOWN_POSITION;
+			throw new ZoneNotFoundException();
 		}
 		return result;
 	}

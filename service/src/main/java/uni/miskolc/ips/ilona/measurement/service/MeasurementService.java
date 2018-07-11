@@ -88,6 +88,6 @@ public interface MeasurementService {
 	 * @throws TimeStampNotFoundException
 	 * 			Occurs when the time stamp does not exists.
 	 */
-	void deleteMeasurement(Date timestamp) throws DatabaseUnavailableException, TimeStampNotFoundException;
+	void deleteMeasurement(Date timestamp) throws DatabaseUnavailableException, TimeStampNotFoundException, ZoneNotFoundException;
 
 }
