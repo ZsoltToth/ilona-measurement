@@ -176,15 +176,15 @@
 		);
 	</insert>
 
-	<update id="updateMeasurement">
+	<update id="updateMeasurement" parameterType="Measurement">
         UPDATE Measurement set
           measTimestamp = #{timestamp},
           magnetometerX = #{magnetometer.xAxis},
           magnetometerY = #{magnetometer.yAxis},
           magnetometerZ = #{magnetometer.zAxis},
           magnetometerRadian = #{magnetometer.radian},
-          gpsLatitude = #{gpsCoordinates.latitude}
-          gpsLongitude = #{gpsCoordinates.longitude}
+          gpsLatitude = #{gpsCoordinates.latitude},
+          gpsLongitude = #{gpsCoordinates.longitude},
           gpsAltitude = #{gpsCoordinates.altitude}
           where
           measId = #{id,typeHandler=UUIDTypeHandler, jdbcType=VARCHAR};

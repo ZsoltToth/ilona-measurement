@@ -257,6 +257,29 @@ public class MeasurementDAOIntegrationTest extends SetupIntegrationTest {
 		assertEquals(true, measuerements.contains(measurement));
 
 	}
+	@Test
+	public void testUpdateMeasurement() throws RecordNotFoundException {
+		MeasurementBuilder measurementBuilder = new MeasurementBuilder();
+		measurementBuilder.setMagnetometer(new Magnetometer(4, 4, 4, 4));
+		measurementBuilder.setGPSCoordinates(new GPSCoordinate(3, 2, 1));
+		Map<String, Double> wifirssi = new HashMap<String, Double>();
+		wifirssi.put("testAP1", -1.0);
+		wifirssi.put("testAP2", -2.0);
+		wifirssi.put("testAP3", -3.0);
+		measurementBuilder.setWifiRSSI(new WiFiRSSI(wifirssi));
+		measurementBuilder.setbluetoothTags(new BluetoothTags(new HashSet<>(Arrays.asList("bt1", "bt2", "bt3"))));
+		measurementBuilder.setPosition(new Position(new Coordinate(3, 3, 3), new Zone("EZ")));
+		RFIDTags rfid = new RFIDTags(new HashSet<byte[]>());
+		rfid.addTag(new byte[] { (byte) 12 });
+		rfid.addTag(new byte[] { (byte) -82, (byte) 34 });
+		measurementBuilder.setRFIDTags(rfid);
+		Measurement measurement = measurementBuilder.build();
+		measurement.setId(UUID.fromString("59d46ae9-e0c8-48d0-b14a-503ed414b7cc"));
+		System.out.println("_________________________-----------------------____________________________");
+		System.out.println(measurement.getPosition());
+		dao.updateMeasurement(measurement);
+
+	}
 
 	@Ignore
 	public void testDeleteMeasurementByMeasurement() throws RecordNotFoundException {
