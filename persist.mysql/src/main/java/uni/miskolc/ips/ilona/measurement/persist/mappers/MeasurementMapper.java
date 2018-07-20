@@ -126,6 +126,7 @@ public interface MeasurementMapper {
 	
 	
 	void insertRFID4Measurement(@Param("rfid") byte[] rfid, @Param("measId") String measId);
-	
+
+	void updateMeasurement(Measurement measurement);
 
 }

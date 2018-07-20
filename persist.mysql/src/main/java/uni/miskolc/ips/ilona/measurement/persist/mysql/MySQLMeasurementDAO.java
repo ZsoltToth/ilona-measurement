@@ -163,6 +163,7 @@ public class MySQLMeasurementDAO implements MeasurementDAO {
 		SqlSession session = sessionFactory.openSession();
 		try {
 			MeasurementMapper mapper = session.getMapper(MeasurementMapper.class);
+			mapper.updateMeasurement(measurement);
 		} finally {
 			session.close();
 		}
