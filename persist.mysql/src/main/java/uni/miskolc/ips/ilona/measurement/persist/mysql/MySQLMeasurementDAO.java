@@ -170,20 +170,41 @@ public class MySQLMeasurementDAO implements MeasurementDAO {
      *
      */
     @Override
-    public final void updateMeasurement(final Measurement measurement) throws InsertionException {
+    public final void updateMeasurement(final Measurement measurement) throws InsertionException, RecordNotFoundException {
         // TODO Auto-generated method stub
         SqlSession session = sessionFactory.openSession();
         try {
-            MeasurementMapper mapper = session.getMapper(MeasurementMapper.class);
+
             try {
                 positionDAO.updatePosition(measurement.getPosition());
             } catch (RecordNotFoundException ex) {
                 positionDAO.createPosition(measurement.getPosition());
             }
-
-
+            MeasurementMapper mapper = session.getMapper(MeasurementMapper.class);
+            mapper.deleteBTDevice(measurement.getId().toString());
+            mapper.deleteRFID(measurement.getId().toString());
+            mapper.deleteWiFiRSSI(measurement.getId().toString());
             mapper.updateMeasurement(measurement);
+
+            final String measId = measurement.getId().toString();
+            if (measurement.getBluetoothTags() != null) {
+                for (String btDeviceId : measurement.getBluetoothTags().getTags()) {
+                    mapper.insertBTDevice4Measurement(btDeviceId, measId);
+                }
+            }
+            if (measurement.getWifiRSSI() != null) {
+                for (Map.Entry<String, Double> rssiEntry : measurement.getWifiRSSI().getRssiValues().entrySet()) {
+                    mapper.insertWiFiRSSI4Measurement(rssiEntry.getKey(), rssiEntry.getValue(), measId);
+                }
+            }
+            if (measurement.getRfidtags() != null) {
+                for (byte[] b : measurement.getRfidtags().getTags())
+                    mapper.insertRFID4Measurement(b, measId);
+            }
+
+
         } finally {
+            session.commit();
             session.close();
         }
 

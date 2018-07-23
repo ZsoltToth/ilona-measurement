@@ -217,6 +217,9 @@ public class MeasurementDAOIntegrationTest extends SetupIntegrationTest {
         dao.createMeasurement(measurement);
         Collection<Measurement> measuerements = dao.readMeasurements();
         assertEquals(true, measuerements.contains(measurement));
+        Measurement actual = dao.readMeasurement(measurement.getId());
+        Assert.assertEquals(measurement, actual);
+        Assert.assertEquals(measurement.getGpsCoordinates(), actual.getGpsCoordinates());
 
     }
 
@@ -230,15 +233,20 @@ public class MeasurementDAOIntegrationTest extends SetupIntegrationTest {
     }
 
     @Test
-    public void testUpdateMeasurement() throws InsertionException {
+    public void testUpdateMeasurement() throws InsertionException, RecordNotFoundException {
         Measurement measurement = createMeasurement();
         measurement.setId(UUID.fromString("59d46ae9-e0c8-48d0-b14a-503ed414b7cc"));
         dao.updateMeasurement(measurement);
         Measurement actual = dao.readMeasurement(UUID.fromString("59d46ae9-e0c8-48d0-b14a-503ed414b7cc"));
         Assert.assertEquals(measurement, actual);
-        Assert.assertEquals(measurement.getGpsCoordinates(), actual.getGpsCoordinates());
-        Assert.assertEquals(measurement.getPosition(), actual.getPosition());
+        //dao.deleteMeasurement(measurement);
+        //dao.createMeasurement(measurement);
 
+        Assert.assertEquals(measurement.getPosition(), actual.getPosition());
+        Assert.assertEquals(measurement.getGpsCoordinates(), actual.getGpsCoordinates());
+        Assert.assertEquals(measurement.getMagnetometer(), actual.getMagnetometer());
+        Assert.assertEquals(measurement.getBluetoothTags(), actual.getBluetoothTags());
+        Assert.assertEquals(measurement.getWifiRSSI(), actual.getWifiRSSI());
     }
 
     @Ignore

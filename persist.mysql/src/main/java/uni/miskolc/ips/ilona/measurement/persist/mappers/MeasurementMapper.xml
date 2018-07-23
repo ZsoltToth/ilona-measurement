@@ -69,7 +69,7 @@
         <association property="gpsCoordinates" javaType="GPSCoordinate">
             <result property="latitude" column="gpsLatitude"/>
             <result property="longitude" column="gpsLongitude"/>
-            <result property="altitude" column="gpsAltitude "/>
+            <result property="altitude" column="gpsAltitude"/>
         </association>
 
 
@@ -105,7 +105,6 @@
 		select btDeviceId from BluetoothTags where measId =
 		#{measId};
 	</select>
-
 
     <select id="selectWiFiRSSIForMeasurement" resultMap="mappedValues"
             parameterType="String">
@@ -159,6 +158,9 @@
 		#{measId}
 		);
 	</insert>
+    <delete id="deleteWiFiRSSI">
+        delete from WIFIRSSI where measId = #{measId};
+    </delete>
 
     <insert id="insertBTDevice4Measurement">
 		insert into
@@ -167,6 +169,10 @@
 		#{measId}
 		);
 	</insert>
+    <delete id="deleteBTDevice" parameterType="String">
+		delete from BluetoothTags where measId = #{measId};
+	</delete>
+
 
     <insert id="insertRFID4Measurement">
 		insert into
@@ -175,8 +181,11 @@
 		#{measId}
 		);
 	</insert>
+    <delete id="deleteRFID" parameterType="String">
+		delete from RFIDTags where measId = #{measId};
+	</delete>
 
-    <update id="updateMeasurement">
+    <update id="updateMeasurement" parameterType="Measurement">
         UPDATE Measurement set
           measTimestamp = #{timestamp},
           magnetometerX = #{magnetometer.xAxis},

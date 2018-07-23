@@ -106,4 +106,12 @@ public interface MeasurementMapper {
     void updateMeasurement(Measurement measurement);
 
     Measurement selectMeasurement(@Param("uuid") UUID uuid);
+
+    void deleteBTDevice(@Param("measId") String id);
+
+    void deleteRFID(@Param("measId") String id);
+
+    void deleteWiFiRSSI(@Param("measId") String id);
+
+
 }
