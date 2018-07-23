@@ -99,7 +99,19 @@ public class BluetoothTags {
 	public final String toString() {
 		return "BluetoothTags [tags=" + tags + "]";
 	}
-	
-	
 
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+
+		BluetoothTags that = (BluetoothTags) o;
+
+		return tags != null ? tags.equals(that.tags) : that.tags == null;
+	}
+
+	@Override
+	public int hashCode() {
+		return tags != null ? tags.hashCode() : 0;
+	}
 }

@@ -1,137 +1,138 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
-  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper
-	namespace="uni.miskolc.ips.ilona.measurement.persist.mappers.MeasurementMapper">
+        namespace="uni.miskolc.ips.ilona.measurement.persist.mappers.MeasurementMapper">
 
 
-	<sql id="selectParameters">
-		FROM Measurement m inner join Position p on m.posId =p.posId inner
-		join
-		Zone z on z.zoneId = p.zoneId <!-- inner join WIFIRSSI on WIFIRSSI.measId 
+    <sql id="selectParameters">
+        FROM Measurement m inner join Position p on m.posId =p.posId inner
+        join
+        Zone z on z.zoneId = p.zoneId <!-- inner join WIFIRSSI on WIFIRSSI.measId
 			= m.measId; -->
-	</sql>
+    </sql>
 
 
-	<resultMap type="Coordinate" id="CoordinateResultMap">
-		<id property="x" column="coord_X" />
-		<id property="y" column="coord_Y" />
-		<id property="z" column="coord_Z" />
-	</resultMap>
+    <resultMap type="Coordinate" id="CoordinateResultMap">
+        <id property="x" column="coord_X"/>
+        <id property="y" column="coord_Y"/>
+        <id property="z" column="coord_Z"/>
+    </resultMap>
 
-	<resultMap type="Zone" id="ZoneResultMap">
-		<id property="id" column="zoneId" javaType="UUID" jdbcType="VARCHAR"
-			typeHandler="UUIDTypeHandler" />
-		<result property="name" column="name" />
-	</resultMap>
-
-
-	<resultMap type="Position" id="PositionResultMap">
-		<id property="id" column="posId" javaType="UUID" jdbcType="VARCHAR"
-			typeHandler="UUIDTypeHandler" />
-		<!-- <association property="zoneId" resultMap="ZoneResultMap" /> -->
-		<association property="coordinate" resultMap="CoordinateResultMap" />
-		<association property="zone" resultMap="ZoneResultMap" />
-	</resultMap>
+    <resultMap type="Zone" id="ZoneResultMap">
+        <id property="id" column="zoneId" javaType="UUID" jdbcType="VARCHAR"
+            typeHandler="UUIDTypeHandler"/>
+        <result property="name" column="name"/>
+    </resultMap>
 
 
-
-	<!-- <resultMap type="WiFiRSSI" id="RSSI" autoMapping="true"> <association 
-		property="rssiValues" column="measId" javaType="java.util.ArrayList" select="selectWiFiRSSIForMeasurement"> 
-		<id column="measId"/> <id column="ssid" property="ssid"/> <id column="rssi" 
-		property="rssi"/> </association> </resultMap> -->
-
-
-
-	<resultMap type="HashMap" id="RSSI" autoMapping="true">
-		<collection property="rssiValues" resultMap="mappedValues"
-			ofType="Hashmap" />
-	</resultMap>
-
-	<resultMap type="HashMap" id="mappedValues">
-		<id column="measId" />
-		<id column="ssid" property="ssid" />
-		<id column="rssi" property="rssi" />
-	</resultMap>
+    <resultMap type="Position" id="PositionResultMap">
+        <id property="id" column="posId" javaType="UUID" jdbcType="VARCHAR"
+            typeHandler="UUIDTypeHandler"/>
+        <!-- <association property="zoneId" resultMap="ZoneResultMap" /> -->
+        <association property="coordinate" resultMap="CoordinateResultMap"/>
+        <association property="zone" resultMap="ZoneResultMap"/>
+    </resultMap>
 
 
-	<resultMap type="Measurement" id="MeasurementResultMap">
-		<id property="id" column="measId" javaType="UUID" jdbcType="VARCHAR"
-			typeHandler="UUIDTypeHandler" />
-		<result property="timestamp" column="measTimestamp" />
-
-		<association property="magnetometer" javaType="Magnetometer">
-			<result property="xAxis" column="magnetometerX" />
-			<result property="yAxis" column="magnetometerY" />
-			<result property="zAxis" column="magnetometerZ" />
-			<result property="radian" column="magnetometerRadian" />
-		</association>
-
-		<association property="gpsCoordinates" javaType="GPSCoordinate">
-			<result property="latitude" column="gpsLatitude" />
-			<result property="longitude" column="gpsLongitude" />
-			<result property="altitude" column="gpsAltitude " />
-		</association>
+    <!-- <resultMap type="WiFiRSSI" id="RSSI" autoMapping="true"> <association
+        property="rssiValues" column="measId" javaType="java.util.ArrayList" select="selectWiFiRSSIForMeasurement">
+        <id column="measId"/> <id column="ssid" property="ssid"/> <id column="rssi"
+        property="rssi"/> </association> </resultMap> -->
 
 
-		<association property="position" column="posId" javaType="Position"
-			resultMap="PositionResultMap" />
+    <resultMap type="HashMap" id="RSSI" autoMapping="true">
+        <collection property="rssiValues" resultMap="mappedValues"
+                    ofType="Hashmap"/>
+    </resultMap>
+
+    <resultMap type="HashMap" id="mappedValues">
+        <id column="measId"/>
+        <id column="ssid" property="ssid"/>
+        <id column="rssi" property="rssi"/>
+    </resultMap>
 
 
-		<association property="bluetoothTags" javaType="BluetoothTags"
-			column="btDeviceId" select="selectBTTagsForMeasurement" />
+    <resultMap type="Measurement" id="MeasurementResultMap">
+        <id property="id" column="measId" javaType="UUID" jdbcType="VARCHAR"
+            typeHandler="UUIDTypeHandler"/>
+        <result property="timestamp" column="measTimestamp"/>
+
+        <association property="magnetometer" javaType="Magnetometer">
+            <result property="xAxis" column="magnetometerX"/>
+            <result property="yAxis" column="magnetometerY"/>
+            <result property="zAxis" column="magnetometerZ"/>
+            <result property="radian" column="magnetometerRadian"/>
+        </association>
+
+        <association property="gpsCoordinates" javaType="GPSCoordinate">
+            <result property="latitude" column="gpsLatitude"/>
+            <result property="longitude" column="gpsLongitude"/>
+            <result property="altitude" column="gpsAltitude"/>
+        </association>
 
 
-	</resultMap>
+        <association property="position" column="posId" javaType="Position"
+                     resultMap="PositionResultMap"/>
 
 
+        <association property="bluetoothTags" javaType="BluetoothTags"
+                     column="btDeviceId" select="selectBTTagsForMeasurement"/>
 
-	<!-- Selects -->
 
-	<select id="selectPositionById" resultMap="PositionResultMap"
-		parameterType="String">
+    </resultMap>
+
+
+    <!-- Selects -->
+
+    <select id="selectPositionById" resultMap="PositionResultMap"
+            parameterType="String">
 		select * from Position p inner join Zone z on z.zoneId =
 		p.zoneId
 		where p.posId like #{posId};
 	</select>
+    <select id="selectMeasurement" resultMap="MeasurementResultMap"
+            parameterType="UUID">
+        select *
+        <include refid="selectParameters"/>
+        where measId = #{uuid, typeHandler=UUIDTypeHandler, jdbcType=VARCHAR};
+    </select>
 
 
-	<select id="selectBTTagsForMeasurement" resultType="String"
-		parameterType="String">
+    <select id="selectBTTagsForMeasurement" resultType="String"
+            parameterType="String">
 		select btDeviceId from BluetoothTags where measId =
 		#{measId};
 	</select>
 
-
-	<select id="selectWiFiRSSIForMeasurement" resultMap="mappedValues"
-		parameterType="String">
+    <select id="selectWiFiRSSIForMeasurement" resultMap="mappedValues"
+            parameterType="String">
 		select ssid, rssi , measId from WIFIRSSI where measId =
 		#{measId};
 
 	</select>
 
 
-
-	<select id="selectRFIDTagsForMeasurement" resultType="_byte[]"
-		parameterType="String">
+    <select id="selectRFIDTagsForMeasurement" resultType="_byte[]"
+            parameterType="String">
 		select rfidTag from RFIDTags where measId = #{measId};
 	</select>
 
 
-	<!-- TODO RFID Tags -->
-	<!-- <select id="selectRFIDTagsForMeasurement" resultType="byte" parameterType="String"> 
-		select rfidTag from RFIDTags where measId = #{measId}; </select> -->
-	<select id="selectMeasurements" resultMap="MeasurementResultMap">
-		select *
-		<include refid="selectParameters" />
-		;
-	</select>
+    <!-- TODO RFID Tags -->
+    <!-- <select id="selectRFIDTagsForMeasurement" resultType="byte" parameterType="String">
+        select rfidTag from RFIDTags where measId = #{measId}; </select> -->
+    <select id="selectMeasurements" resultMap="MeasurementResultMap">
+        select *
+        <include refid="selectParameters"/>
+        ;
+    </select>
 
-	<!-- TODO measId,measTimestamp,magnetometerX,magnetometerY,magnetometerZ,magnetometerRadian, 
-		gpsLatitude,gpsLongitude,gpsAltitude, posId -->
+    <!-- TODO measId,measTimestamp,magnetometerX,magnetometerY,magnetometerZ,magnetometerRadian,
+        gpsLatitude,gpsLongitude,gpsAltitude, posId -->
 
-	<insert id="insertMeasurement">
+    <insert id="insertMeasurement">
 		insert into Measurement(measId,
 		measTimestamp,magnetometerX,magnetometerY,magnetometerZ,magnetometerRadian,gpsLatitude,gpsLongitude,gpsAltitude,posId)
 		values(
@@ -144,55 +145,77 @@
 		#{gpsCoordinates.latitude},
 		#{gpsCoordinates.longitude},
 		#{gpsCoordinates.altitude},
-		#{position.id,typeHandler=UUIDTypeHandler,
-		jdbcType=VARCHAR}
+		#{position.id,typeHandler=UUIDTypeHandler,jdbcType=VARCHAR}
 		);
 
 	</insert>
 
 
-
-	<insert id="insertWiFiRSSI4Measurement">
+    <insert id="insertWiFiRSSI4Measurement">
 		insert into WIFIRSSI values (
 		#{ssid},
 		#{rssi},
 		#{measId}
 		);
 	</insert>
+    <delete id="deleteWiFiRSSI">
+        delete from WIFIRSSI where measId = #{measId};
+    </delete>
 
-	<insert id="insertBTDevice4Measurement">
+    <insert id="insertBTDevice4Measurement">
 		insert into
 		BluetoothTags values (
 		#{btDeviceId},
 		#{measId}
 		);
 	</insert>
+    <delete id="deleteBTDevice" parameterType="String">
+		delete from BluetoothTags where measId = #{measId};
+	</delete>
 
-	<insert id="insertRFID4Measurement">
+
+    <insert id="insertRFID4Measurement">
 		insert into
 		RFIDTags values (
 		#{rfid},
 		#{measId}
 		);
 	</insert>
+    <delete id="deleteRFID" parameterType="String">
+		delete from RFIDTags where measId = #{measId};
+	</delete>
+
+    <update id="updateMeasurement" parameterType="Measurement">
+        UPDATE Measurement set
+          measTimestamp = #{timestamp},
+          magnetometerX = #{magnetometer.xAxis},
+          magnetometerY = #{magnetometer.yAxis},
+          magnetometerZ = #{magnetometer.zAxis},
+          magnetometerRadian = #{magnetometer.radian},
+          gpsLatitude = #{gpsCoordinates.latitude},
+          gpsLongitude = #{gpsCoordinates.longitude},
+          gpsAltitude = #{gpsCoordinates.altitude},
+          posId = #{position.id,typeHandler=UUIDTypeHandler, jdbcType=VARCHAR}
+          where
+          measId = #{id,typeHandler=UUIDTypeHandler, jdbcType=VARCHAR};
+    </update>
 
 
+    <!-- <insert id="insertPosition"> insert into Position values( #{UUID, typeHandler=UUIDTypeHandler,
+        jdbcType=VARCHAR}, #{coordinate.x}, #{coordinate.y}, #{coordinate.z}, #{zone.id,
+        typeHandler=UUIDTypeHandler, jdbcType=VARCHAR} ); </insert> <update id="updatePosition">
+        update Position set coord_X = #{coordinate.x}, coord_Y = #{coordinate.y},
+        coord_Z = #{coordinate.z}, zoneId = #{zone.id, typeHandler=UUIDTypeHandler,
+        jdbcType=VARCHAR} where posId = #{UUID, typeHandler=UUIDTypeHandler, jdbcType=VARCHAR};
+        </update> <delete id="deletePosition"> delete from Position where posId =
+        #{UUID, typeHandler=UUIDTypeHandler, jdbcType=VARCHAR}; </delete> -->
 
-	<!-- <insert id="insertPosition"> insert into Position values( #{UUID, typeHandler=UUIDTypeHandler, 
-		jdbcType=VARCHAR}, #{coordinate.x}, #{coordinate.y}, #{coordinate.z}, #{zone.id, 
-		typeHandler=UUIDTypeHandler, jdbcType=VARCHAR} ); </insert> <update id="updatePosition"> 
-		update Position set coord_X = #{coordinate.x}, coord_Y = #{coordinate.y}, 
-		coord_Z = #{coordinate.z}, zoneId = #{zone.id, typeHandler=UUIDTypeHandler, 
-		jdbcType=VARCHAR} where posId = #{UUID, typeHandler=UUIDTypeHandler, jdbcType=VARCHAR}; 
-		</update> <delete id="deletePosition"> delete from Position where posId = 
-		#{UUID, typeHandler=UUIDTypeHandler, jdbcType=VARCHAR}; </delete> -->
-
-	<delete id="deleteMeasurementByMeasurement" parameterType="String">
+    <delete id="deleteMeasurementByMeasurement" parameterType="String">
 		delete from Measurement where measId = #{measId};
 	</delete>
 
-	<!--<delete id="deleteMeasurementByTimestamp" parameterType="String"> 
-	delete from Measurement where measTimestamp like #{stamp};
-	</delete> -->
+    <!--<delete id="deleteMeasurementByTimestamp" parameterType="String">
+    delete from Measurement where measTimestamp like #{stamp};
+    </delete> -->
 </mapper>
 

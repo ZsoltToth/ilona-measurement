@@ -1,32 +1,33 @@
 package uni.miskolc.ips.ilona.measurement.persist;
 
-import java.util.Collection;
-import java.util.Date;
-
 import uni.miskolc.ips.ilona.measurement.model.measurement.Measurement;
 import uni.miskolc.ips.ilona.measurement.persist.exceptions.InsertionException;
 import uni.miskolc.ips.ilona.measurement.persist.exceptions.RecordNotFoundException;
 
+import java.util.Collection;
+import java.util.Date;
+import java.util.UUID;
+
 
 /**
- * 
  * @author Zsolt Toth
- *
  */
 public interface MeasurementDAO {
 
-	// Create
-	public void createMeasurement(Measurement measurement) throws InsertionException;
+    // Create
+    public void createMeasurement(Measurement measurement) throws InsertionException;
 
-	// Read
-	public Collection<Measurement> readMeasurements();
+    // Read
+    public Collection<Measurement> readMeasurements();
 
-	// Update
-	public void updateMeasurement(Measurement measurement) throws RecordNotFoundException;
+    Measurement readMeasurement(UUID uuid);
 
-	// Delete
-	public void deleteMeasurement(Date timestamp) throws RecordNotFoundException;
+    // Update
+    public void updateMeasurement(Measurement measurement) throws RecordNotFoundException, InsertionException;
 
-	public void deleteMeasurement(Measurement measurement) throws RecordNotFoundException;
+    // Delete
+    public void deleteMeasurement(Date timestamp) throws RecordNotFoundException;
+
+    public void deleteMeasurement(Measurement measurement) throws RecordNotFoundException;
 
 }
