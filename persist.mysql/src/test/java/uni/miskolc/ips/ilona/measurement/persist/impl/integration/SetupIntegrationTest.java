@@ -2,10 +2,7 @@ package uni.miskolc.ips.ilona.measurement.persist.impl.integration;
 
 import com.mysql.jdbc.Driver;
 import org.apache.ibatis.jdbc.ScriptRunner;
-import org.junit.After;
-import org.junit.Assume;
-import org.junit.Before;
-import org.junit.BeforeClass;
+import org.junit.*;
 
 import java.io.*;
 import java.sql.Connection;
@@ -78,6 +75,7 @@ public class SetupIntegrationTest {
     /**
      * It drops the created tables.
      */
+    @AfterClass
     public static void afterClass() {
         try {
             runSQLScript(TEST_DROP_TABLES);

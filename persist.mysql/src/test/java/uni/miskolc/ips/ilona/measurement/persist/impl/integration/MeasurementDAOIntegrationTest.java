@@ -5,7 +5,10 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.junit.*;
+import org.junit.Assert;
+import org.junit.Assume;
+import org.junit.Before;
+import org.junit.Test;
 import uni.miskolc.ips.ilona.measurement.model.measurement.*;
 import uni.miskolc.ips.ilona.measurement.model.position.Coordinate;
 import uni.miskolc.ips.ilona.measurement.model.position.Position;
@@ -137,7 +140,7 @@ public class MeasurementDAOIntegrationTest extends SetupIntegrationTest {
             measurementBuilder.setPosition(new Position(new Zone("EZ")));
             RFIDTags rfid = new RFIDTags(new HashSet<byte[]>());
             rfid.addTag(new byte[]{(byte) 12});
-            ;
+
             measurementBuilder.setRFIDTags(rfid);
             Measurement newMeas = measurementBuilder.build();
 
@@ -249,7 +252,7 @@ public class MeasurementDAOIntegrationTest extends SetupIntegrationTest {
         Assert.assertEquals(measurement.getWifiRSSI(), actual.getWifiRSSI());
     }
 
-    @Ignore
+    @Test
     public void testDeleteMeasurementByMeasurement() throws RecordNotFoundException {
         UUID zoneId1 = UUID.fromString("9ff78a6a-2216-4f38-bfeb-5fa189b6421b");
         Zone bathroom = new Zone("bathroom");
