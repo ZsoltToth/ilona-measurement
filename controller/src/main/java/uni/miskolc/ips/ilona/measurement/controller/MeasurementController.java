@@ -1,7 +1,5 @@
 package uni.miskolc.ips.ilona.measurement.controller;
 
-import java.util.*;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +7,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-
 import uni.miskolc.ips.ilona.measurement.controller.dto.*;
 import uni.miskolc.ips.ilona.measurement.model.measurement.*;
 import uni.miskolc.ips.ilona.measurement.model.position.Coordinate;
@@ -23,6 +20,7 @@ import uni.miskolc.ips.ilona.measurement.service.exception.ZoneNotFoundException
 
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
+import java.util.*;
 
 /**
  * @author bogdandy, tothzs
@@ -68,6 +66,7 @@ public class MeasurementController {
             }
             result.add(assembleMeasurementDTO(measurement));
         }
+        LOG.info("listMeasurement in MeasurementController");
         return result;
     }
 
@@ -121,7 +120,9 @@ public class MeasurementController {
             RFIDTags rfidTags = new RFIDTags(new HashSet<byte[]>(measurementRegistrationRequest.getRfidtags().getRfidTag()));
             measurement.setRfidtags(rfidTags);
         }
+
         this.measurementManagerService.recordMeasurement(measurement);
+        LOG.info("measurement added: " + measurement.getId());
     }
 
     /**
@@ -136,6 +137,7 @@ public class MeasurementController {
     @ResponseBody
     public void deleteMeasurement(@RequestParam("timestamp") final long timestamp) throws TimeStampNotFoundException, DatabaseUnavailableException, ZoneNotFoundException {
         measurementManagerService.deleteMeasurement(new Date(timestamp));
+        LOG.info("Measurement deleted:" + timestamp);
     }
 
     private MeasurementDTO assembleMeasurementDTO(Measurement measurement) throws DatatypeConfigurationException {
@@ -218,19 +220,19 @@ public class MeasurementController {
 
     @ResponseStatus(value = HttpStatus.UNSUPPORTED_MEDIA_TYPE, reason = "Measurement was Inconsistent.")
     @ExceptionHandler(InconsistentMeasurementException.class)
-    public void inconsistentMeasurementExceptionHandler(Exception ex){
-        LOG.info(ex.getMessage());
+    public void inconsistentMeasurementExceptionHandler(Exception ex) {
+        LOG.error(ex.getMessage());
     }
 
     @ResponseStatus(value = HttpStatus.NOT_FOUND)
     @ExceptionHandler(TimeStampNotFoundException.class)
-    public void timeStampNotFoundExceptionHandler(Exception ex){
-        LOG.info(ex.getMessage());
+    public void timeStampNotFoundExceptionHandler(Exception ex) {
+        LOG.error(ex.getMessage());
     }
 
     @ResponseStatus(value = HttpStatus.NOT_FOUND)
     @ExceptionHandler(ZoneNotFoundException.class)
-    public void zoneNotFoundExceptionHandler(Exception ex){
-        LOG.info(ex.getMessage());
+    public void zoneNotFoundExceptionHandler(Exception ex) {
+        LOG.error(ex.getMessage());
     }
 }

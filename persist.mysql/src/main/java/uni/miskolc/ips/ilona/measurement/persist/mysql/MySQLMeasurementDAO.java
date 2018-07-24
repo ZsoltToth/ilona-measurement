@@ -113,6 +113,7 @@ public class MySQLMeasurementDAO implements MeasurementDAO {
             }
 
             session.commit();
+            LOG.info("Measurement stored in the database" + measId);
         } finally {
             session.close();
         }
@@ -123,14 +124,14 @@ public class MySQLMeasurementDAO implements MeasurementDAO {
      */
     @Override
     public final Collection<Measurement> readMeasurements() {
-        Collection<Measurement> result = new ArrayList<Measurement>();
+        Collection<Measurement> result = new ArrayList<>();
         SqlSession session = sessionFactory.openSession();
         try {
             MeasurementMapper mapper = session.getMapper(MeasurementMapper.class);
-            result = new ArrayList<Measurement>(mapper.selectMeasurements());
+            result = new ArrayList<>(mapper.selectMeasurements());
             for (Measurement m : result) {
                 String id = m.getId().toString();
-                Map<String, Double> wifi = new HashMap<String, Double>();
+                Map<String, Double> wifi = new HashMap<>();
                 List<Map<String, Double>> mysqlwifis = mapper.selectWiFiRSSIForMeasurement(id);
                 for (Map<String, Double> map : mysqlwifis) {
                     String ssid = "" + map.get("ssid");
@@ -170,7 +171,7 @@ public class MySQLMeasurementDAO implements MeasurementDAO {
      *
      */
     @Override
-    public final void updateMeasurement(final Measurement measurement) throws InsertionException, RecordNotFoundException {
+    public final void updateMeasurement(final Measurement measurement) throws InsertionException {
         // TODO Auto-generated method stub
         SqlSession session = sessionFactory.openSession();
         try {
@@ -207,6 +208,7 @@ public class MySQLMeasurementDAO implements MeasurementDAO {
             session.commit();
             session.close();
         }
+        LOG.info("Measurement updated:" + measurement.getId());
 
     }
 
@@ -223,6 +225,7 @@ public class MySQLMeasurementDAO implements MeasurementDAO {
             session.commit();
             session.close();
         }
+        LOG.info("Measurement deleted with timestamp:" + timestamp);
     }
 
     /**
@@ -238,6 +241,7 @@ public class MySQLMeasurementDAO implements MeasurementDAO {
             session.commit();
             session.close();
         }
+        LOG.info("Measurement deleted: " + measurement.getId());
     }
 
 }
