@@ -28,7 +28,7 @@ public class MySQLPositionDAO implements PositionDAO {
      * This is the central interface in the log4j package.
      * Most logging operations, except configuration, are done through this interface.
      */
-    private final Logger log = LogManager.getLogger(MySQLPositionDAO.class);
+    private final Logger LOG = LogManager.getLogger(MySQLPositionDAO.class);
 
     /**
      * Interface for identification zone.
@@ -112,12 +112,12 @@ public class MySQLPositionDAO implements PositionDAO {
             mapper.insertPosition(position);
             session.commit();
         } catch (PersistenceException ex) {
-            log.error(ex.getMessage());
+            LOG.error(ex.getMessage());
             throw new InsertionException();
         } finally {
             session.close();
         }
-        log.info("Position Created: " + position.getUUID());
+        LOG.info("Position Created: " + position.getUUID());
 
     }
 
@@ -159,7 +159,7 @@ public class MySQLPositionDAO implements PositionDAO {
         try {
             PositionMapper mapper = session.getMapper(PositionMapper.class);
             if (mapper.selectPositionByUUID(position.getUUID()) == null) {
-                log.error("position for update not found: " + position.getUUID());
+                LOG.error("position for update not found: " + position.getUUID());
                 throw new RecordNotFoundException();
 
             }
@@ -170,7 +170,7 @@ public class MySQLPositionDAO implements PositionDAO {
         } finally {
             session.close();
         }
-        log.info("Position " + position.getUUID() + "updated");
+        LOG.info("Position " + position.getUUID() + "updated");
     }
 
     @Override
@@ -187,7 +187,7 @@ public class MySQLPositionDAO implements PositionDAO {
         } finally {
             session.close();
         }
-        log.info("position" + position.getUUID() + "deleted");
+        LOG.info("position" + position.getUUID() + "deleted");
 
     }
 

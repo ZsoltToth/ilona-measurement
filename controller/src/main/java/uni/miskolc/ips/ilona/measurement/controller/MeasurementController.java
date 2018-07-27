@@ -66,7 +66,7 @@ public class MeasurementController {
             }
             result.add(assembleMeasurementDTO(measurement));
         }
-        LOG.info("listMeasurement in MeasurementController");
+        LOG.info("ListMeasurements in MeasurementController called");
         return result;
     }
 
@@ -122,7 +122,7 @@ public class MeasurementController {
         }
 
         this.measurementManagerService.recordMeasurement(measurement);
-        LOG.info("measurement added: " + measurement.getId());
+        LOG.info("Measurement added: " + measurement.getId());
     }
 
     /**
@@ -221,18 +221,18 @@ public class MeasurementController {
     @ResponseStatus(value = HttpStatus.UNSUPPORTED_MEDIA_TYPE, reason = "Measurement was Inconsistent.")
     @ExceptionHandler(InconsistentMeasurementException.class)
     public void inconsistentMeasurementExceptionHandler(Exception ex) {
-        LOG.error(ex.getMessage());
+        LOG.error("InconsistentMeasurementException, Measurement was Inconsistent.");
     }
 
     @ResponseStatus(value = HttpStatus.NOT_FOUND)
     @ExceptionHandler(TimeStampNotFoundException.class)
     public void timeStampNotFoundExceptionHandler(Exception ex) {
-        LOG.error(ex.getMessage());
+        LOG.error("TimeStampNotFoundException in MeasurementController");
     }
 
     @ResponseStatus(value = HttpStatus.NOT_FOUND)
     @ExceptionHandler(ZoneNotFoundException.class)
     public void zoneNotFoundExceptionHandler(Exception ex) {
-        LOG.error(ex.getMessage());
+        LOG.error("ZoneNotFoundException in MeasurementController");
     }
 }

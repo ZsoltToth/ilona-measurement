@@ -216,7 +216,7 @@ public class MySQLMeasurementDAO implements MeasurementDAO {
      *
      */
     @Override
-    public final void deleteMeasurement(final Date timestamp) throws RecordNotFoundException {
+    public final void deleteMeasurement(final Date timestamp) {
         SqlSession session = sessionFactory.openSession();
         try {
             MeasurementMapper mapper = session.getMapper(MeasurementMapper.class);
@@ -232,7 +232,7 @@ public class MySQLMeasurementDAO implements MeasurementDAO {
      *
      */
     @Override
-    public final void deleteMeasurement(final Measurement measurement) throws RecordNotFoundException {
+    public final void deleteMeasurement(final Measurement measurement) {
         SqlSession session = sessionFactory.openSession();
         try {
             MeasurementMapper mapper = session.getMapper(MeasurementMapper.class);

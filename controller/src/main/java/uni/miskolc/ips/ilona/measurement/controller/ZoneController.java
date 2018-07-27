@@ -112,7 +112,7 @@ public class ZoneController {
         ModelAndView result = new ModelAndView("zoneManagement");
         result.addObject("zones", zoneManagerService.getZones());
 
-        LOG.info("zoneManagement page returned");
+        LOG.info("ZoneManagement page returned");
         return result;
     }
 
