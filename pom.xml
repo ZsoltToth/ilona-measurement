@@ -78,17 +78,6 @@
 		<module>web</module>
 	</modules>
 
-	<distributionManagement>
-		<snapshotRepository>
-			<id>safranek</id>
-			<url>http://safranek.iit.uni-miskolc.hu:8081/nexus/content/repositories/ILONA-Snapshots</url>
-		</snapshotRepository>
-		<repository>
-			<id>safranek</id>
-			<url>http://safranek.iit.uni-miskolc.hu:8081/nexus/content/repositories/ILONA-Releases</url>
-		</repository>
-	</distributionManagement>
-
 
 
 
