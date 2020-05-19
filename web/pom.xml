@@ -95,11 +95,6 @@
 			<name>Spring Snapshot Repository</name>
 			<url>http://repo.spring.io/snapshot</url>
 		</repository>
-		<repository>
-			<id>safranek</id>
-			<name>ILONA - Snapshot</name>
-			<url>http://safranek.iit.uni-miskolc.hu:8081/nexus/content/repositories/ILONA-Snapshots/</url>
-		</repository>
 	</repositories>
 
 

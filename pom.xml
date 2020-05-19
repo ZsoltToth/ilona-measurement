@@ -29,14 +29,7 @@
 		<maven-jar-plugin.version>3.0.2</maven-jar-plugin.version>
 	</properties>
 	
-	<repositories>
-		<repository>
-			<id>safranek</id>
-			<name>ILONA - Snapshot</name>
-			<url>http://safranek.iit.uni-miskolc.hu:8081/nexus/content/repositories/ILONA-Snapshots/</url>
-		</repository>
-	</repositories>
-	
+
 	<build>
 		<pluginManagement>
 			<plugins>
