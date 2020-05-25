@@ -4,7 +4,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import uni.miskolc.ips.ilona.measurement.persist.MeasurementDAO;
 import uni.miskolc.ips.ilona.measurement.persist.PositionDAO;
@@ -27,60 +26,54 @@ public class IlonaMeasurementApplicationContext {
 
 
     /**
-     * TODO
      *
-     * @return
+     * @return A MySQLZoneDAO bean which is impelemtend in persist.mysql
      */
     @Bean(name = "zoneDao")
     public ZoneDAO getZoneDAO() throws FileNotFoundException {
-        ZoneDAO mySQLZoneDAO = new MySQLZoneDAO(
+        return new MySQLZoneDAO(
                 System.getProperty("mybatis.config"),
                 System.getProperty("database.host"),
                 Integer.parseInt(System.getProperty("database.port")),
                 System.getProperty("database.db"),
                 System.getProperty("database.user"),
                 System.getProperty("database.password"));
-        return mySQLZoneDAO;
     }
 
     @Bean(name = "positionDAO")
     public PositionDAO getPositionDAO() throws FileNotFoundException {
 
-        PositionDAO mySQLPositionDAO = new MySQLPositionDAO(System.getProperty("mybatis.config"),
+        return new MySQLPositionDAO(System.getProperty("mybatis.config"),
                 System.getProperty("database.host)"),
                 Integer.parseInt(System.getProperty("database.port")),
                 System.getProperty("database.db"),
                 System.getProperty("database.user"),
                 System.getProperty("database.password"),
                 getZoneDAO());
-        return mySQLPositionDAO;
     }
 
     @Bean(name = "measurementDAO")
     public MeasurementDAO getMeasurementDAO() throws FileNotFoundException {
 
-        MeasurementDAO mySQLMeasurementDAO = new MySQLMeasurementDAO(System.getProperty("mybatis.config"),
+        return new MySQLMeasurementDAO(System.getProperty("mybatis.config"),
                 System.getProperty("database.host"),
                 Integer.parseInt(System.getProperty("database.port")),
                 System.getProperty("database.db"),
                 System.getProperty("database.user"),
                 System.getProperty("database.password"),
                 getPositionDAO());
-        return mySQLMeasurementDAO;
     }
 
     @Bean(name = "zoneManagerService")
     public ZoneService zoneManagerService() throws FileNotFoundException {
 
-        ZoneService zoneManagerServiceImpl = new ZoneManagerServiceImpl(getZoneDAO());
-        return zoneManagerServiceImpl;
+        return new ZoneManagerServiceImpl(getZoneDAO());
     }
 
     @Bean(name = "measurementManagerService")
     public MeasurementService measurementManagerService() throws FileNotFoundException {
 
-        MeasurementService measurementManagerServiceImpl = new MeasurementManagerServiceImpl(getMeasurementDAO());
-        return measurementManagerServiceImpl;
+        return new MeasurementManagerServiceImpl(getMeasurementDAO());
     }
 
     @Bean
@@ -91,7 +84,7 @@ public class IlonaMeasurementApplicationContext {
         return bean;
     }
 
-
+    /*
     public void addResourceHandlers(final ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
         registry.addResourceHandler("/css/**").addResourceLocations("/css/");
@@ -100,4 +93,5 @@ public class IlonaMeasurementApplicationContext {
         registry.addResourceHandler("/fonts/**").addResourceLocations("/fonts/");
 
     }
+     */
 }
