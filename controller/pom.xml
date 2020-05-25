@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>uni.miskolc.ips.ilona.measurement</groupId>
 		<artifactId>bundle</artifactId>
-		<version>2.0.25-SNAPSHOT</version>
+		<version>2.0.27-SNAPSHOT</version>
 	</parent>
 
 	<!-- https://mvnrepository.com/artifact/org.codehaus.mojo/versions-maven-plugin -->
