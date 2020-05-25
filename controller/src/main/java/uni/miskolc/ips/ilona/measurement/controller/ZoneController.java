@@ -41,28 +41,28 @@ public class ZoneController {
 	public @ResponseBody
 	final Collection<ZoneDTO> listZones() throws DatabaseUnavailableException {
 		Collection<ZoneDTO> result = new ArrayList<>();
-			for(Zone zone : this.zoneManagerService.getZones()){
-				ZoneDTO dto = new ZoneDTO();
-				dto.setId(zone.getId().toString());
-				dto.setName(zone.getName());
-				result.add(dto);
-			}
+		for(Zone zone : this.zoneManagerService.getZones()){
+			ZoneDTO dto = new ZoneDTO();
+			dto.setId(zone.getId().toString());
+			dto.setName(zone.getName());
+			result.add(dto);
+		}
 		return result;
 	}
-/**
- * Adds a new zone to the list of zones.
- * @param name The name of the new zone
- */
+	/**
+	 * Adds a new zone to the list of zones.
+	 * @param name The name of the new zone
+	 */
 	@RequestMapping("/addZone")
 	@ResponseBody
 	public void addZone(@RequestParam("name")final String name) throws DatabaseUnavailableException {
 		Zone zone = new Zone(name);
 		zoneManagerService.createZone(zone);
 	}
-/**
- * Deletes a zone based on the zone ID.
- * @param id The ID of the zone that needs to be deleted
- */
+	/**
+	 * Deletes a zone based on the zone ID.
+	 * @param id The ID of the zone that needs to be deleted
+	 */
 	@RequestMapping("/deleteZone")
 	@ResponseBody
 	public void deleteZone(@RequestParam("id") final String id) throws ZoneNotFoundException, DatabaseUnavailableException {
