@@ -23,7 +23,6 @@ import uni.miskolc.ips.ilona.measurement.persist.exceptions.InsertionException;
 import uni.miskolc.ips.ilona.measurement.persist.exceptions.RecordNotFoundException;
 import uni.miskolc.ips.ilona.measurement.persist.mappers.PositionMapper;
 
-import com.mysql.jdbc.PreparedStatement;
 
 public class MySQLPositionDAO implements PositionDAO {
 
