@@ -10,13 +10,13 @@
 	<name>ILONA - Measurement Subsystem</name>
 	<properties>
 		<java.version>1.7</java.version>
-		<spring.version>4.3.1.RELEASE</spring.version>
-		<spring.security.version>4.1.1.RELEASE</spring.security.version>
-		<jackson.version>2.5.1</jackson.version>
+		<jackson.version>2.11.0</jackson.version>
 		<junit.version>4.12</junit.version>
 		<gov.nist.math.version>1.0.3</gov.nist.math.version>
 		<org.apache.commons.version>2.2</org.apache.commons.version>
-		<org.springframework.version>4.3.1.RELEASE</org.springframework.version>
+		<spring.version>5.2.6.RELEASE</spring.version>
+		<org.springframework.version>5.2.6.RELEASE</org.springframework.version>
+		<spring.security.version>5.2.6.RELEASE</spring.security.version>
 		<org.easymock.version>3.4</org.easymock.version>
 		<org.mybatis.version>3.3.0</org.mybatis.version>
 		<org.apache.maven.plugins.version>3.5.1</org.apache.maven.plugins.version>

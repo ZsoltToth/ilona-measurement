@@ -5,7 +5,6 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import uni.miskolc.ips.ilona.measurement.persist.MeasurementDAO;
 import uni.miskolc.ips.ilona.measurement.persist.PositionDAO;
@@ -24,7 +23,7 @@ import java.io.FileNotFoundException;
 @Configuration
 @EnableWebMvc
 @ComponentScan(basePackages = "uni.miskolc.ips.ilona.measurement.controller")
-public class IlonaMeasurementApplicationContext extends WebMvcConfigurerAdapter {
+public class IlonaMeasurementApplicationContext {
 
 
     /**
@@ -93,7 +92,6 @@ public class IlonaMeasurementApplicationContext extends WebMvcConfigurerAdapter 
     }
 
 
-    @Override
     public void addResourceHandlers(final ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
         registry.addResourceHandler("/css/**").addResourceLocations("/css/");
