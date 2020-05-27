@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>uni.miskolc.ips.ilona.measurement</groupId>
 	<artifactId>bundle</artifactId>
@@ -14,30 +14,30 @@
 		<junit.version>4.12</junit.version>
 		<gov.nist.math.version>1.0.3</gov.nist.math.version>
 		<org.apache.commons.version>2.2</org.apache.commons.version>
-	<spring.version>5.2.6.RELEASE</spring.version>
-	<org.springframework.version>${spring.version}</org.springframework.version>
-	<spring.boot.version>2.1.8.RELEASE</spring.boot.version>
-	<spring.security.version>${spring.version}</spring.security.version>
-	<org.easymock.version>3.4</org.easymock.version>
-	<org.mybatis.version>3.3.0</org.mybatis.version>
-	<org.apache.maven.plugins.version>3.5.1</org.apache.maven.plugins.version>
-	<org.apache.logging.log4j.version>2.2</org.apache.logging.log4j.version>
-	<mysql.connector.version>8.0.19</mysql.connector.version>
-	<javax.servlet.version>3.1.0</javax.servlet.version>
-	<jstl.version>1.2</jstl.version>
-	<maven-deploy-plugin.version>2.8.1</maven-deploy-plugin.version>
-	<maven-surefire-plugin.version>2.12.4</maven-surefire-plugin.version>
-	<maven-jar-plugin.version>3.0.2</maven-jar-plugin.version>
-</properties>
+		<spring.version>5.2.6.RELEASE</spring.version>
+		<org.springframework.version>${spring.version}</org.springframework.version>
+		<spring.boot.version>2.1.8.RELEASE</spring.boot.version>
+		<spring.security.version>${spring.version}</spring.security.version>
+		<org.easymock.version>3.4</org.easymock.version>
+		<org.mybatis.version>3.3.0</org.mybatis.version>
+		<org.apache.maven.plugins.version>3.5.1</org.apache.maven.plugins.version>
+		<org.apache.logging.log4j.version>2.2</org.apache.logging.log4j.version>
+		<mysql.connector.version>8.0.19</mysql.connector.version>
+		<javax.servlet.version>3.1.0</javax.servlet.version>
+		<jstl.version>1.2</jstl.version>
+		<maven-deploy-plugin.version>2.8.1</maven-deploy-plugin.version>
+		<maven-surefire-plugin.version>2.12.4</maven-surefire-plugin.version>
+		<maven-jar-plugin.version>3.0.2</maven-jar-plugin.version>
+	</properties>
 
 
-<build>
-	<pluginManagement>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>${org.apache.maven.plugins.version}</version>
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>${org.apache.maven.plugins.version}</version>
 					<configuration>
 						<source>${java.version}</source>
 						<target>${java.version}</target>
