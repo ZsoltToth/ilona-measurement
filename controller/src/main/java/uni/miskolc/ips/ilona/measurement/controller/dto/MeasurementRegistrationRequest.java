@@ -2,6 +2,7 @@ package uni.miskolc.ips.ilona.measurement.controller.dto;
 
 import lombok.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter @Setter
@@ -49,12 +50,17 @@ public class MeasurementRegistrationRequest {
     public static class Rfidtags {
         protected List<byte[]> rfidTag;
     }
-
-   @Getter
+    
     @NoArgsConstructor
     public static class WifiRSSI {
        protected List<MeasurementRegistrationRequest.WifiRSSI.Ap> ap;
 
+       public List<MeasurementRegistrationRequest.WifiRSSI.Ap> getAp() {
+           if (ap == null) {
+               ap = new ArrayList<>();
+           }
+           return ap;
+       }
 
        @Getter
        @Setter

@@ -3,13 +3,12 @@ package uni.miskolc.ips.ilona.measurement.controller.dto;
 import lombok.*;
 
 import javax.xml.datatype.XMLGregorianCalendar;
+import java.util.ArrayList;
 import java.util.List;
-
 
 @Getter @Setter
 @NoArgsConstructor
 public class MeasurementDTO {
-
     protected String id;
     protected XMLGregorianCalendar timestamp;
     protected PositionDTO position;
@@ -20,10 +19,16 @@ public class MeasurementDTO {
     protected MeasurementDTO.Rfidtags rfidtags;
 
 
-    @Getter
     @NoArgsConstructor
     public static class BluetoothTags {
         protected List<String> bluetoothTag;
+
+        public List<String> getBluetoothTag() {
+            if (bluetoothTag == null) {
+                return new ArrayList<>();
+            }
+            return bluetoothTag;
+        }
     }
 
     @Getter @Setter
@@ -43,16 +48,28 @@ public class MeasurementDTO {
         protected double radian;
     }
 
-    @Getter
     @NoArgsConstructor
     public static class Rfidtags {
         protected List<byte[]> rfidTag;
+
+        public List<byte[]> getRfidTag() {
+            if (rfidTag == null) {
+                rfidTag = new ArrayList<>();
+            }
+            return rfidTag;
+        }
     }
 
-    @Getter
     @NoArgsConstructor
     public static class WifiRSSI {
         protected List<MeasurementDTO.WifiRSSI.Ap> ap;
+
+        public List<Ap> getAp() {
+            if (ap == null) {
+                ap = new ArrayList<>();
+            }
+            return ap;
+        }
 
         @Getter @Setter
         @NoArgsConstructor
@@ -61,5 +78,4 @@ public class MeasurementDTO {
             protected String ssid;
         }
     }
-
 }
