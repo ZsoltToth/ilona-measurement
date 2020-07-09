@@ -1,15 +1,18 @@
 package uni.miskolc.ips.ilona.measurement.controller.dto;
 
-
 import lombok.*;
 
-@Getter
-@Setter
+@Builder
+@Getter @Setter
 @NoArgsConstructor
 public class CoordinateDTO {
-    protected double x;
-    protected double y;
-    protected double z;
+    private double x;
+    private double y;
+    private double z;
 
-
+    public CoordinateDTO(double x, double y, double z) {
+        this.x = x;
+        this.y = y;
+        this.z = z;
+    }
 }
