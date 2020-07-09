@@ -5,12 +5,8 @@ import lombok.*;
 @Builder
 @Getter @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 public class ZoneDTO {
     private String id;
     private String name;
-
-    public ZoneDTO(String id, String name) {
-        this.id = id;
-        this.name = name;
-    }
 }
