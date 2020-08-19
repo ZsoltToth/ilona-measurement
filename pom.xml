@@ -18,6 +18,7 @@
 		<org.springframework.version>${spring.version}</org.springframework.version>
 		<spring.boot.version>2.1.8.RELEASE</spring.boot.version>
 		<spring.security.version>${spring.version}</spring.security.version>
+		<swagger.version>2.9.2</swagger.version>
 		<org.easymock.version>3.4</org.easymock.version>
 		<org.mybatis.version>3.3.0</org.mybatis.version>
 		<org.apache.maven.plugins.version>3.5.1</org.apache.maven.plugins.version>
