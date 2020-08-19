@@ -37,7 +37,6 @@ public class IlonaMeasurementApplicationContext implements WebMvcConfigurer {
 
     @Bean
     public Docket api(){
-        log.info("Docket is configured");
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
                 .apis(RequestHandlerSelectors.any())
