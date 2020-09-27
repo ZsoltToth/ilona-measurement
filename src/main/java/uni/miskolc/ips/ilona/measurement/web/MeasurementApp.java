@@ -13,7 +13,7 @@ public class MeasurementApp {
      * -Ddatabase.db=Ilona
      * -Ddatabase.user=ilona
      * -Ddatabase.password=secret
-     * -Dmybatis.config=<path-to-persist-mysql>/persist.mysql/src/main/resources/mybatis-configuration.xml
+     * -Dmybatis.config=$(pwd)/src/main/resources/mybatis-configuration.xml
      *
      * @param args
      */
