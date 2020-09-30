@@ -3,6 +3,9 @@ package uni.miskolc.ips.ilona.measurement.service.impl;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 import uni.miskolc.ips.ilona.measurement.model.measurement.Measurement;
 import uni.miskolc.ips.ilona.measurement.model.position.Position;
 import uni.miskolc.ips.ilona.measurement.model.position.Zone;
@@ -16,19 +19,11 @@ import uni.miskolc.ips.ilona.measurement.service.MeasurementService;
  *
  * @author tamas13
  */
+@Service
+@RequiredArgsConstructor
 public class MeasurementManagerServiceImpl implements MeasurementService {
   /** MeasurementDAO provides an abstract interface to database of Measurements. */
-  private MeasurementDAO measurementDAO;
-
-  /**
-   * The constructor of MeasurementManagerServiceImpl with the measurementDAO parameter.
-   *
-   * @param measurementDAO provides an abstract interface to database of Measurements.
-   */
-  public MeasurementManagerServiceImpl(final MeasurementDAO measurementDAO) {
-    super();
-    this.measurementDAO = measurementDAO;
-  }
+  private final MeasurementDAO measurementDAO;
 
   /**
    * The recordMeasurement method insert the given measurement into the database.

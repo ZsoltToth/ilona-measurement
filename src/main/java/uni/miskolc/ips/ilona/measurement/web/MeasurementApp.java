@@ -8,7 +8,7 @@ public class MeasurementApp {
 
   /**
    * -Ddatabase.host=127.0.0.1 -Ddatabase.port=3306 -Ddatabase.db=Ilona -Ddatabase.user=ilona
-   * -Ddatabase.password=secret -Dmybatis.config=$(pwd)/src/main/resources/mybatis-configuration.xml
+   * -Ddatabase.password=secret
    *
    * @param args
    */

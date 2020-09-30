@@ -3,6 +3,8 @@ package uni.miskolc.ips.ilona.measurement.controller;
 import java.util.*;
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
+
+import lombok.RequiredArgsConstructor;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,18 +24,15 @@ import uni.miskolc.ips.ilona.measurement.service.exception.TimeStampNotFoundExce
 import uni.miskolc.ips.ilona.measurement.service.exception.ZoneNotFoundException;
 
 /** @author bogdandy, tothzs */
+@RequiredArgsConstructor
 @Controller
 public class MeasurementController {
 
   /** Logger. */
   private static final Logger LOG = LogManager.getLogger(MeasurementController.class);
   /** Reads data from context.xml automatically. */
-  private MeasurementService measurementManagerService;
+  private final MeasurementService measurementManagerService;
 
-  @Autowired
-  public MeasurementController(MeasurementService measurementManagerService) {
-    this.measurementManagerService = measurementManagerService;
-  }
 
   @RequestMapping("/")
   public ModelAndView loadHomePage() {

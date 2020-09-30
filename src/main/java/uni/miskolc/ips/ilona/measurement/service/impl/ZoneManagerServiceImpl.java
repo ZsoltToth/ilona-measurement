@@ -2,6 +2,9 @@ package uni.miskolc.ips.ilona.measurement.service.impl;
 
 import java.util.Collection;
 import java.util.UUID;
+
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 import uni.miskolc.ips.ilona.measurement.model.position.Zone;
 import uni.miskolc.ips.ilona.measurement.persist.ZoneDAO;
 import uni.miskolc.ips.ilona.measurement.persist.exceptions.InsertionException;
@@ -15,18 +18,11 @@ import uni.miskolc.ips.ilona.measurement.service.exception.ZoneNotFoundException
  *
  * @author tamas13
  */
+@Service
+@RequiredArgsConstructor
 public class ZoneManagerServiceImpl implements ZoneService {
   /** PositionDAO provides an abstract interface to database of Zones. */
-  private ZoneDAO zoneDAO;
-  /**
-   * The constructor of ZoneManagerServiceImpl with the zoneDAO parameter.
-   *
-   * @param zoneDAO provides an abstract interface to database of Zones.
-   */
-  public ZoneManagerServiceImpl(final ZoneDAO zoneDAO) {
-    super();
-    this.zoneDAO = zoneDAO;
-  }
+  private final ZoneDAO zoneDAO;
 
   /**
    * The createZone method insert the given Zone into the database.

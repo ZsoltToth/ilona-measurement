@@ -21,6 +21,5 @@ services:
       database.db: ilona
       database.user: root
       database.password: password
-      mybatis.config: mybatis-configuration.xml
     depends_on:
       - db
