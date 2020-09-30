@@ -1,14 +1,12 @@
 package uni.miskolc.ips.ilona.measurement.persist.impl.integration;
 
+import jdk.jfr.Unsigned;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.junit.Assert;
-import org.junit.Assume;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 import uni.miskolc.ips.ilona.measurement.model.measurement.*;
 import uni.miskolc.ips.ilona.measurement.model.position.Coordinate;
 import uni.miskolc.ips.ilona.measurement.model.position.Position;
@@ -35,6 +33,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 
 
+@Ignore
 public class MeasurementDAOIntegrationTest extends SetupIntegrationTest {
 
     private static final Logger LOG = LogManager.getLogger("uni.miskolc.ips.ilona.persist");
