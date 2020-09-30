@@ -3,6 +3,8 @@ package uni.miskolc.ips.ilona.measurement.controller;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.UUID;
+
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -14,16 +16,13 @@ import uni.miskolc.ips.ilona.measurement.service.ZoneService;
 import uni.miskolc.ips.ilona.measurement.service.exception.DatabaseUnavailableException;
 import uni.miskolc.ips.ilona.measurement.service.exception.ZoneNotFoundException;
 
-/** @author bogdandy */
+/** @author bogdandy, tothzs */
+@RequiredArgsConstructor
 @Controller
 public class ZoneController {
   /** */
-  private ZoneService zoneManagerService;
+  private final ZoneService zoneManagerService;
 
-  @Autowired
-  public ZoneController(ZoneService zoneManagerService) {
-    this.zoneManagerService = zoneManagerService;
-  }
 
   /** @return Returns the list of zones. */
   @RequestMapping(value = {"/listZones", "/resource/zones"})

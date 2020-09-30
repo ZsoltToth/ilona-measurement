@@ -12,5 +12,4 @@ FROM openjdk:11.0-jre-slim
 EXPOSE 8080
 WORKDIR /usr/src/myapp
 COPY --from=build /tmp/target/ilona-measurement.jar .
-COPY src/main/resources/mybatis-configuration.xml .
 CMD java -jar ilona-measurement.jar

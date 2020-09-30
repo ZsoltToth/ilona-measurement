@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>uni.miskolc.ips.ilona.measurement</groupId>
 	<artifactId>backend</artifactId>
-	<version>3.0.40-SNAPSHOT</version>
+	<version>3.0.44-SNAPSHOT</version>
 
 	<packaging>jar</packaging>
 	<name>ILONA - Measurement Subsystem</name>
@@ -20,7 +20,6 @@
 		<spring.security.version>${spring.version}</spring.security.version>
 		<swagger.version>2.9.2</swagger.version>
 		<org.easymock.version>3.4</org.easymock.version>
-		<org.mybatis.version>3.3.0</org.mybatis.version>
 		<org.apache.maven.plugins.version>3.5.1</org.apache.maven.plugins.version>
 		<org.apache.logging.log4j.version>2.13.3</org.apache.logging.log4j.version>
 		<mysql.connector.version>8.0.19</mysql.connector.version>
@@ -87,11 +86,6 @@
 
 		<!-- Data Access Dependencies -->
 		<dependency>
-			<groupId>org.mybatis</groupId>
-			<artifactId>mybatis</artifactId>
-			<version>${org.mybatis.version}</version>
-		</dependency>
-		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<version>${mysql.connector.version}</version>
@@ -134,16 +128,6 @@
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
 			<version>1.18.12</version>
-		</dependency>
-		<dependency>
-			<groupId>io.springfox</groupId>
-			<artifactId>springfox-swagger2</artifactId>
-			<version>${swagger.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>io.springfox</groupId>
-			<artifactId>springfox-swagger-ui</artifactId>
-			<version>${swagger.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
