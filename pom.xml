@@ -3,8 +3,8 @@
 		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>uni.miskolc.ips.ilona.measurement</groupId>
-	<artifactId>bundle</artifactId>
-	<version>3.0.38-SNAPSHOT</version>
+	<artifactId>backend</artifactId>
+	<version>3.0.40-SNAPSHOT</version>
 
 	<packaging>jar</packaging>
 	<name>ILONA - Measurement Subsystem</name>

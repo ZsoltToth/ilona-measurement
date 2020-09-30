@@ -1,9 +1,6 @@
 package uni.miskolc.ips.ilona.measurement.persist.impl.integration;
 
-import org.junit.Assert;
-import org.junit.Assume;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 import uni.miskolc.ips.ilona.measurement.model.position.Coordinate;
 import uni.miskolc.ips.ilona.measurement.model.position.Position;
 import uni.miskolc.ips.ilona.measurement.model.position.Zone;
@@ -22,6 +19,7 @@ import static org.hamcrest.CoreMatchers.hasItems;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 
+@Ignore
 public class PositionDAOIntegrationTest extends SetupIntegrationTest {
 
     private MySQLPositionDAO dao;

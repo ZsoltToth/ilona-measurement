@@ -11,6 +11,7 @@ import java.util.UUID;
 
 import org.junit.Assume;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import uni.miskolc.ips.ilona.measurement.model.position.Zone;
@@ -19,6 +20,7 @@ import uni.miskolc.ips.ilona.measurement.persist.exceptions.InsertionException;
 import uni.miskolc.ips.ilona.measurement.persist.exceptions.RecordNotFoundException;
 import uni.miskolc.ips.ilona.measurement.persist.mysql.MySQLZoneDAO;
 
+@Ignore
 public class ZoneDAOIntegrationTest extends SetupIntegrationTest {
 
 	private ZoneDAO dao;
