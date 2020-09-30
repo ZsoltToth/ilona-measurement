@@ -31,6 +31,19 @@
 		<maven-jar-plugin.version>3.0.2</maven-jar-plugin.version>
 	</properties>
 
+	<scm>
+		<url>https://github.com/ZsoltToth/ilona-measurement.git</url>
+	</scm>
+
+	<distributionManagement>
+		<repository>
+			<id>github</id>
+			<name>GitHub OWNER Apache Maven Packages</name>
+			<url>https://maven.pkg.github.com/ZsoltToth/ilona-measurement</url>
+		</repository>
+	</distributionManagement>
+
+
 	<dependencies>
 		<dependency>
 			<groupId>junit</groupId>
@@ -253,8 +266,5 @@
 		</resources>
 	</build>
 
-	<scm>
-		<url>https://github.com/ZsoltToth/ilona-measurement.git</url>
-	</scm>
 
 </project>
