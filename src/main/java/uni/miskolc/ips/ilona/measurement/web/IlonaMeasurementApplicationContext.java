@@ -50,5 +50,4 @@ public class IlonaMeasurementApplicationContext implements WebMvcConfigurer {
         .addResourceHandler("/api/webjars/**")
         .addResourceLocations("classpath:/META-INF/resources/webjars/");
   }
-
 }

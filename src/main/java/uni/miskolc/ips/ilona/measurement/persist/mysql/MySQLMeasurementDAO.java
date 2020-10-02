@@ -1,5 +1,9 @@
 package uni.miskolc.ips.ilona.measurement.persist.mysql;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Date;
+import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -9,11 +13,6 @@ import uni.miskolc.ips.ilona.measurement.persist.PositionDAO;
 import uni.miskolc.ips.ilona.measurement.persist.exceptions.InsertionException;
 import uni.miskolc.ips.ilona.measurement.persist.exceptions.RecordNotFoundException;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Date;
-import java.util.UUID;
-
 @Service
 @Slf4j
 @RequiredArgsConstructor
@@ -21,9 +20,7 @@ public class MySQLMeasurementDAO implements MeasurementDAO {
   private final PositionDAO positionDAO;
 
   @Override
-  public final void createMeasurement(final Measurement measurement) throws InsertionException {
-
-  }
+  public final void createMeasurement(final Measurement measurement) throws InsertionException {}
 
   @Override
   public final Collection<Measurement> readMeasurements() {
@@ -37,15 +34,12 @@ public class MySQLMeasurementDAO implements MeasurementDAO {
 
   @Override
   public final void updateMeasurement(final Measurement measurement)
-      throws InsertionException, RecordNotFoundException {
-  }
+      throws InsertionException, RecordNotFoundException {}
 
   @Override
-  public final void deleteMeasurement(final Date timestamp) throws RecordNotFoundException {
-  }
+  public final void deleteMeasurement(final Date timestamp) throws RecordNotFoundException {}
 
   @Override
   public final void deleteMeasurement(final Measurement measurement)
-      throws RecordNotFoundException {
-  }
+      throws RecordNotFoundException {}
 }

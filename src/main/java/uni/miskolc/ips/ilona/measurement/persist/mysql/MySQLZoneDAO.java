@@ -1,5 +1,7 @@
 package uni.miskolc.ips.ilona.measurement.persist.mysql;
 
+import java.util.Collection;
+import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -8,18 +10,13 @@ import uni.miskolc.ips.ilona.measurement.persist.ZoneDAO;
 import uni.miskolc.ips.ilona.measurement.persist.exceptions.InsertionException;
 import uni.miskolc.ips.ilona.measurement.persist.exceptions.RecordNotFoundException;
 
-import java.util.Collection;
-import java.util.UUID;
-
 @Service
 @Slf4j
 @RequiredArgsConstructor
 public class MySQLZoneDAO implements ZoneDAO {
 
   @Override
-  public void createZone(Zone zone) throws InsertionException {
-
-  }
+  public void createZone(Zone zone) throws InsertionException {}
 
   @Override
   public Collection<Zone> readZones() {
@@ -37,7 +34,5 @@ public class MySQLZoneDAO implements ZoneDAO {
   }
 
   @Override
-  public void deleteZone(Zone zone) throws RecordNotFoundException {
-
-  }
+  public void deleteZone(Zone zone) throws RecordNotFoundException {}
 }

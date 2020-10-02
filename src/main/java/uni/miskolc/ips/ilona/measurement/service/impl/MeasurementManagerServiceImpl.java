@@ -3,7 +3,6 @@ package uni.miskolc.ips.ilona.measurement.service.impl;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
-
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import uni.miskolc.ips.ilona.measurement.model.measurement.Measurement;
