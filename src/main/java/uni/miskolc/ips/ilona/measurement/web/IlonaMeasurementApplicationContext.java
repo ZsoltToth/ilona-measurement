@@ -2,8 +2,10 @@ package uni.miskolc.ips.ilona.measurement.web;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringBootConfiguration;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
@@ -18,6 +20,8 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @SpringBootConfiguration
 @EnableWebMvc
 @ComponentScan(basePackages = "uni.miskolc.ips.ilona.measurement")
+@EnableJpaRepositories("uni.miskolc.ips.ilona.measurement.persist.mysql")
+@EntityScan("uni.miskolc.ips.ilona.measurement.persist.mysql.entity")
 @EnableSwagger2
 public class IlonaMeasurementApplicationContext implements WebMvcConfigurer {
 
