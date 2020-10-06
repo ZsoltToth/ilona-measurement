@@ -16,10 +16,10 @@ services:
     ports:
       - '127.0.0.1:8080:8080'
     environment:
-      database.host: db
-      database.port: 3306
-      database.db: ilona
-      database.user: root
-      database.password: password
+      DB_HOST: db
+      DB_PORT: 3306
+      DB_NAME: ilona
+      DB_USER: root
+      DB_PASSWORD: password
     depends_on:
       - db
