@@ -91,6 +91,11 @@
 			<artifactId>mysql-connector-java</artifactId>
 			<version>${mysql.connector.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<version>1.4.200</version>
+		</dependency>
 
 		<!-- Spring Dependencies -->
 		<dependency>
@@ -159,6 +164,11 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
+			<version>2.3.3.RELEASE</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
 			<version>2.3.3.RELEASE</version>
 		</dependency>
 	</dependencies>
@@ -274,7 +284,7 @@
 
 		<resources>
 			<resource>
-				<directory>src/main/java</directory>
+				<directory>src/main/test/resources</directory>
 				<includes>
 					<include>**/*.xml</include>
 				</includes>
