@@ -17,7 +17,7 @@ import uni.miskolc.ips.ilona.measurement.service.PositionService;
  */
 @Service
 @RequiredArgsConstructor
-public class PositionManagerServiceImpl implements PositionService {
+public class PositionServiceImpl implements PositionService {
   /** PositionDAO provides an abstract interface to database of Positions. */
   private final PositionDAO positionDao;
 
