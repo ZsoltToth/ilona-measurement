@@ -31,7 +31,7 @@ public class MeasurementController {
   /** Reads data from context.xml automatically. */
   private final MeasurementService measurementManagerService;
 
-  @RequestMapping("/")
+  @GetMapping("/")
   public ModelAndView loadHomePage() {
     return new ModelAndView("index");
   }
@@ -42,7 +42,7 @@ public class MeasurementController {
    * @param zoneId The zoneID of the list is based on
    * @return Returns the list of results
    */
-  @RequestMapping("/resources/listMeasurements")
+  @GetMapping("/resources/listMeasurements")
   @ResponseBody
   public List<MeasurementDTO> listMeasurements(
       @RequestParam(value = "zoneId", required = false) final UUID zoneId)
@@ -63,7 +63,7 @@ public class MeasurementController {
    *
    * @param measurementRegistrationRequest measurement data
    */
-  @RequestMapping(value = "/recordMeasurement", method = RequestMethod.POST)
+  @PostMapping(value = "/recordMeasurement")
   @ResponseBody
   public void recordMeasurement(
       @RequestBody final MeasurementRegistrationRequest measurementRegistrationRequest)
@@ -92,8 +92,8 @@ public class MeasurementController {
     if (measurementRegistrationRequest.getBluetoothTags() != null) {
       BluetoothTags bluetoothTags =
           new BluetoothTags(
-              new HashSet<String>(
-                  measurementRegistrationRequest.getBluetoothTags().getBluetoothTag()));
+                  new HashSet<>(
+                          measurementRegistrationRequest.getBluetoothTags().getBluetoothTag()));
       measurement.setBluetoothTags(bluetoothTags);
     }
     if (measurementRegistrationRequest.getGpsCoordinates() != null) {
@@ -107,7 +107,7 @@ public class MeasurementController {
     if (measurementRegistrationRequest.getRfidtags() != null) {
       RFIDTags rfidTags =
           new RFIDTags(
-              new HashSet<byte[]>(measurementRegistrationRequest.getRfidtags().getRfidTag()));
+                  new HashSet<>(measurementRegistrationRequest.getRfidtags().getRfidTag()));
       measurement.setRfidtags(rfidTags);
     }
     this.measurementManagerService.recordMeasurement(measurement);
@@ -119,7 +119,7 @@ public class MeasurementController {
    * @param timestamp The timestamp the deletion is based on
    * @return It returns true if the operation was successful. Otherwise it throws exception.
    */
-  @RequestMapping("/deleteMeasurement")
+  @DeleteMapping("/deleteMeasurement")
   @ResponseBody
   public void deleteMeasurement(@RequestParam("timestamp") final long timestamp)
       throws TimeStampNotFoundException, DatabaseUnavailableException, ZoneNotFoundException {

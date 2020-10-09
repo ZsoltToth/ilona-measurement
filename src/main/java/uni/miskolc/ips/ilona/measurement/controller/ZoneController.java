@@ -22,7 +22,7 @@ public class ZoneController {
   private final ZoneService zoneManagerService;
 
   /** @return Returns the list of zones. */
-  @RequestMapping(value = {"/listZones", "/resource/zones"})
+  @GetMapping(value = {"/listZones", "/resource/zones"})
   public @ResponseBody final Collection<ZoneDTO> listZones() throws DatabaseUnavailableException {
     Collection<ZoneDTO> result = new ArrayList<>();
     for (Zone zone : this.zoneManagerService.getZones()) {
@@ -38,7 +38,7 @@ public class ZoneController {
    *
    * @param name The name of the new zone
    */
-  @RequestMapping("/addZone")
+  @PostMapping("/addZone")
   @ResponseBody
   public void addZone(@RequestParam("name") final String name) throws DatabaseUnavailableException {
     Zone zone = new Zone(name);
@@ -49,7 +49,7 @@ public class ZoneController {
    *
    * @param id The ID of the zone that needs to be deleted
    */
-  @RequestMapping("/deleteZone")
+  @DeleteMapping("/deleteZone")
   @ResponseBody
   public void deleteZone(@RequestParam("id") final String id)
       throws ZoneNotFoundException, DatabaseUnavailableException {
@@ -65,7 +65,7 @@ public class ZoneController {
    * @param id The ID of the zone that needs to be retrieved
    * @return Returns the Zone if successful.
    */
-  @RequestMapping(value = "/zones/{id}", method = RequestMethod.GET)
+  @GetMapping(value = "/zones/{id}")
   public @ResponseBody final ZoneDTO getZone(@PathVariable("id") final String id)
       throws ZoneNotFoundException, DatabaseUnavailableException {
     UUID uuid = UUID.fromString(id);
@@ -85,7 +85,7 @@ public class ZoneController {
    *
    * @return Returns the results of the getZones() method
    */
-  @RequestMapping("/zoneManagement")
+  @GetMapping("/zoneManagement")
   public final ModelAndView zoneManagementPage() {
     ModelAndView result = new ModelAndView("zoneManagement");
     try {
