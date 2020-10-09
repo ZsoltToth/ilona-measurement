@@ -5,9 +5,10 @@ import javax.persistence.*;
 import java.util.Collection;
 
 @Entity
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Table(name = "Zone")
 public class ZoneEntity {
     @Id

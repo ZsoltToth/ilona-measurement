@@ -4,9 +4,10 @@ import lombok.*;
 import javax.persistence.*;
 
 @Entity
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Table(name = "RFIDTags")
 public class RfidTagEntity {
     @EmbeddedId

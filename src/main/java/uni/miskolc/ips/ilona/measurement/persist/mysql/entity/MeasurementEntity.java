@@ -6,9 +6,10 @@ import java.util.Collection;
 import java.util.Date;
 
 @Entity
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Table(name = "Measurement")
 public class MeasurementEntity {
     @Id
