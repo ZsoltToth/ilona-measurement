@@ -201,7 +201,6 @@
 						<excludes>
 							<exclude>**/*IntegrationTest.java</exclude>
 						</excludes>
-
 					</configuration>
 
 					<executions>
@@ -214,15 +213,15 @@
 							<configuration>
 								<systemPropertyVariables>
 									<!--suppress UnresolvedMavenProperty -->
-									<database.host>${database.host}</database.host>
+									<DB_HOST>${DB_HOST}</DB_HOST>
+                                    <!--suppress UnresolvedMavenProperty -->
+									<DB_PORT>${DB_PORT}</DB_PORT>
 									<!--suppress UnresolvedMavenProperty -->
-									<database.port>${database.port}</database.port>
+									<DB_NAME>${DB_NAME}</DB_NAME>
 									<!--suppress UnresolvedMavenProperty -->
-									<database.db>${database.db}</database.db>
+									<DB_USER>${DB_USER}</DB_USER>
 									<!--suppress UnresolvedMavenProperty -->
-									<database.user>${database.user}</database.user>
-									<!--suppress UnresolvedMavenProperty -->
-									<database.password>${database.password}</database.password>
+									<DB_PASSWORD>${DB_PASSWORD}</DB_PASSWORD>
 								</systemPropertyVariables>
 								<excludes>
 									<exclude>none</exclude>
@@ -233,7 +232,6 @@
 							</configuration>
 						</execution>
 					</executions>
-
 				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
@@ -243,6 +241,7 @@
 						<includes>
 							<include>**/*.xml</include>
 							<include>**/*.class</include>
+							<include>**/*.properties</include>
 						</includes>
 					</configuration>
 				</plugin>
@@ -257,7 +256,7 @@
 								<goal>repackage</goal>
 							</goals>
 							<configuration>
-								<mainClass>hu.uni.eku.tzs.App</mainClass>
+								<mainClass>uni.miskolc.ips.ilona.measurement.web.MeasurementApp</mainClass>
 							</configuration>
 						</execution>
 					</executions>
@@ -278,13 +277,12 @@
 
 		<resources>
 			<resource>
-				<directory>src/main/test/resources</directory>
+				<directory>src/main/resources</directory>
 				<includes>
 					<include>**/*.xml</include>
+                    <include>**/*.properties</include>
 				</includes>
 			</resource>
 		</resources>
 	</build>
-
-
 </project>

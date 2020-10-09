@@ -19,7 +19,7 @@ import static org.junit.Assert.assertThat;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(classes = MeasurementApp.class)
-public class MySQLZoneDAOTest extends SetupIntegrationTest {
+public class MySQLZoneDAOIntegrationTest extends SetupIntegrationTest {
     @Autowired
     private MySQLZoneDAO zoneDAO;
 

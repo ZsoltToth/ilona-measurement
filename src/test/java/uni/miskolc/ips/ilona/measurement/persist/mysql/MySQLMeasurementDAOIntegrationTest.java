@@ -22,7 +22,7 @@ import static org.junit.Assert.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(classes = MeasurementApp.class)
-public class MySQLMeasurementDAOTest extends SetupIntegrationTest {
+public class MySQLMeasurementDAOIntegrationTest extends SetupIntegrationTest {
     @Autowired
     private MySQLMeasurementDAO measurementDAO;
 
