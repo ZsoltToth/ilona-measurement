@@ -92,7 +92,7 @@ public class SetupIntegrationTest {
     private static void runSQLScript(String scriptFile) throws IOException, SQLException, ClassNotFoundException {
         Class.forName(Driver.class.getName());
         final String connectionURL = String.format("jdbc:mysql://%s:%d/%s",
-                HOST, PORT, DATABASE);
+                HOST, PORT, "IlonaTest");
         Connection connection = DriverManager.getConnection(connectionURL,
                 USER, PASSWORD);
         RunScript.execute(connection, new FileReader(scriptFile));
