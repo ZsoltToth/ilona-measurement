@@ -1,6 +1,7 @@
 package uni.miskolc.ips.ilona.measurement.model.measurement;
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -80,10 +81,10 @@ public class BluetoothTags {
     if (this.getTags().isEmpty() && other.getTags().isEmpty()) {
       return 0;
     }
-    Set<String> intersection = new HashSet<String>(this.getTags());
+    Set<String> intersection = new HashSet<>(this.getTags());
     intersection.retainAll(other.getTags());
 
-    Set<String> union = new HashSet<String>(this.getTags());
+    Set<String> union = new HashSet<>(this.getTags());
     union.addAll(other.getTags());
 
     result = 1 - ((double) intersection.size() / (double) union.size());
@@ -103,14 +104,12 @@ public class BluetoothTags {
   public boolean equals(Object o) {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
-
     BluetoothTags that = (BluetoothTags) o;
-
-    return tags != null ? tags.equals(that.tags) : that.tags == null;
+    return Objects.equals(tags, that.tags);
   }
 
   @Override
   public int hashCode() {
-    return tags != null ? tags.hashCode() : 0;
+    return Objects.hash(tags);
   }
 }

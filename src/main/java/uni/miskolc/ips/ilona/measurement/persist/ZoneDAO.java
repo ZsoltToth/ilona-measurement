@@ -9,13 +9,13 @@ import uni.miskolc.ips.ilona.measurement.persist.exceptions.RecordNotFoundExcept
 /** @author Zsolt Toth */
 public interface ZoneDAO {
 
-  public void createZone(Zone zone) throws InsertionException;
+  void createZone(Zone zone) throws InsertionException;
 
-  public Collection<Zone> readZones();
+  Collection<Zone> readZones();
 
-  public Collection<Zone> readZones(String zoneName);
+  Collection<Zone> readZones(String zoneName);
 
-  public Zone readZone(UUID id) throws RecordNotFoundException;
+  Zone readZone(UUID id) throws RecordNotFoundException;
 
-  public void deleteZone(Zone zone) throws RecordNotFoundException;
+  void deleteZone(Zone zone) throws RecordNotFoundException;
 }

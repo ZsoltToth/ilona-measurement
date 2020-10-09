@@ -31,7 +31,7 @@ public class MeasurementDistanceCalculatorImpl implements MeasurementDistanceCal
   }
 
   public double distance(Measurement measA, Measurement measB) {
-    double result = -1;
+    double result;
     double wifiDistance,
         bluetoothDistance,
         magnetometerDistance,

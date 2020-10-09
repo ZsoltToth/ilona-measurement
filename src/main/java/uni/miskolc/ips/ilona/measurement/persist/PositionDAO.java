@@ -8,14 +8,13 @@ import uni.miskolc.ips.ilona.measurement.persist.exceptions.RecordNotFoundExcept
 
 /** @author Zsolt Toth */
 public interface PositionDAO {
+  void createPosition(Position position) throws InsertionException;
 
-  public void createPosition(Position position) throws InsertionException;
+  Position getPosition(UUID id) throws RecordNotFoundException;
 
-  public Position getPosition(UUID id) throws RecordNotFoundException;
+  Collection<Position> readPositions();
 
-  public Collection<Position> readPositions();
+  void updatePosition(Position position) throws RecordNotFoundException;
 
-  public void updatePosition(Position position) throws RecordNotFoundException;
-
-  public void deletePosition(Position position) throws RecordNotFoundException;
+  void deletePosition(Position position) throws RecordNotFoundException;
 }

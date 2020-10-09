@@ -9,7 +9,7 @@ public class WiFiRSSI {
 
   public WiFiRSSI() {
     super();
-    this.rssiValues = new HashMap<String, Double>();
+    this.rssiValues = new HashMap<>();
   }
 
   public WiFiRSSI(Map<String, Double> rssiValues) {

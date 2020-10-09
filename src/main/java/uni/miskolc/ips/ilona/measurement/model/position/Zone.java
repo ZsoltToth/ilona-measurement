@@ -53,7 +53,7 @@ public class Zone {
 
   @Override
   public boolean equals(Object obj) {
-    if (obj instanceof Zone == false) {
+    if (!(obj instanceof Zone)) {
       return false;
     }
     return this.id.equals(((Zone) obj).id);

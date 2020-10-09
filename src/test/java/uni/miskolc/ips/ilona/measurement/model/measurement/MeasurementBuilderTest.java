@@ -1,7 +1,5 @@
 package uni.miskolc.ips.ilona.measurement.model.measurement;
 
-import static org.junit.Assert.*;
-
 import org.junit.Test;
 import uni.miskolc.ips.ilona.measurement.model.position.Coordinate;
 import uni.miskolc.ips.ilona.measurement.model.position.Position;
@@ -19,13 +17,13 @@ public class MeasurementBuilderTest {
     measb.setPosition(new Position());
     measb.unsetPosition();
 
-    measb.setbluetoothTags(new BluetoothTags());
+    measb.setBluetoothTags(new BluetoothTags());
     measb.setGPSCoordinates(new GPSCoordinate());
     measb.setMagnetometer(new Magnetometer());
     measb.setRFIDTags(new RFIDTags());
     measb.setWifiRSSI(new WiFiRSSI());
 
-    measb.unsetbluetoothTags();
+    measb.unsetBluetoothTags();
     measb.unsetGPSCoordinates();
     measb.unsetMagnetometer();
     measb.unsetRFIDTags();

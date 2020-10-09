@@ -11,19 +11,19 @@ import uni.miskolc.ips.ilona.measurement.persist.exceptions.RecordNotFoundExcept
 public interface MeasurementDAO {
 
   // Create
-  public void createMeasurement(Measurement measurement) throws InsertionException;
+  void createMeasurement(Measurement measurement) throws InsertionException;
 
   // Read
-  public Collection<Measurement> readMeasurements();
+  Collection<Measurement> readMeasurements();
 
   Measurement readMeasurement(UUID uuid);
 
   // Update
-  public void updateMeasurement(Measurement measurement)
+  void updateMeasurement(Measurement measurement)
       throws RecordNotFoundException, InsertionException;
 
   // Delete
-  public void deleteMeasurement(Date timestamp) throws RecordNotFoundException;
+  void deleteMeasurement(Date timestamp) throws RecordNotFoundException;
 
-  public void deleteMeasurement(Measurement measurement) throws RecordNotFoundException;
+  void deleteMeasurement(Measurement measurement) throws RecordNotFoundException;
 }
