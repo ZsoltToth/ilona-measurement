@@ -17,6 +17,12 @@ public class SetupIntegrationTest {
     public static final String TEST_CREATE_TABLES = "src/main/resources/sql/createTables.sql";
     public static final String TEST_DROP_TABLES = "src/main/resources/sql/dropTables.sql";
 
+    protected static String HOST;
+    protected static int PORT;
+    protected static String DATABASE;
+    protected static String USER;
+    protected static String PASSWORD;
+
     @BeforeClass
     public static void beforeClass() {
         File createTablesSQL = new File(TEST_CREATE_TABLES);
@@ -28,6 +34,26 @@ public class SetupIntegrationTest {
         Assume.assumeTrue(dropTablesSQL.exists());
         Assume.assumeTrue(setupTestSQL.exists());
         Assume.assumeTrue(teardownSQL.exists());
+
+        String host = System.getProperty("DB_HOST");
+
+        int port;
+        try {
+            port = Integer.parseInt(System.getProperty("DB_PORT"));
+        } catch (NumberFormatException ex) {
+            port = -1;
+            Assume.assumeNoException(ex);
+        }
+
+        String database = System.getProperty("DB_NAME");
+        String user = System.getProperty("DB_USER");
+        String password = System.getProperty("DB_PASSWORD");
+        Assume.assumeNotNull(host, port, database, user, password);
+        HOST = host;
+        PORT = port;
+        DATABASE = database;
+        USER = user;
+        PASSWORD = password;
 
         try {
             runSQLScript(TEST_CREATE_TABLES);
@@ -66,9 +92,9 @@ public class SetupIntegrationTest {
     private static void runSQLScript(String scriptFile) throws IOException, SQLException, ClassNotFoundException {
         Class.forName(Driver.class.getName());
         final String connectionURL = String.format("jdbc:mysql://%s:%d/%s",
-                "localhost", 3306, "IlonaTest");
+                HOST, PORT, DATABASE);
         Connection connection = DriverManager.getConnection(connectionURL,
-                "ilona", "secret");
+                USER, PASSWORD);
         RunScript.execute(connection, new FileReader(scriptFile));
         connection.close();
     }
