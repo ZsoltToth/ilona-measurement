@@ -225,9 +225,12 @@
 								</systemPropertyVariables>
 								<excludes>
 									<exclude>none</exclude>
+									<exclude>**/*IntegrationTest.java</exclude>
 								</excludes>
 								<includes>
+                                    <!--
 									<include>**/*IntegrationTest.java</include>
+									-->
 								</includes>
 							</configuration>
 						</execution>
