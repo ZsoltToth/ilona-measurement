@@ -13,6 +13,7 @@ public class RFIDTags {
 
   public RFIDTags() {
     super();
+    tags = new HashSet<>();
   }
 
   public RFIDTags(Set<byte[]> tags) {
@@ -72,7 +73,7 @@ public class RFIDTags {
   }
 
   protected Set<byte[]> union(RFIDTags other) {
-    Set<byte[]> union = new HashSet<byte[]>();
+    Set<byte[]> union = new HashSet<>();
     union.addAll(this.intersection(other));
 
     for (byte[] thiseach : this.tags) {
@@ -96,7 +97,7 @@ public class RFIDTags {
   }
 
   protected Set<byte[]> intersection(RFIDTags other) {
-    Set<byte[]> intersection = new HashSet<byte[]>();
+    Set<byte[]> intersection = new HashSet<>();
     for (byte[] thiseach : this.tags) {
       for (byte[] each : other.tags) {
         if (Arrays.equals(thiseach, each)) {
@@ -144,28 +145,28 @@ public class RFIDTags {
 
   @Override
   public String toString() {
-    String result = "RFIDTags =";
+    StringBuilder result = new StringBuilder("RFIDTags =");
     if (tags == null) {
-      return result;
+      return result.toString();
     }
-    int i = 1, j = 1;
+    int i = 1, j;
     for (byte[] each : tags) {
       j = 1;
-      result = result + "[";
+      result.append("[");
       for (byte eachbyte : each) {
-        result = result + eachbyte;
+        result.append(eachbyte);
         if (j < each.length) {
-          result = result + ",";
+          result.append(",");
         }
         j++;
       }
 
-      result = result + "]";
+      result.append("]");
       if (i < tags.size()) {
-        result = result + ";";
+        result.append(";");
       }
       i++;
     }
-    return result;
+    return result.toString();
   }
 }

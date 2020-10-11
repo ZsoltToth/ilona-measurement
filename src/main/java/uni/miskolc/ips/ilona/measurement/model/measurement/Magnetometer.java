@@ -131,8 +131,8 @@ public class Magnetometer {
    * @return the distance as double
    */
   public final double distance(final Magnetometer other) {
-    double result = 0;
-    double cos = 0;
+    double result;
+    double cos;
     if (this.isNull() || other.isNull()) {
       result = UNKNOW_DISTANCE;
       return result;
@@ -185,12 +185,12 @@ public class Magnetometer {
    * @return the result as double
    */
   private double cosine(final RealVector v1, final RealVector v2) {
-    double result = 0.0;
+    double result;
     double v1norm = v1.getNorm();
     double v2norm = v2.getNorm();
     result = v1.dotProduct(v2) / (v1norm * v2norm);
-    result = result < -1.0 ? -1.0 : result;
-    result = result > 1.0 ? 1.0 : result;
+    result = Math.max(result, -1.0);
+    result = Math.min(result, 1.0);
     return result;
   }
 

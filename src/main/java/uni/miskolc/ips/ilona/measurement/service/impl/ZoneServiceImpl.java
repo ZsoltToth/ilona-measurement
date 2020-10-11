@@ -19,7 +19,7 @@ import uni.miskolc.ips.ilona.measurement.service.exception.ZoneNotFoundException
  */
 @Service
 @RequiredArgsConstructor
-public class ZoneManagerServiceImpl implements ZoneService {
+public class ZoneServiceImpl implements ZoneService {
   /** PositionDAO provides an abstract interface to database of Zones. */
   private final ZoneDAO zoneDAO;
 

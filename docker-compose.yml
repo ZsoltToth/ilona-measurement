@@ -6,7 +6,9 @@ services:
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: password
-      MYSQL_DATABASE: ilona
+      MYSQL_DATABASE: Ilona
+    volumes:
+      - './src/main/resources/sql/create-user.sql:/docker-entrypoint-initdb.d/create-user.sql'
     ports:
       - '127.0.0.1:3306:3306'
   backend:
@@ -18,8 +20,8 @@ services:
     environment:
       DB_HOST: db
       DB_PORT: 3306
-      DB_NAME: ilona
-      DB_USER: root
-      DB_PASSWORD: password
+      DB_NAME: Ilona
+      DB_USER: ilona
+      DB_PASSWORD: secret
     depends_on:
       - db

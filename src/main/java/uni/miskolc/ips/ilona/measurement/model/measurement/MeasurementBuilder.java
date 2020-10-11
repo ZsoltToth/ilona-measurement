@@ -60,11 +60,11 @@ public class MeasurementBuilder {
     this.magnetometer = magnetometer;
   }
 
-  public void unsetbluetoothTags() {
+  public void unsetBluetoothTags() {
     this.bluetoothTags = null;
   }
 
-  public void setbluetoothTags(BluetoothTags bluetoothTags) {
+  public void setBluetoothTags(BluetoothTags bluetoothTags) {
     this.bluetoothTags = bluetoothTags;
   }
 

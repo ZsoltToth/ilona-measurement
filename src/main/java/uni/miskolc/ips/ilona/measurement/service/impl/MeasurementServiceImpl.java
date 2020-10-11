@@ -20,7 +20,7 @@ import uni.miskolc.ips.ilona.measurement.service.MeasurementService;
  */
 @Service
 @RequiredArgsConstructor
-public class MeasurementManagerServiceImpl implements MeasurementService {
+public class MeasurementServiceImpl implements MeasurementService {
   /** MeasurementDAO provides an abstract interface to database of Measurements. */
   private final MeasurementDAO measurementDAO;
 
@@ -57,7 +57,7 @@ public class MeasurementManagerServiceImpl implements MeasurementService {
   public final Collection<Measurement> readMeasurements(final Zone zone) {
     Collection<Measurement> wholelist = this.measurementDAO.readMeasurements();
 
-    Collection<Measurement> resultlist = new ArrayList<Measurement>();
+    Collection<Measurement> resultlist = new ArrayList<>();
 
     for (Measurement m : wholelist) {
       if (m.getPosition().getZone().equals(zone)) {
@@ -78,7 +78,7 @@ public class MeasurementManagerServiceImpl implements MeasurementService {
   public final Collection<Measurement> readMeasurements(final Position position) {
     Collection<Measurement> wholelist = this.measurementDAO.readMeasurements();
 
-    Collection<Measurement> resultlist = new ArrayList<Measurement>();
+    Collection<Measurement> resultlist = new ArrayList<>();
 
     for (Measurement m : wholelist) {
       if (m.getPosition().equals(position)) {

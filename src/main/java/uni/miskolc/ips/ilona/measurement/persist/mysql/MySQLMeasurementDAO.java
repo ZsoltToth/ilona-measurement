@@ -1,45 +1,114 @@
 package uni.miskolc.ips.ilona.measurement.persist.mysql;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Date;
-import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import uni.miskolc.ips.ilona.measurement.model.measurement.Measurement;
 import uni.miskolc.ips.ilona.measurement.persist.MeasurementDAO;
-import uni.miskolc.ips.ilona.measurement.persist.PositionDAO;
 import uni.miskolc.ips.ilona.measurement.persist.exceptions.InsertionException;
 import uni.miskolc.ips.ilona.measurement.persist.exceptions.RecordNotFoundException;
+import uni.miskolc.ips.ilona.measurement.persist.mysql.entity.*;
+
+import java.util.*;
 
 @Service
 @Slf4j
 @RequiredArgsConstructor
 public class MySQLMeasurementDAO implements MeasurementDAO {
-  private final PositionDAO positionDAO;
+  private final MeasurementRepository repository;
 
   @Override
-  public final void createMeasurement(final Measurement measurement) throws InsertionException {}
-
-  @Override
-  public final Collection<Measurement> readMeasurements() {
-    return new ArrayList<>();
+  @Transactional
+  public void createMeasurement(Measurement measurement) throws InsertionException {
+    try {
+      repository.save(MeasurementEntityConverter.convertModelToEntity(measurement));
+    } catch (Exception ex) {
+      throw new InsertionException();
+    }
   }
 
   @Override
+  @Transactional
+  public Collection<Measurement> readMeasurements() {
+    ArrayList<Measurement> measurements = new ArrayList<>();
+    repository.findAll().forEach(measurement -> measurements.add(
+            MeasurementEntityConverter.convertEntityToModel(measurement)
+    ));
+    return measurements;
+  }
+
+  @Override
+  @Transactional
   public Measurement readMeasurement(UUID uuid) {
-    return null;
+    Optional<MeasurementEntity> measurementOptional = repository.findById(uuid.toString());
+    return measurementOptional.map(MeasurementEntityConverter::convertEntityToModel).orElse(null);
   }
 
   @Override
-  public final void updateMeasurement(final Measurement measurement)
-      throws InsertionException, RecordNotFoundException {}
+  @Transactional
+  public void updateMeasurement(Measurement measurement) throws RecordNotFoundException, InsertionException {
+    Optional<MeasurementEntity> oldMeasurement = repository.findById(measurement.getId().toString());
+    if (oldMeasurement.isPresent()) {
+      oldMeasurement.get().setMeasTimestamp(new Date(System.currentTimeMillis()));
+      if (measurement.getMagnetometer() != null) {
+        oldMeasurement.get().setMagnetometerX(measurement.getMagnetometer().getxAxis());
+        oldMeasurement.get().setMagnetometerY(measurement.getMagnetometer().getyAxis());
+        oldMeasurement.get().setMagnetometerZ(measurement.getMagnetometer().getzAxis());
+        oldMeasurement.get().setMagnetometerRadian(measurement.getMagnetometer().getRadian());
+      }
+      if (measurement.getGpsCoordinates() != null) {
+        oldMeasurement.get().setGpsLatitude(measurement.getGpsCoordinates().getLatitude());
+        oldMeasurement.get().setGpsLongitude(measurement.getGpsCoordinates().getLongitude());
+        oldMeasurement.get().setGpsAltitude(measurement.getGpsCoordinates().getAltitude());
+      }
+      if (measurement.getPosition() != null) {
+        oldMeasurement.get().setPosition(
+                PositionEntityConverter.convertModelToEntity(measurement.getPosition())
+        );
+      }
+      if (measurement.getBluetoothTags() != null) {
+        oldMeasurement.get().getBluetoothTags().clear();
+        oldMeasurement.get().getBluetoothTags().addAll(
+                BluetoothTagEntityConverter.convertModelToEntity(measurement)
+        );
+      }
+      if (measurement.getWifiRSSI() != null) {
+        oldMeasurement.get().getWifiRSSI().clear();
+        oldMeasurement.get().getWifiRSSI().addAll(
+                WifiRssiEntityConverter.convertModelToEntity(measurement)
+        );
+      }
+      if (measurement.getRfidtags() != null) {
+        oldMeasurement.get().getRfidTags().clear();
+        oldMeasurement.get().getRfidTags().addAll(
+                RfidTagEntityConverter.convertModelToEntity(measurement)
+        );
+      }
+      try {
+        repository.save(oldMeasurement.get());
+      } catch (Exception ex) {
+        throw new InsertionException();
+      }
+    } else {
+      throw new RecordNotFoundException();
+    }
+  }
 
   @Override
-  public final void deleteMeasurement(final Date timestamp) throws RecordNotFoundException {}
+  @Transactional
+  public void deleteMeasurement(Date timestamp) throws RecordNotFoundException {
+    if (repository.findAllByMeasTimestamp(timestamp).isEmpty()) {
+      throw new RecordNotFoundException();
+    }
+    repository.deleteAllByMeasTimestamp(timestamp);
+  }
 
   @Override
-  public final void deleteMeasurement(final Measurement measurement)
-      throws RecordNotFoundException {}
+  public void deleteMeasurement(Measurement measurement) throws RecordNotFoundException {
+    if (repository.findById(measurement.getId().toString()).isEmpty()) {
+      throw new RecordNotFoundException();
+    }
+    repository.deleteById(measurement.getId().toString());
+  }
 }
