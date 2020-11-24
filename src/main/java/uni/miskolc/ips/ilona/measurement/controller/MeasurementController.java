@@ -35,7 +35,7 @@ public class MeasurementController {
    * @param zoneId The zoneID of the list is based on
    * @return Returns the list of results
    */
-  @GetMapping(value = {"/"})
+  @GetMapping(value = {"", "/"})
   public List<MeasurementDTO> listMeasurements(
       @RequestParam(value = "zoneId", required = false) final UUID zoneId)
       throws DatatypeConfigurationException, DatabaseUnavailableException {
