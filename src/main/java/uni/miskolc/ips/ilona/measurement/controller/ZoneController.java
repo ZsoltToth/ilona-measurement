@@ -3,7 +3,6 @@ package uni.miskolc.ips.ilona.measurement.controller;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import uni.miskolc.ips.ilona.measurement.controller.dto.ZoneDTO;
 import uni.miskolc.ips.ilona.measurement.model.position.Zone;
@@ -18,15 +17,17 @@ import java.util.UUID;
 /** @author bogdandy, tothzs */
 @Slf4j
 @RequiredArgsConstructor
-@Controller
+@RestController
 @RequestMapping(value = "/zones")
 public class ZoneController {
 
   private final ZoneService zoneManagerService;
 
-  /** @return Returns the list of zones. */
+  /**
+   * @return Returns the list of zones.
+   */
   @GetMapping(value = {"", "/"})
-  public @ResponseBody final Collection<ZoneDTO> listZones() throws DatabaseUnavailableException {
+  public final Collection<ZoneDTO> listZones() throws DatabaseUnavailableException {
     Collection<ZoneDTO> result = new ArrayList<>();
     for (Zone zone : this.zoneManagerService.getZones()) {
       ZoneDTO dto = new ZoneDTO();
@@ -43,7 +44,6 @@ public class ZoneController {
    * @param name The name of the new zone
    */
   @PostMapping("/add")
-  @ResponseBody
   public void addZone(@RequestParam("name") final String name) throws DatabaseUnavailableException {
     Zone zone = new Zone(name);
     zoneManagerService.createZone(zone);
@@ -55,7 +55,6 @@ public class ZoneController {
    * @param id The ID of the zone that needs to be deleted
    */
   @DeleteMapping("/{id}")
-  @ResponseBody
   public void deleteZone(@PathVariable("id") final String id)
           throws ZoneNotFoundException, DatabaseUnavailableException {
     UUID uuid = UUID.fromString(id);
@@ -71,8 +70,8 @@ public class ZoneController {
    * @return Returns the Zone if successful.
    */
   @GetMapping(value = "/{id}")
-  public @ResponseBody final ZoneDTO getZone(@PathVariable("id") final String id)
-      throws ZoneNotFoundException, DatabaseUnavailableException {
+  public final ZoneDTO getZone(@PathVariable("id") final String id)
+          throws ZoneNotFoundException, DatabaseUnavailableException {
     Zone zone = zoneManagerService.getZone(UUID.fromString(id));
     return ZoneDTO.builder()
             .id(zone.getId().toString())
