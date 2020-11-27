@@ -1,15 +1,9 @@
 package uni.miskolc.ips.ilona.measurement.controller;
 
-import java.util.*;
-import javax.xml.datatype.DatatypeConfigurationException;
-import javax.xml.datatype.DatatypeFactory;
 import lombok.RequiredArgsConstructor;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 import uni.miskolc.ips.ilona.measurement.controller.dto.*;
 import uni.miskolc.ips.ilona.measurement.model.measurement.*;
 import uni.miskolc.ips.ilona.measurement.model.position.Coordinate;
@@ -21,20 +15,19 @@ import uni.miskolc.ips.ilona.measurement.service.exception.InconsistentMeasureme
 import uni.miskolc.ips.ilona.measurement.service.exception.TimeStampNotFoundException;
 import uni.miskolc.ips.ilona.measurement.service.exception.ZoneNotFoundException;
 
+import javax.xml.datatype.DatatypeConfigurationException;
+import javax.xml.datatype.DatatypeFactory;
+import java.util.*;
+
 /** @author bogdandy, tothzs */
+@Slf4j
+@RestController
+@RequestMapping(value = "/measurements")
 @RequiredArgsConstructor
-@Controller
 public class MeasurementController {
 
-  /** Logger. */
-  private static final Logger LOG = LogManager.getLogger(MeasurementController.class);
   /** Reads data from context.xml automatically. */
   private final MeasurementService measurementManagerService;
-
-  @GetMapping("/")
-  public ModelAndView loadHomePage() {
-    return new ModelAndView("index");
-  }
 
   /**
    * Lists the available measurements based on the zoneID which is not necessarily required.
@@ -42,8 +35,7 @@ public class MeasurementController {
    * @param zoneId The zoneID of the list is based on
    * @return Returns the list of results
    */
-  @GetMapping("/resources/listMeasurements")
-  @ResponseBody
+  @GetMapping(value = {"", "/"})
   public List<MeasurementDTO> listMeasurements(
       @RequestParam(value = "zoneId", required = false) final UUID zoneId)
       throws DatatypeConfigurationException, DatabaseUnavailableException {
@@ -63,8 +55,7 @@ public class MeasurementController {
    *
    * @param measurementRegistrationRequest measurement data
    */
-  @PostMapping(value = "/recordMeasurement")
-  @ResponseBody
+  @PostMapping(value = "/")
   public void recordMeasurement(
       @RequestBody final MeasurementRegistrationRequest measurementRegistrationRequest)
       throws InconsistentMeasurementException, DatabaseUnavailableException {
@@ -119,8 +110,7 @@ public class MeasurementController {
    * @param timestamp The timestamp the deletion is based on
    * @return It returns true if the operation was successful. Otherwise it throws exception.
    */
-  @DeleteMapping("/deleteMeasurement")
-  @ResponseBody
+  @DeleteMapping("/")
   public void deleteMeasurement(@RequestParam("timestamp") final long timestamp)
       throws TimeStampNotFoundException, DatabaseUnavailableException, ZoneNotFoundException {
     measurementManagerService.deleteMeasurement(new Date(timestamp));
@@ -213,18 +203,18 @@ public class MeasurementController {
       reason = "Measurement was Inconsistent.")
   @ExceptionHandler(InconsistentMeasurementException.class)
   public void inconsistentMeasurementExceptionHandler(Exception ex) {
-    LOG.info(ex.getMessage());
+    log.info(ex.getMessage());
   }
 
   @ResponseStatus(value = HttpStatus.NOT_FOUND)
   @ExceptionHandler(TimeStampNotFoundException.class)
   public void timeStampNotFoundExceptionHandler(Exception ex) {
-    LOG.info(ex.getMessage());
+    log.info(ex.getMessage());
   }
 
   @ResponseStatus(value = HttpStatus.NOT_FOUND)
   @ExceptionHandler(ZoneNotFoundException.class)
   public void zoneNotFoundExceptionHandler(Exception ex) {
-    LOG.info(ex.getMessage());
+    log.info(ex.getMessage());
   }
 }
