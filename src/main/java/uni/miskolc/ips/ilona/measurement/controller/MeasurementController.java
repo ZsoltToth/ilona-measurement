@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 import uni.miskolc.ips.ilona.measurement.controller.dto.*;
 import uni.miskolc.ips.ilona.measurement.model.measurement.*;
 import uni.miskolc.ips.ilona.measurement.model.position.Coordinate;
@@ -19,105 +20,102 @@ import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
 import java.util.*;
 
-/** @author bogdandy, tothzs */
 @Slf4j
 @RestController
 @RequestMapping(value = "/measurements")
 @RequiredArgsConstructor
 public class MeasurementController {
-
-  /** Reads data from context.xml automatically. */
   private final MeasurementService measurementManagerService;
 
-  /**
-   * Lists the available measurements based on the zoneID which is not necessarily required.
-   *
-   * @param zoneId The zoneID of the list is based on
-   * @return Returns the list of results
-   */
   @GetMapping(value = {"", "/"})
-  public List<MeasurementDTO> listMeasurements(
-      @RequestParam(value = "zoneId", required = false) final UUID zoneId)
-      throws DatatypeConfigurationException, DatabaseUnavailableException {
-    List<MeasurementDTO> result = new ArrayList<>();
-    Collection<Measurement> measurements = measurementManagerService.readMeasurements();
-    for (Measurement measurement : measurements) {
-      if (zoneId != null && !measurement.getPosition().getZone().getId().equals(zoneId)) {
-        continue;
+  public List<MeasurementDTO> listMeasurements(@RequestParam(value = "zoneId", required = false) UUID zoneId) {
+    try {
+      List<MeasurementDTO> result = new ArrayList<>();
+      Collection<Measurement> measurements = measurementManagerService.readMeasurements();
+      for (Measurement measurement : measurements) {
+        if (zoneId != null && !measurement.getPosition().getZone().getId().equals(zoneId)) {
+          continue;
+        }
+        result.add(assembleMeasurementDTO(measurement));
       }
-      result.add(assembleMeasurementDTO(measurement));
+      return result;
+    } catch (DatatypeConfigurationException e) {
+      log.info(e.getMessage());
+      throw new ResponseStatusException(HttpStatus.UNSUPPORTED_MEDIA_TYPE, e.getMessage());
+    } catch (DatabaseUnavailableException e) {
+      log.info(e.getMessage());
+      throw new ResponseStatusException(HttpStatus.INSUFFICIENT_STORAGE, e.getMessage());
     }
-    return result;
   }
 
-  /**
-   * Calls the measurement manager service to create a measurement. It accepts only post requests.
-   *
-   * @param measurementRegistrationRequest measurement data
-   */
   @PostMapping(value = "/")
-  public void recordMeasurement(
-      @RequestBody final MeasurementRegistrationRequest measurementRegistrationRequest)
-      throws InconsistentMeasurementException, DatabaseUnavailableException {
-    Measurement measurement = new Measurement();
-    measurement.setId(UUID.randomUUID());
-    measurement.setTimestamp(new Date());
-    measurement.setPosition(dispersePositionDTO(measurementRegistrationRequest.getPosition()));
-    if (measurementRegistrationRequest.getWifiRSSI() != null) {
-      Map<String, Double> wifiRssis = new HashMap<>();
-      for (MeasurementRegistrationRequest.WifiRSSI.Ap ap :
-          measurementRegistrationRequest.getWifiRSSI().getAp()) {
-        wifiRssis.put(ap.getSsid(), ap.getValue());
+  public void recordMeasurement(@RequestBody MeasurementRegistrationRequest measurementRegistrationRequest) {
+    try {
+      Measurement measurement = new Measurement();
+      measurement.setId(UUID.randomUUID());
+      measurement.setTimestamp(new Date());
+      measurement.setPosition(dispersePositionDTO(measurementRegistrationRequest.getPosition()));
+      if (measurementRegistrationRequest.getWifiRSSI() != null) {
+        Map<String, Double> wifiRssis = new HashMap<>();
+        for (MeasurementRegistrationRequest.WifiRSSI.Ap ap :
+                measurementRegistrationRequest.getWifiRSSI().getAp()) {
+          wifiRssis.put(ap.getSsid(), ap.getValue());
+        }
+        measurement.setWifiRSSI(new WiFiRSSI(wifiRssis));
       }
-      measurement.setWifiRSSI(new WiFiRSSI(wifiRssis));
+      if (measurementRegistrationRequest.getMagnetometer() != null) {
+        Magnetometer magnetometer = new Magnetometer(
+                measurementRegistrationRequest.getMagnetometer().getXAxis(),
+                measurementRegistrationRequest.getMagnetometer().getYAxis(),
+                measurementRegistrationRequest.getMagnetometer().getZAxis(),
+                measurementRegistrationRequest.getMagnetometer().getRadian()
+        );
+        measurement.setMagnetometer(magnetometer);
+      }
+      if (measurementRegistrationRequest.getBluetoothTags() != null) {
+        BluetoothTags bluetoothTags = new BluetoothTags(new HashSet<>(
+                measurementRegistrationRequest.getBluetoothTags().getBluetoothTag())
+        );
+        measurement.setBluetoothTags(bluetoothTags);
+      }
+      if (measurementRegistrationRequest.getGpsCoordinates() != null) {
+        GPSCoordinate gpsCoordinate = new GPSCoordinate(
+                measurementRegistrationRequest.getGpsCoordinates().getLatitude(),
+                measurementRegistrationRequest.getGpsCoordinates().getLongitude(),
+                measurementRegistrationRequest.getGpsCoordinates().getAltitude()
+        );
+        measurement.setGpsCoordinates(gpsCoordinate);
+      }
+      if (measurementRegistrationRequest.getRfidtags() != null) {
+        RFIDTags rfidTags = new RFIDTags(
+                new HashSet<>(measurementRegistrationRequest.getRfidtags().getRfidTag())
+        );
+        measurement.setRfidtags(rfidTags);
+      }
+      this.measurementManagerService.recordMeasurement(measurement);
+    } catch (InconsistentMeasurementException e) {
+      log.info(e.getMessage());
+      throw new ResponseStatusException(HttpStatus.UNSUPPORTED_MEDIA_TYPE, e.getMessage());
+    } catch (DatabaseUnavailableException e) {
+      log.info(e.getMessage());
+      throw new ResponseStatusException(HttpStatus.INSUFFICIENT_STORAGE, e.getMessage());
     }
-    if (measurementRegistrationRequest.getMagnetometer() != null) {
-      Magnetometer magnetometer =
-          new Magnetometer(
-              measurementRegistrationRequest.getMagnetometer().getXAxis(),
-              measurementRegistrationRequest.getMagnetometer().getYAxis(),
-              measurementRegistrationRequest.getMagnetometer().getZAxis(),
-              measurementRegistrationRequest.getMagnetometer().getRadian());
-      measurement.setMagnetometer(magnetometer);
-    }
-    if (measurementRegistrationRequest.getBluetoothTags() != null) {
-      BluetoothTags bluetoothTags =
-          new BluetoothTags(
-                  new HashSet<>(
-                          measurementRegistrationRequest.getBluetoothTags().getBluetoothTag()));
-      measurement.setBluetoothTags(bluetoothTags);
-    }
-    if (measurementRegistrationRequest.getGpsCoordinates() != null) {
-      GPSCoordinate gpsCoordinate =
-          new GPSCoordinate(
-              measurementRegistrationRequest.getGpsCoordinates().getLatitude(),
-              measurementRegistrationRequest.getGpsCoordinates().getLongitude(),
-              measurementRegistrationRequest.getGpsCoordinates().getAltitude());
-      measurement.setGpsCoordinates(gpsCoordinate);
-    }
-    if (measurementRegistrationRequest.getRfidtags() != null) {
-      RFIDTags rfidTags =
-          new RFIDTags(
-                  new HashSet<>(measurementRegistrationRequest.getRfidtags().getRfidTag()));
-      measurement.setRfidtags(rfidTags);
-    }
-    this.measurementManagerService.recordMeasurement(measurement);
   }
 
-  /**
-   * It calls the measurement manager service to delete the measurement with the given timestamp.
-   *
-   * @param timestamp The timestamp the deletion is based on
-   * @return It returns true if the operation was successful. Otherwise it throws exception.
-   */
   @DeleteMapping("/")
-  public void deleteMeasurement(@RequestParam("timestamp") final long timestamp)
-      throws TimeStampNotFoundException, DatabaseUnavailableException, ZoneNotFoundException {
-    measurementManagerService.deleteMeasurement(new Date(timestamp));
+  public void deleteMeasurement(@RequestParam("timestamp") long timestamp) {
+    try {
+      measurementManagerService.deleteMeasurement(new Date(timestamp));
+    } catch (TimeStampNotFoundException | ZoneNotFoundException e) {
+      log.info(e.getMessage());
+      throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
+    } catch (DatabaseUnavailableException e) {
+      log.info(e.getMessage());
+      throw new ResponseStatusException(HttpStatus.INSUFFICIENT_STORAGE, e.getMessage());
+    }
   }
 
-  private MeasurementDTO assembleMeasurementDTO(Measurement measurement)
-      throws DatatypeConfigurationException {
+  private MeasurementDTO assembleMeasurementDTO(Measurement measurement) throws DatatypeConfigurationException {
     GregorianCalendar calendar = new GregorianCalendar();
     DatatypeFactory datatypeFactory = DatatypeFactory.newInstance();
     MeasurementDTO dto = new MeasurementDTO();
@@ -129,14 +127,12 @@ public class MeasurementController {
     if (measurement.getWifiRSSI() != null) {
       MeasurementDTO.WifiRSSI wifiRSSI = new MeasurementDTO.WifiRSSI();
       List<MeasurementDTO.WifiRSSI.Ap> aps = wifiRSSI.getAp();
-      for (Map.Entry<String, Double> wifiRSSIEntry :
-          measurement.getWifiRSSI().getRssiValues().entrySet()) {
+      for (Map.Entry<String, Double> wifiRSSIEntry : measurement.getWifiRSSI().getRssiValues().entrySet()) {
         MeasurementDTO.WifiRSSI.Ap ap = new MeasurementDTO.WifiRSSI.Ap();
         ap.setSsid(wifiRSSIEntry.getKey());
         ap.setValue(wifiRSSIEntry.getValue());
         aps.add(ap);
       }
-
       dto.setWifiRSSI(wifiRSSI);
     }
     if (measurement.getMagnetometer() != null) {
@@ -160,11 +156,10 @@ public class MeasurementController {
       dto.setGpsCoordinates(gpsCoordinates);
     }
     if (measurement.getRfidtags() != null) {
-      MeasurementDTO.Rfidtags rfidtags = new MeasurementDTO.Rfidtags();
-      rfidtags.getRfidTag().addAll(measurement.getRfidtags().getTags());
-      dto.setRfidtags(rfidtags);
+      MeasurementDTO.Rfidtags rfidTags = new MeasurementDTO.Rfidtags();
+      rfidTags.getRfidTag().addAll(measurement.getRfidtags().getTags());
+      dto.setRfidtags(rfidTags);
     }
-
     return dto;
   }
 
@@ -187,34 +182,14 @@ public class MeasurementController {
     Coordinate coordinate = null;
     Zone zone = null;
     if (dto.getCoordinate() != null) {
-      coordinate =
-          new Coordinate(
-              dto.getCoordinate().getX(), dto.getCoordinate().getY(), dto.getCoordinate().getZ());
+      coordinate = new Coordinate(
+              dto.getCoordinate().getX(), dto.getCoordinate().getY(), dto.getCoordinate().getZ()
+      );
     }
     if (dto.getZone() != null) {
       zone = new Zone(dto.getZone().getName());
       zone.setId(UUID.fromString(dto.getZone().getId()));
     }
     return new Position(coordinate, zone);
-  }
-
-  @ResponseStatus(
-      value = HttpStatus.UNSUPPORTED_MEDIA_TYPE,
-      reason = "Measurement was Inconsistent.")
-  @ExceptionHandler(InconsistentMeasurementException.class)
-  public void inconsistentMeasurementExceptionHandler(Exception ex) {
-    log.info(ex.getMessage());
-  }
-
-  @ResponseStatus(value = HttpStatus.NOT_FOUND)
-  @ExceptionHandler(TimeStampNotFoundException.class)
-  public void timeStampNotFoundExceptionHandler(Exception ex) {
-    log.info(ex.getMessage());
-  }
-
-  @ResponseStatus(value = HttpStatus.NOT_FOUND)
-  @ExceptionHandler(ZoneNotFoundException.class)
-  public void zoneNotFoundExceptionHandler(Exception ex) {
-    log.info(ex.getMessage());
   }
 }

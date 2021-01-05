@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 import uni.miskolc.ips.ilona.measurement.controller.dto.ZoneDTO;
 import uni.miskolc.ips.ilona.measurement.model.position.Zone;
 import uni.miskolc.ips.ilona.measurement.service.ZoneService;
@@ -14,74 +15,72 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.UUID;
 
-/** @author bogdandy, tothzs */
 @Slf4j
 @RequiredArgsConstructor
 @RestController
 @RequestMapping(value = "/zones")
 public class ZoneController {
-
   private final ZoneService zoneManagerService;
 
-  /**
-   * @return Returns the list of zones.
-   */
   @GetMapping(value = {"", "/"})
-  public final Collection<ZoneDTO> listZones() throws DatabaseUnavailableException {
-    Collection<ZoneDTO> result = new ArrayList<>();
-    for (Zone zone : this.zoneManagerService.getZones()) {
-      ZoneDTO dto = new ZoneDTO();
-      dto.setId(zone.getId().toString());
-      dto.setName(zone.getName());
-      result.add(dto);
+  public Collection<ZoneDTO> listZones() {
+    try {
+      Collection<ZoneDTO> result = new ArrayList<>();
+      for (Zone zone : this.zoneManagerService.getZones()) {
+        ZoneDTO dto = new ZoneDTO();
+        dto.setId(zone.getId().toString());
+        dto.setName(zone.getName());
+        result.add(dto);
+      }
+      return result;
+    } catch (DatabaseUnavailableException e) {
+      log.info(e.getMessage());
+      throw new ResponseStatusException(HttpStatus.INSUFFICIENT_STORAGE, e.getMessage());
     }
-    return result;
   }
 
-  /**
-   * Adds a new zone to the list of zones.
-   *
-   * @param name The name of the new zone
-   */
   @PostMapping("/add")
-  public void addZone(@RequestParam("name") final String name) throws DatabaseUnavailableException {
-    Zone zone = new Zone(name);
-    zoneManagerService.createZone(zone);
+  public void addZone(@RequestParam("name") String name) {
+    try {
+
+      Zone zone = new Zone(name);
+      zoneManagerService.createZone(zone);
+    } catch (DatabaseUnavailableException e) {
+      log.info(e.getMessage());
+      throw new ResponseStatusException(HttpStatus.INSUFFICIENT_STORAGE, e.getMessage());
+    }
   }
 
-  /**
-   * Deletes a zone based on the zone ID.
-   *
-   * @param id The ID of the zone that needs to be deleted
-   */
   @DeleteMapping("/{id}")
-  public void deleteZone(@PathVariable("id") final String id)
-          throws ZoneNotFoundException, DatabaseUnavailableException {
-    UUID uuid = UUID.fromString(id);
-    Zone zone = new Zone();
-    zone.setId(uuid);
-    this.zoneManagerService.deleteZone(zone);
+  public void deleteZone(@PathVariable("id") String id) {
+    try {
+      UUID uuid = UUID.fromString(id);
+      Zone zone = new Zone();
+      zone.setId(uuid);
+      this.zoneManagerService.deleteZone(zone);
+    } catch (DatabaseUnavailableException e) {
+      log.info(e.getMessage());
+      throw new ResponseStatusException(HttpStatus.INSUFFICIENT_STORAGE, e.getMessage());
+    } catch (ZoneNotFoundException e) {
+      log.info(e.getMessage());
+      throw new ResponseStatusException(HttpStatus.CONFLICT, e.getMessage());
+    }
   }
 
-  /**
-   * Retrieves a zone based on the zone ID.
-   *
-   * @param id The ID of the zone that needs to be retrieved
-   * @return Returns the Zone if successful.
-   */
   @GetMapping(value = "/{id}")
-  public final ZoneDTO getZone(@PathVariable("id") final String id)
-          throws ZoneNotFoundException, DatabaseUnavailableException {
-    Zone zone = zoneManagerService.getZone(UUID.fromString(id));
-    return ZoneDTO.builder()
-            .id(zone.getId().toString())
-            .name(zone.getName())
-            .build();
-  }
-
-  @ResponseStatus(value = HttpStatus.CONFLICT)
-  @ExceptionHandler(ZoneNotFoundException.class)
-  public String zoneNotFoundExceptionHandler(Exception ex) {
-    return ex.getMessage();
+  public ZoneDTO getZone(@PathVariable("id") String id) {
+    try {
+      Zone zone = zoneManagerService.getZone(UUID.fromString(id));
+      return ZoneDTO.builder()
+              .id(zone.getId().toString())
+              .name(zone.getName())
+              .build();
+    } catch (DatabaseUnavailableException e) {
+      log.info(e.getMessage());
+      throw new ResponseStatusException(HttpStatus.INSUFFICIENT_STORAGE, e.getMessage());
+    } catch (ZoneNotFoundException e) {
+      log.info(e.getMessage());
+      throw new ResponseStatusException(HttpStatus.CONFLICT, e.getMessage());
+    }
   }
 }
