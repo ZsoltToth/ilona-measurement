@@ -1,17 +1,10 @@
 package uni.miskolc.ips.ilona.measurement.controller;
 
-import java.util.*;
-import javax.xml.datatype.DatatypeConfigurationException;
-import javax.xml.datatype.DatatypeFactory;
-
 import lombok.RequiredArgsConstructor;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
-import org.springframework.web.servlet.ModelAndView;
 import uni.miskolc.ips.ilona.measurement.controller.dto.*;
 import uni.miskolc.ips.ilona.measurement.model.measurement.*;
 import uni.miskolc.ips.ilona.measurement.model.position.Coordinate;
@@ -23,19 +16,18 @@ import uni.miskolc.ips.ilona.measurement.service.exception.InconsistentMeasureme
 import uni.miskolc.ips.ilona.measurement.service.exception.TimeStampNotFoundException;
 import uni.miskolc.ips.ilona.measurement.service.exception.ZoneNotFoundException;
 
+import javax.xml.datatype.DatatypeConfigurationException;
+import javax.xml.datatype.DatatypeFactory;
+import java.util.*;
+
+@Slf4j
+@RestController
+@RequestMapping(value = "/measurements")
 @RequiredArgsConstructor
-@Controller
 public class MeasurementController {
-    private static final Logger LOG = LogManager.getLogger(MeasurementController.class);
     private final MeasurementService measurementManagerService;
 
-    @GetMapping("/")
-    public ModelAndView loadHomePage() {
-        return new ModelAndView("index");
-    }
-
-    @GetMapping("/resources/listMeasurements")
-    @ResponseBody
+    @GetMapping(value = {"", "/"})
     public List<MeasurementDTO> listMeasurements(@RequestParam(value = "zoneId", required = false) UUID zoneId) {
         try {
             List<MeasurementDTO> result = new ArrayList<>();
@@ -48,16 +40,15 @@ public class MeasurementController {
             }
             return result;
         } catch (DatatypeConfigurationException e) {
-            LOG.info(e.getMessage());
+            log.info(e.getMessage());
             throw new ResponseStatusException(HttpStatus.UNSUPPORTED_MEDIA_TYPE, e.getMessage());
         } catch (DatabaseUnavailableException e) {
-            LOG.info(e.getMessage());
+            log.info(e.getMessage());
             throw new ResponseStatusException(HttpStatus.INSUFFICIENT_STORAGE, e.getMessage());
         }
     }
 
-    @PostMapping(value = "/recordMeasurement")
-    @ResponseBody
+    @PostMapping(value = "/")
     public void recordMeasurement(@RequestBody MeasurementRegistrationRequest measurementRegistrationRequest) {
         try {
             Measurement measurement = new Measurement();
@@ -77,7 +68,8 @@ public class MeasurementController {
                         measurementRegistrationRequest.getMagnetometer().getXAxis(),
                         measurementRegistrationRequest.getMagnetometer().getYAxis(),
                         measurementRegistrationRequest.getMagnetometer().getZAxis(),
-                        measurementRegistrationRequest.getMagnetometer().getRadian());
+                        measurementRegistrationRequest.getMagnetometer().getRadian()
+                );
                 measurement.setMagnetometer(magnetometer);
             }
             if (measurementRegistrationRequest.getBluetoothTags() != null) {
@@ -102,24 +94,23 @@ public class MeasurementController {
             }
             this.measurementManagerService.recordMeasurement(measurement);
         } catch (InconsistentMeasurementException e) {
-            LOG.info(e.getMessage());
+            log.info(e.getMessage());
             throw new ResponseStatusException(HttpStatus.UNSUPPORTED_MEDIA_TYPE, e.getMessage());
         } catch (DatabaseUnavailableException e) {
-            LOG.info(e.getMessage());
+            log.info(e.getMessage());
             throw new ResponseStatusException(HttpStatus.INSUFFICIENT_STORAGE, e.getMessage());
         }
     }
 
-    @DeleteMapping("/deleteMeasurement")
-    @ResponseBody
+    @DeleteMapping("/")
     public void deleteMeasurement(@RequestParam("timestamp") long timestamp) {
         try {
             measurementManagerService.deleteMeasurement(new Date(timestamp));
         } catch (TimeStampNotFoundException | ZoneNotFoundException e) {
-            LOG.info(e.getMessage());
+            log.info(e.getMessage());
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
         } catch (DatabaseUnavailableException e) {
-            LOG.info(e.getMessage());
+            log.info(e.getMessage());
             throw new ResponseStatusException(HttpStatus.INSUFFICIENT_STORAGE, e.getMessage());
         }
     }
