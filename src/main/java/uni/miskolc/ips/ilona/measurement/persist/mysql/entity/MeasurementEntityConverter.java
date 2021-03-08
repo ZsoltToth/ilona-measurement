@@ -1,8 +1,17 @@
 package uni.miskolc.ips.ilona.measurement.persist.mysql.entity;
 
-import uni.miskolc.ips.ilona.measurement.model.measurement.*;
+import uni.miskolc.ips.ilona.measurement.model.measurement.BluetoothTags;
+import uni.miskolc.ips.ilona.measurement.model.measurement.GPSCoordinate;
+import uni.miskolc.ips.ilona.measurement.model.measurement.Magnetometer;
+import uni.miskolc.ips.ilona.measurement.model.measurement.Measurement;
+import uni.miskolc.ips.ilona.measurement.model.measurement.RFIDTags;
+import uni.miskolc.ips.ilona.measurement.model.measurement.WiFiRSSI;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
+import java.util.UUID;
 
 public class MeasurementEntityConverter {
     public static MeasurementEntity convertModelToEntity(Measurement measurement) {
@@ -29,7 +38,7 @@ public class MeasurementEntityConverter {
         measurement.setTimestamp(measurementEntity.getMeasTimestamp());
         if (measurementEntity.getMagnetometerX() != null &&
                 measurementEntity.getMagnetometerY() != null &&
-                measurementEntity.getMagnetometerZ()  != null &&
+                measurementEntity.getMagnetometerZ() != null &&
                 measurementEntity.getMagnetometerRadian() != null
         ) {
             measurement.setMagnetometer(new Magnetometer(

@@ -1,86 +1,88 @@
 package uni.miskolc.ips.ilona.measurement.model.measurement;
 
-import java.util.Date;
 import uni.miskolc.ips.ilona.measurement.model.position.Coordinate;
 import uni.miskolc.ips.ilona.measurement.model.position.Position;
 import uni.miskolc.ips.ilona.measurement.model.position.Zone;
 
+import java.util.Date;
+
 public class MeasurementBuilder {
 
-  private Position position;
+    private Position position;
 
-  private WiFiRSSI wifiRSSI;
-  private Magnetometer magnetometer;
-  private BluetoothTags bluetoothTags;
-  private GPSCoordinate gpsCoordinates;
-  private RFIDTags rfidTags;
+    private WiFiRSSI wifiRSSI;
+    private Magnetometer magnetometer;
+    private BluetoothTags bluetoothTags;
+    private GPSCoordinate gpsCoordinates;
+    private RFIDTags rfidTags;
 
-  public MeasurementBuilder() {}
-
-  public Measurement build() {
-    return new Measurement(
-        new Date(), position, wifiRSSI, magnetometer, bluetoothTags, gpsCoordinates, rfidTags);
-  }
-
-  public void unsetPosition() {
-    this.position = null;
-  }
-
-  public void setPosition(Position position) {
-    this.position = position;
-  }
-
-  public void setPosition(Zone zone) {
-    if (this.position == null) {
-      this.position = new Position();
+    public MeasurementBuilder() {
     }
-    this.position.setZone(zone);
-  }
 
-  public void setPosition(Coordinate coordinate) {
-    if (this.position == null) {
-      this.position = new Position();
+    public Measurement build() {
+        return new Measurement(
+                new Date(), position, wifiRSSI, magnetometer, bluetoothTags, gpsCoordinates, rfidTags);
     }
-    this.position.setCoordinate(coordinate);
-  }
 
-  public void unsetWifiRSSI() {
-    this.wifiRSSI = null;
-  }
+    public void unsetPosition() {
+        this.position = null;
+    }
 
-  public void setWifiRSSI(final WiFiRSSI wifiRSSI) {
-    this.wifiRSSI = wifiRSSI;
-  }
+    public void setPosition(Position position) {
+        this.position = position;
+    }
 
-  public void unsetMagnetometer() {
-    this.magnetometer = null;
-  }
+    public void setPosition(Zone zone) {
+        if (this.position == null) {
+            this.position = new Position();
+        }
+        this.position.setZone(zone);
+    }
 
-  public void setMagnetometer(Magnetometer magnetometer) {
-    this.magnetometer = magnetometer;
-  }
+    public void setPosition(Coordinate coordinate) {
+        if (this.position == null) {
+            this.position = new Position();
+        }
+        this.position.setCoordinate(coordinate);
+    }
 
-  public void unsetBluetoothTags() {
-    this.bluetoothTags = null;
-  }
+    public void unsetWifiRSSI() {
+        this.wifiRSSI = null;
+    }
 
-  public void setBluetoothTags(BluetoothTags bluetoothTags) {
-    this.bluetoothTags = bluetoothTags;
-  }
+    public void setWifiRSSI(final WiFiRSSI wifiRSSI) {
+        this.wifiRSSI = wifiRSSI;
+    }
 
-  public void unsetGPSCoordinates() {
-    this.gpsCoordinates = null;
-  }
+    public void unsetMagnetometer() {
+        this.magnetometer = null;
+    }
 
-  public void setGPSCoordinates(GPSCoordinate gpsCoordinates) {
-    this.gpsCoordinates = gpsCoordinates;
-  }
+    public void setMagnetometer(Magnetometer magnetometer) {
+        this.magnetometer = magnetometer;
+    }
 
-  public void unsetRFIDTags() {
-    this.rfidTags = null;
-  }
+    public void unsetBluetoothTags() {
+        this.bluetoothTags = null;
+    }
 
-  public void setRFIDTags(RFIDTags rfidTags) {
-    this.rfidTags = rfidTags;
-  }
+    public void setBluetoothTags(BluetoothTags bluetoothTags) {
+        this.bluetoothTags = bluetoothTags;
+    }
+
+    public void unsetGPSCoordinates() {
+        this.gpsCoordinates = null;
+    }
+
+    public void setGPSCoordinates(GPSCoordinate gpsCoordinates) {
+        this.gpsCoordinates = gpsCoordinates;
+    }
+
+    public void unsetRFIDTags() {
+        this.rfidTags = null;
+    }
+
+    public void setRFIDTags(RFIDTags rfidTags) {
+        this.rfidTags = rfidTags;
+    }
 }

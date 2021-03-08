@@ -3,7 +3,10 @@ package uni.miskolc.ips.ilona.measurement.persist.mysql.entity;
 import uni.miskolc.ips.ilona.measurement.model.measurement.Measurement;
 import uni.miskolc.ips.ilona.measurement.model.measurement.WiFiRSSI;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
 public class WifiRssiEntityConverter {
     public static WiFiRSSI convertEntityToModel(Collection<WifiRSSIEntity> wifiRSSIEntity) {

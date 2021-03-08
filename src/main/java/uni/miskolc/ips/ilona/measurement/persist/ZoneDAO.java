@@ -1,21 +1,24 @@
 package uni.miskolc.ips.ilona.measurement.persist;
 
-import java.util.Collection;
-import java.util.UUID;
 import uni.miskolc.ips.ilona.measurement.model.position.Zone;
 import uni.miskolc.ips.ilona.measurement.persist.exceptions.InsertionException;
 import uni.miskolc.ips.ilona.measurement.persist.exceptions.RecordNotFoundException;
 
-/** @author Zsolt Toth */
+import java.util.Collection;
+import java.util.UUID;
+
+/**
+ * @author Zsolt Toth
+ */
 public interface ZoneDAO {
 
-  void createZone(Zone zone) throws InsertionException;
+    void createZone(Zone zone) throws InsertionException;
 
-  Collection<Zone> readZones();
+    Collection<Zone> readZones();
 
-  Collection<Zone> readZones(String zoneName);
+    Collection<Zone> readZones(String zoneName);
 
-  Zone readZone(UUID id) throws RecordNotFoundException;
+    Zone readZone(UUID id) throws RecordNotFoundException;
 
-  void deleteZone(Zone zone) throws RecordNotFoundException;
+    void deleteZone(Zone zone) throws RecordNotFoundException;
 }

@@ -8,5 +8,6 @@ import java.util.Optional;
 
 public interface MeasurementRepository extends CrudRepository<MeasurementEntity, String> {
     Optional<MeasurementEntity> findAllByMeasTimestamp(Date timestamp);
+
     void deleteAllByMeasTimestamp(Date timestamp);
 }

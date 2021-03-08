@@ -1,6 +1,10 @@
 package uni.miskolc.ips.ilona.measurement.persist.mysql.entity;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.Embeddable;
 import java.io.Serializable;
 
