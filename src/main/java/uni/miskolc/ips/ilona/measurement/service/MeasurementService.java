@@ -1,6 +1,7 @@
 /**
  * This package domain contains the measurement service class hierarchy.
  */
+
 package uni.miskolc.ips.ilona.measurement.service;
 
 import uni.miskolc.ips.ilona.measurement.model.measurement.Measurement;

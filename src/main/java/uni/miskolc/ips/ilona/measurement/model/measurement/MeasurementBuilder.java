@@ -11,9 +11,13 @@ public class MeasurementBuilder {
     private Position position;
 
     private WiFiRSSI wifiRSSI;
+
     private Magnetometer magnetometer;
+
     private BluetoothTags bluetoothTags;
+
     private GPSCoordinate gpsCoordinates;
+
     private RFIDTags rfidTags;
 
     public MeasurementBuilder() {

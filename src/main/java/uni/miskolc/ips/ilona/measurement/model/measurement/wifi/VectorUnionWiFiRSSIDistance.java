@@ -11,6 +11,7 @@ import java.util.Set;
 public class VectorUnionWiFiRSSIDistance implements WiFiRSSIDistanceCalculator {
 
     private static final Logger LOG = LogManager.getLogger(VectorUnionWiFiRSSIDistance.class);
+
     private final double UNKNOWN_VALUE;
 
     public VectorUnionWiFiRSSIDistance(double unknownValue) {

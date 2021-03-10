@@ -13,6 +13,8 @@ import lombok.Setter;
 @AllArgsConstructor
 public class PositionDTO {
     private String id;
+
     private ZoneDTO zone;
+
     private CoordinateDTO coordinate;
 }

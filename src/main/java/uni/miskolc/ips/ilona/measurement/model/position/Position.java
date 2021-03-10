@@ -5,7 +5,9 @@ import java.util.UUID;
 public class Position {
 
     private Coordinate coordinate;
+
     private Zone zone;
+
     private UUID id;
 
     public Position() {

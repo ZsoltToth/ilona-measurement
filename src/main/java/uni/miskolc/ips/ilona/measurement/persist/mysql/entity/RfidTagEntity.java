@@ -21,6 +21,7 @@ import javax.persistence.Table;
 public class RfidTagEntity {
     @EmbeddedId
     private RfidTagId id;
+
     @MapsId("measId")
     @ManyToOne
     @JoinColumn(name = "measId", referencedColumnName = "measId")

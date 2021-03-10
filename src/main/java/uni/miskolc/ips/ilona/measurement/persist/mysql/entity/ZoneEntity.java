@@ -23,7 +23,9 @@ public class ZoneEntity {
     @Id
     @Column(name = "zoneId")
     private String id;
+
     private String name;
+
     @OneToMany(
             mappedBy = "zone",
             cascade = CascadeType.ALL

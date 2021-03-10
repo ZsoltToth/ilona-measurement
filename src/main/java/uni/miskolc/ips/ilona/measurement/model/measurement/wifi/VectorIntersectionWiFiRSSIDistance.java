@@ -11,6 +11,7 @@ import java.util.Set;
 public class VectorIntersectionWiFiRSSIDistance implements WiFiRSSIDistanceCalculator {
 
     public static final double UNKNOWN_DISTANCE = -1;
+
     private static final Logger LOG = LogManager.getLogger(VectorIntersectionWiFiRSSIDistance.class);
 
     @Override

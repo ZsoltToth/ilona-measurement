@@ -10,6 +10,7 @@ import java.util.Set;
 public class RFIDTags {
 
     private static final Logger LOG = LogManager.getLogger(RFIDTags.class);
+
     private Set<byte[]> tags;
 
     public RFIDTags() {

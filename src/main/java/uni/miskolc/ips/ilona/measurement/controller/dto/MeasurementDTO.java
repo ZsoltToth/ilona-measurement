@@ -17,12 +17,19 @@ import java.util.List;
 @AllArgsConstructor
 public class MeasurementDTO {
     private String id;
+
     private XMLGregorianCalendar timestamp;
+
     private PositionDTO position;
+
     private MeasurementDTO.WifiRSSI wifiRSSI;
+
     private MeasurementDTO.Magnetometer magnetometer;
+
     private MeasurementDTO.BluetoothTags bluetoothTags;
+
     private MeasurementDTO.GpsCoordinates gpsCoordinates;
+
     private MeasurementDTO.Rfidtags rfidtags;
 
     @Builder
@@ -46,7 +53,9 @@ public class MeasurementDTO {
     @AllArgsConstructor
     public static class GpsCoordinates {
         private double latitude;
+
         private double longitude;
+
         private double altitude;
     }
 
@@ -57,8 +66,11 @@ public class MeasurementDTO {
     @AllArgsConstructor
     public static class Magnetometer {
         private double xAxis;
+
         private double yAxis;
+
         private double zAxis;
+
         private double radian;
     }
 
@@ -96,6 +108,7 @@ public class MeasurementDTO {
         @AllArgsConstructor
         public static class Ap {
             private double value;
+
             private String ssid;
         }
     }

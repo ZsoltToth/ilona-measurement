@@ -18,10 +18,12 @@ public class GPSCoordinate {
      * The latitude is represented by this attribute.
      */
     private double latitude;
+
     /**
      * The longitude is represented by this attribute.
      */
     private double longitude;
+
     /**
      * The altitude is represented by this attribute.
      */

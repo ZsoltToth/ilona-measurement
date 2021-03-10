@@ -3,7 +3,9 @@ package uni.miskolc.ips.ilona.measurement.model.position;
 public class Coordinate {
 
     private double x;
+
     private double y;
+
     private double z;
 
     /**

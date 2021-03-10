@@ -16,10 +16,15 @@ import java.util.List;
 @AllArgsConstructor
 public class MeasurementRegistrationRequest {
     private MeasurementRegistrationRequest.Position position;
+
     private MeasurementRegistrationRequest.WifiRSSI wifiRSSI;
+
     private MeasurementRegistrationRequest.Magnetometer magnetometer;
+
     private MeasurementRegistrationRequest.BluetoothTags bluetoothTags;
+
     private MeasurementRegistrationRequest.GpsCoordinates gpsCoordinates;
+
     private MeasurementRegistrationRequest.Rfidtags rfidtags;
 
     @Builder
@@ -37,7 +42,9 @@ public class MeasurementRegistrationRequest {
     @AllArgsConstructor
     public static class GpsCoordinates {
         private double latitude;
+
         private double longitude;
+
         private double altitude;
     }
 
@@ -48,8 +55,11 @@ public class MeasurementRegistrationRequest {
     @AllArgsConstructor
     public static class Magnetometer {
         private double xAxis;
+
         private double yAxis;
+
         private double zAxis;
+
         private double radian;
     }
 
@@ -60,6 +70,7 @@ public class MeasurementRegistrationRequest {
     @AllArgsConstructor
     public static class Position {
         private ZoneDTO zone;
+
         private CoordinateDTO coordinate;
     }
 
@@ -91,6 +102,7 @@ public class MeasurementRegistrationRequest {
         @AllArgsConstructor
         public static class Ap {
             private double value;
+
             private String ssid;
         }
     }

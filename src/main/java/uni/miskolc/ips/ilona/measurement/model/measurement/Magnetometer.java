@@ -19,22 +19,27 @@ public class Magnetometer {
      * The constant default value of the unknown distance.
      */
     public static final double UNKNOW_DISTANCE = -1.0;
+
     /**
      * The logger.
      */
     private static final Logger LOG = LogManager.getLogger(Magnetometer.class);
+
     /**
      * The attribute representing the X axis of the magnetometer.
      */
     private double xAxis;
+
     /**
      * The attribute representing the Y axis of the magnetometer.
      */
     private double yAxis;
+
     /**
      * The attribute representing the Z axis of the magnetometer.
      */
     private double zAxis;
+
     /**
      * The attribute representing the radian of the magnetometer.
      */

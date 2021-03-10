@@ -15,5 +15,6 @@ import java.io.Serializable;
 @EqualsAndHashCode
 public class BluetoothTagId implements Serializable {
     private String btDeviceId;
+
     private String measId;
 }

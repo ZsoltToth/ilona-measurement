@@ -17,6 +17,7 @@ public class BluetoothTags {
      * The logger class.
      */
     private static final Logger LOG = LogManager.getLogger(BluetoothTags.class);
+
     /**
      * The collection of the bluetooth tags.
      */

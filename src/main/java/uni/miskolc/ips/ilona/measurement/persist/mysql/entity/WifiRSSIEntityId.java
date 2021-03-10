@@ -15,5 +15,6 @@ import java.io.Serializable;
 @EqualsAndHashCode
 public class WifiRSSIEntityId implements Serializable {
     private String ssid;
+
     private String measId;
 }

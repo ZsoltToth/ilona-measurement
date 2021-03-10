@@ -25,12 +25,17 @@ public class PositionEntity {
     @Id
     @Column(name = "posId")
     private String id;
+
     private double coord_X;
+
     private double coord_Y;
+
     private double coord_Z;
+
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "zoneId", referencedColumnName = "zoneId")
     private ZoneEntity zone;
+
     @OneToMany(
             mappedBy = "position",
             cascade = CascadeType.REMOVE

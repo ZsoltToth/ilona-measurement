@@ -13,5 +13,6 @@ import lombok.Setter;
 @AllArgsConstructor
 public class ZoneDTO {
     private String id;
+
     private String name;
 }

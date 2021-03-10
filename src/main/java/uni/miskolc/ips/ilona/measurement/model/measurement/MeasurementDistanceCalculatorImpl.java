@@ -6,12 +6,19 @@ import org.apache.logging.log4j.Logger;
 public class MeasurementDistanceCalculatorImpl implements MeasurementDistanceCalculator {
 
     private static final double UNKNOWN_DISTANCE = -1.0;
+
     private static final Logger LOG = LogManager.getLogger(MeasurementDistanceCalculatorImpl.class);
+
     private final WiFiRSSIDistanceCalculator wifiDistanceCalculator;
+
     private final double wifiDistanceWeight;
+
     private final double magnetometerDistanceWeight;
+
     private final double gpsDistanceWeight;
+
     private final double bluetoothDistanceWeight;
+
     private final double rfidDistanceWeight;
 
     public MeasurementDistanceCalculatorImpl(

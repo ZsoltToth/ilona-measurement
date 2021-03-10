@@ -15,5 +15,6 @@ import java.io.Serializable;
 @EqualsAndHashCode
 public class RfidTagId implements Serializable {
     private byte[] rfidTag;
+
     private String measId;
 }
