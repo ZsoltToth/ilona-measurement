@@ -7,18 +7,18 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-public class RFIDTags {
+public class RfidTags {
 
-    private static final Logger LOG = LogManager.getLogger(RFIDTags.class);
+    private static final Logger LOG = LogManager.getLogger(RfidTags.class);
 
     private Set<byte[]> tags;
 
-    public RFIDTags() {
+    public RfidTags() {
         super();
         tags = new HashSet<>();
     }
 
-    public RFIDTags(Set<byte[]> tags) {
+    public RfidTags(Set<byte[]> tags) {
         super();
         this.tags = trimTagsSet(tags);
     }
@@ -39,7 +39,7 @@ public class RFIDTags {
         this.tags.remove(trimTags(tag));
     }
 
-    public double distance(RFIDTags other) {
+    public double distance(RfidTags other) {
         double result;
 
         if (this.getTags().isEmpty() && other.getTags().isEmpty()) {
@@ -64,7 +64,7 @@ public class RFIDTags {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        RFIDTags rfidTags = (RFIDTags) o;
+        RfidTags rfidTags = (RfidTags) o;
 
         return tags.equals(rfidTags.tags);
     }
@@ -74,7 +74,7 @@ public class RFIDTags {
         return tags != null ? tags.hashCode() : 0;
     }
 
-    protected Set<byte[]> union(RFIDTags other) {
+    protected Set<byte[]> union(RfidTags other) {
         Set<byte[]> union = new HashSet<>();
         union.addAll(this.intersection(other));
 
@@ -98,7 +98,7 @@ public class RFIDTags {
         return union;
     }
 
-    protected Set<byte[]> intersection(RFIDTags other) {
+    protected Set<byte[]> intersection(RfidTags other) {
         Set<byte[]> intersection = new HashSet<>();
         for (byte[] thiseach : this.tags) {
             for (byte[] each : other.tags) {

@@ -9,7 +9,7 @@ public class MeasurementDistanceCalculatorImpl implements MeasurementDistanceCal
 
     private static final Logger LOG = LogManager.getLogger(MeasurementDistanceCalculatorImpl.class);
 
-    private final WiFiRSSIDistanceCalculator wifiDistanceCalculator;
+    private final WifiRssiDistanceCalculator wifiDistanceCalculator;
 
     private final double wifiDistanceWeight;
 
@@ -22,7 +22,7 @@ public class MeasurementDistanceCalculatorImpl implements MeasurementDistanceCal
     private final double rfidDistanceWeight;
 
     public MeasurementDistanceCalculatorImpl(
-            WiFiRSSIDistanceCalculator wifiDistanceCalculator,
+            WifiRssiDistanceCalculator wifiDistanceCalculator,
             double wifiDistanceWeight,
             double magnetometerDistanceWeight,
             double gpsDistanceWeight,
@@ -42,11 +42,11 @@ public class MeasurementDistanceCalculatorImpl implements MeasurementDistanceCal
         double wifiDistance,
                 bluetoothDistance,
                 magnetometerDistance,
-                GPSCoordinateDistance,
+                gpsCoordinateDistance,
                 rfidDistance;
         wifiDistance =
-                measA.getWifiRSSI() != null && measB.getWifiRSSI() != null
-                        ? wifiDistanceCalculator.distance(measA.getWifiRSSI(), measB.getWifiRSSI())
+                measA.getWifiRssi() != null && measB.getWifiRssi() != null
+                        ? wifiDistanceCalculator.distance(measA.getWifiRssi(), measB.getWifiRssi())
                         : UNKNOWN_DISTANCE;
         bluetoothDistance =
                 measA.getBluetoothTags() != null && measB.getBluetoothTags() != null
@@ -56,7 +56,7 @@ public class MeasurementDistanceCalculatorImpl implements MeasurementDistanceCal
                 measA.getMagnetometer() != null && measB.getMagnetometer() != null
                         ? measA.getMagnetometer().distance(measB.getMagnetometer())
                         : UNKNOWN_DISTANCE;
-        GPSCoordinateDistance =
+        gpsCoordinateDistance =
                 measA.getGpsCoordinates() != null && measB.getGpsCoordinates() != null
                         ? measA.getGpsCoordinates().distance(measB.getGpsCoordinates())
                         : UNKNOWN_DISTANCE;
@@ -68,7 +68,7 @@ public class MeasurementDistanceCalculatorImpl implements MeasurementDistanceCal
         result = 0.0;
         double denominator = 0.0;
 
-        if (wifiDistance != WiFiRSSIDistanceCalculator.UNKOWN_DISTANCE) {
+        if (wifiDistance != WifiRssiDistanceCalculator.UNKOWN_DISTANCE) {
             result += wifiDistanceWeight * Math.pow(wifiDistance, 2.0);
             denominator += wifiDistanceWeight;
         }
@@ -83,8 +83,8 @@ public class MeasurementDistanceCalculatorImpl implements MeasurementDistanceCal
             denominator += magnetometerDistanceWeight;
         }
 
-        if (GPSCoordinateDistance != UNKNOWN_DISTANCE) {
-            result += gpsDistanceWeight * Math.pow(GPSCoordinateDistance, 2.0);
+        if (gpsCoordinateDistance != UNKNOWN_DISTANCE) {
+            result += gpsDistanceWeight * Math.pow(gpsCoordinateDistance, 2.0);
             denominator += gpsDistanceWeight;
         }
 

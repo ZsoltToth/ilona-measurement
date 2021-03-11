@@ -3,29 +3,29 @@ package uni.miskolc.ips.ilona.measurement.model.measurement;
 import java.util.HashMap;
 import java.util.Map;
 
-public class WiFiRSSI {
+public class WifiRssi {
 
     private Map<String, Double> rssiValues;
 
-    public WiFiRSSI() {
+    public WifiRssi() {
         super();
         this.rssiValues = new HashMap<>();
     }
 
-    public WiFiRSSI(Map<String, Double> rssiValues) {
+    public WifiRssi(Map<String, Double> rssiValues) {
         super();
         this.rssiValues = rssiValues;
     }
 
-    public void setRSSI(String ssid, double rssi) {
+    public void setRssi(String ssid, double rssi) {
         this.rssiValues.put(ssid, rssi);
     }
 
-    public double getRSSI(String ssid) {
+    public double getRssi(String ssid) {
         return this.rssiValues.get(ssid);
     }
 
-    public void removeSSID(String ssid) {
+    public void removeSsid(String ssid) {
         this.rssiValues.remove(ssid);
     }
 
@@ -47,11 +47,11 @@ public class WiFiRSSI {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        WiFiRSSI wiFiRSSI = (WiFiRSSI) o;
+        WifiRssi wifiRssi = (WifiRssi) o;
 
         return rssiValues != null
-                ? rssiValues.equals(wiFiRSSI.rssiValues)
-                : wiFiRSSI.rssiValues == null;
+                ? rssiValues.equals(wifiRssi.rssiValues)
+                : wifiRssi.rssiValues == null;
     }
 
     @Override

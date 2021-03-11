@@ -17,7 +17,7 @@ import java.util.List;
 public class MeasurementRegistrationRequest {
     private MeasurementRegistrationRequest.Position position;
 
-    private MeasurementRegistrationRequest.WifiRSSI wifiRSSI;
+    private MeasurementRegistrationRequest.WifiRssi wifiRssi;
 
     private MeasurementRegistrationRequest.Magnetometer magnetometer;
 
@@ -69,9 +69,9 @@ public class MeasurementRegistrationRequest {
     @NoArgsConstructor
     @AllArgsConstructor
     public static class Position {
-        private ZoneDTO zone;
+        private ZoneDto zone;
 
-        private CoordinateDTO coordinate;
+        private CoordinateDto coordinate;
     }
 
     @Builder
@@ -85,10 +85,10 @@ public class MeasurementRegistrationRequest {
     @Builder
     @NoArgsConstructor
     @AllArgsConstructor
-    public static class WifiRSSI {
-        private List<MeasurementRegistrationRequest.WifiRSSI.Ap> ap;
+    public static class WifiRssi {
+        private List<MeasurementRegistrationRequest.WifiRssi.Ap> ap;
 
-        public List<MeasurementRegistrationRequest.WifiRSSI.Ap> getAp() {
+        public List<MeasurementRegistrationRequest.WifiRssi.Ap> getAp() {
             if (ap == null) {
                 ap = new ArrayList<>();
             }

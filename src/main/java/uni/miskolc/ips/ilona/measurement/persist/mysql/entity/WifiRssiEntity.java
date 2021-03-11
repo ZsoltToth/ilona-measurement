@@ -18,9 +18,9 @@ import javax.persistence.Table;
 @AllArgsConstructor
 @Builder
 @Table(name = "WIFIRSSI")
-public class WifiRSSIEntity {
+public class WifiRssiEntity {
     @EmbeddedId
-    public WifiRSSIEntityId id;
+    public WifiRssiEntityId id;
 
     @MapsId("measId")
     @ManyToOne

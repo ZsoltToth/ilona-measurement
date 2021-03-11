@@ -11,7 +11,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class CoordinateDTO {
+public class CoordinateDto {
     private double x;
 
     private double y;

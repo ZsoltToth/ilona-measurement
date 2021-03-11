@@ -11,7 +11,7 @@ import java.util.UUID;
 /**
  * @author Zsolt Toth
  */
-public interface MeasurementDAO {
+public interface MeasurementDao {
 
     // Create
     void createMeasurement(Measurement measurement) throws InsertionException;

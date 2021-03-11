@@ -3,7 +3,7 @@ package uni.miskolc.ips.ilona.measurement.service.impl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import uni.miskolc.ips.ilona.measurement.model.position.Position;
-import uni.miskolc.ips.ilona.measurement.persist.PositionDAO;
+import uni.miskolc.ips.ilona.measurement.persist.PositionDao;
 import uni.miskolc.ips.ilona.measurement.persist.exceptions.InsertionException;
 import uni.miskolc.ips.ilona.measurement.persist.exceptions.RecordNotFoundException;
 import uni.miskolc.ips.ilona.measurement.service.PositionService;
@@ -22,7 +22,7 @@ public class PositionServiceImpl implements PositionService {
     /**
      * PositionDAO provides an abstract interface to database of Positions.
      */
-    private final PositionDAO positionDao;
+    private final PositionDao positionDao;
 
     /**
      * The createPosition method insert the given position into the database.

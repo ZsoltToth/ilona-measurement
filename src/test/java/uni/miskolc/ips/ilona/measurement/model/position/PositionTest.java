@@ -15,8 +15,8 @@ public class PositionTest {
     Position pos = new Position();
     pos.setCoordinate(coord);
     pos.setZone(zone);
-    pos.setUUID(uuid);
-    if (pos.getUUID().compareTo(uuid) == 0
+    pos.setUuid(uuid);
+    if (pos.getUuid().compareTo(uuid) == 0
         && pos.getCoordinate().equals(coord)
         && pos.getZone().equals(zone)) {
       String positionString = pos.toString();

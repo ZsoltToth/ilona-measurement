@@ -1,11 +1,11 @@
 package uni.miskolc.ips.ilona.measurement.persist.mysql.entity;
 
 import uni.miskolc.ips.ilona.measurement.model.measurement.BluetoothTags;
-import uni.miskolc.ips.ilona.measurement.model.measurement.GPSCoordinate;
+import uni.miskolc.ips.ilona.measurement.model.measurement.GpsCoordinate;
 import uni.miskolc.ips.ilona.measurement.model.measurement.Magnetometer;
 import uni.miskolc.ips.ilona.measurement.model.measurement.Measurement;
-import uni.miskolc.ips.ilona.measurement.model.measurement.RFIDTags;
-import uni.miskolc.ips.ilona.measurement.model.measurement.WiFiRSSI;
+import uni.miskolc.ips.ilona.measurement.model.measurement.RfidTags;
+import uni.miskolc.ips.ilona.measurement.model.measurement.WifiRssi;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -27,7 +27,7 @@ public class MeasurementEntityConverter {
         measurementEntity.setGpsAltitude(measurement.getGpsCoordinates().getAltitude());
         measurementEntity.setPosition(PositionEntityConverter.convertModelToEntity(measurement.getPosition()));
         measurementEntity.setBluetoothTags(BluetoothTagEntityConverter.convertModelToEntity(measurement));
-        measurementEntity.setWifiRSSI(WifiRssiEntityConverter.convertModelToEntity(measurement));
+        measurementEntity.setWifiRssi(WifiRssiEntityConverter.convertModelToEntity(measurement));
         measurementEntity.setRfidTags(RfidTagEntityConverter.convertModelToEntity(measurement));
         return measurementEntity;
     }
@@ -52,7 +52,7 @@ public class MeasurementEntityConverter {
                 measurementEntity.getGpsLatitude() != null &&
                 measurementEntity.getGpsLongitude() != null
         ) {
-            measurement.setGpsCoordinates(new GPSCoordinate(
+            measurement.setGpsCoordinates(new GpsCoordinate(
                     measurementEntity.getGpsLatitude(),
                     measurementEntity.getGpsLongitude(),
                     measurementEntity.getGpsAltitude()
@@ -68,17 +68,17 @@ public class MeasurementEntityConverter {
             bluetoothTags.setTags(bluetoothTagSet);
             measurement.setBluetoothTags(bluetoothTags);
         }
-        if (measurementEntity.getWifiRSSI() != null) {
-            WiFiRSSI wiFiRSSI = new WiFiRSSI();
+        if (measurementEntity.getWifiRssi() != null) {
+            WifiRssi wifiRssi = new WifiRssi();
             Map<String, Double> wifiRssiMap = new HashMap<>();
-            for (WifiRSSIEntity wifiRSSIEntity : measurementEntity.getWifiRSSI()) {
-                wifiRssiMap.put(wifiRSSIEntity.getId().getSsid(), wifiRSSIEntity.getRssi());
+            for (WifiRssiEntity wifiRssiEntity : measurementEntity.getWifiRssi()) {
+                wifiRssiMap.put(wifiRssiEntity.getId().getSsid(), wifiRssiEntity.getRssi());
             }
-            wiFiRSSI.setRssiValues(wifiRssiMap);
-            measurement.setWifiRSSI(wiFiRSSI);
+            wifiRssi.setRssiValues(wifiRssiMap);
+            measurement.setWifiRssi(wifiRssi);
         }
         if (measurementEntity.getRfidTags().size() != 0) {
-            RFIDTags rfidTags = new RFIDTags();
+            RfidTags rfidTags = new RfidTags();
             for (RfidTagEntity tag : measurementEntity.getRfidTags()) {
                 rfidTags.addTag(tag.getId().getRfidTag());
             }

@@ -11,17 +11,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
-import uni.miskolc.ips.ilona.measurement.controller.dto.CoordinateDTO;
-import uni.miskolc.ips.ilona.measurement.controller.dto.MeasurementDTO;
+import uni.miskolc.ips.ilona.measurement.controller.dto.CoordinateDto;
+import uni.miskolc.ips.ilona.measurement.controller.dto.MeasurementDto;
 import uni.miskolc.ips.ilona.measurement.controller.dto.MeasurementRegistrationRequest;
-import uni.miskolc.ips.ilona.measurement.controller.dto.PositionDTO;
-import uni.miskolc.ips.ilona.measurement.controller.dto.ZoneDTO;
+import uni.miskolc.ips.ilona.measurement.controller.dto.PositionDto;
+import uni.miskolc.ips.ilona.measurement.controller.dto.ZoneDto;
 import uni.miskolc.ips.ilona.measurement.model.measurement.BluetoothTags;
-import uni.miskolc.ips.ilona.measurement.model.measurement.GPSCoordinate;
+import uni.miskolc.ips.ilona.measurement.model.measurement.GpsCoordinate;
 import uni.miskolc.ips.ilona.measurement.model.measurement.Magnetometer;
 import uni.miskolc.ips.ilona.measurement.model.measurement.Measurement;
-import uni.miskolc.ips.ilona.measurement.model.measurement.RFIDTags;
-import uni.miskolc.ips.ilona.measurement.model.measurement.WiFiRSSI;
+import uni.miskolc.ips.ilona.measurement.model.measurement.RfidTags;
+import uni.miskolc.ips.ilona.measurement.model.measurement.WifiRssi;
 import uni.miskolc.ips.ilona.measurement.model.position.Coordinate;
 import uni.miskolc.ips.ilona.measurement.model.position.Position;
 import uni.miskolc.ips.ilona.measurement.model.position.Zone;
@@ -51,15 +51,15 @@ public class MeasurementController {
     private final MeasurementService measurementManagerService;
 
     @GetMapping(value = {"", "/"})
-    public List<MeasurementDTO> listMeasurements(@RequestParam(value = "zoneId", required = false) UUID zoneId) {
+    public List<MeasurementDto> listMeasurements(@RequestParam(value = "zoneId", required = false) UUID zoneId) {
         try {
-            List<MeasurementDTO> result = new ArrayList<>();
+            List<MeasurementDto> result = new ArrayList<>();
             Collection<Measurement> measurements = measurementManagerService.readMeasurements();
             for (Measurement measurement : measurements) {
                 if (zoneId != null && !measurement.getPosition().getZone().getId().equals(zoneId)) {
                     continue;
                 }
-                result.add(assembleMeasurementDTO(measurement));
+                result.add(assembleMeasurementDto(measurement));
             }
             return result;
         } catch (DatatypeConfigurationException e) {
@@ -77,14 +77,14 @@ public class MeasurementController {
             Measurement measurement = new Measurement();
             measurement.setId(UUID.randomUUID());
             measurement.setTimestamp(new Date());
-            measurement.setPosition(dispersePositionDTO(measurementRegistrationRequest.getPosition()));
-            if (measurementRegistrationRequest.getWifiRSSI() != null) {
+            measurement.setPosition(dispersePositionDto(measurementRegistrationRequest.getPosition()));
+            if (measurementRegistrationRequest.getWifiRssi() != null) {
                 Map<String, Double> wifiRssis = new HashMap<>();
-                for (MeasurementRegistrationRequest.WifiRSSI.Ap ap :
-                        measurementRegistrationRequest.getWifiRSSI().getAp()) {
+                for (MeasurementRegistrationRequest.WifiRssi.Ap ap :
+                        measurementRegistrationRequest.getWifiRssi().getAp()) {
                     wifiRssis.put(ap.getSsid(), ap.getValue());
                 }
-                measurement.setWifiRSSI(new WiFiRSSI(wifiRssis));
+                measurement.setWifiRssi(new WifiRssi(wifiRssis));
             }
             if (measurementRegistrationRequest.getMagnetometer() != null) {
                 Magnetometer magnetometer = new Magnetometer(
@@ -102,7 +102,7 @@ public class MeasurementController {
                 measurement.setBluetoothTags(bluetoothTags);
             }
             if (measurementRegistrationRequest.getGpsCoordinates() != null) {
-                GPSCoordinate gpsCoordinate = new GPSCoordinate(
+                GpsCoordinate gpsCoordinate = new GpsCoordinate(
                         measurementRegistrationRequest.getGpsCoordinates().getLatitude(),
                         measurementRegistrationRequest.getGpsCoordinates().getLongitude(),
                         measurementRegistrationRequest.getGpsCoordinates().getAltitude()
@@ -110,7 +110,7 @@ public class MeasurementController {
                 measurement.setGpsCoordinates(gpsCoordinate);
             }
             if (measurementRegistrationRequest.getRfidtags() != null) {
-                RFIDTags rfidTags = new RFIDTags(
+                RfidTags rfidTags = new RfidTags(
                         new HashSet<>(measurementRegistrationRequest.getRfidtags().getRfidTag())
                 );
                 measurement.setRfidtags(rfidTags);
@@ -138,28 +138,28 @@ public class MeasurementController {
         }
     }
 
-    private MeasurementDTO assembleMeasurementDTO(Measurement measurement) throws DatatypeConfigurationException {
+    private MeasurementDto assembleMeasurementDto(Measurement measurement) throws DatatypeConfigurationException {
         GregorianCalendar calendar = new GregorianCalendar();
         DatatypeFactory datatypeFactory = DatatypeFactory.newInstance();
-        MeasurementDTO dto = new MeasurementDTO();
+        MeasurementDto dto = new MeasurementDto();
         dto.setId(measurement.getId().toString());
         calendar.setTime(measurement.getTimestamp());
         dto.setTimestamp(datatypeFactory.newXMLGregorianCalendar(calendar));
-        dto.setPosition(assemblePositionDTO(measurement.getPosition()));
+        dto.setPosition(assemblePositionDto(measurement.getPosition()));
 
-        if (measurement.getWifiRSSI() != null) {
-            MeasurementDTO.WifiRSSI wifiRSSI = new MeasurementDTO.WifiRSSI();
-            List<MeasurementDTO.WifiRSSI.Ap> aps = wifiRSSI.getAp();
-            for (Map.Entry<String, Double> wifiRSSIEntry : measurement.getWifiRSSI().getRssiValues().entrySet()) {
-                MeasurementDTO.WifiRSSI.Ap ap = new MeasurementDTO.WifiRSSI.Ap();
-                ap.setSsid(wifiRSSIEntry.getKey());
-                ap.setValue(wifiRSSIEntry.getValue());
+        if (measurement.getWifiRssi() != null) {
+            MeasurementDto.WifiRssi wifiRssi = new MeasurementDto.WifiRssi();
+            List<MeasurementDto.WifiRssi.Ap> aps = wifiRssi.getAp();
+            for (Map.Entry<String, Double> wifiRssiEntry : measurement.getWifiRssi().getRssiValues().entrySet()) {
+                MeasurementDto.WifiRssi.Ap ap = new MeasurementDto.WifiRssi.Ap();
+                ap.setSsid(wifiRssiEntry.getKey());
+                ap.setValue(wifiRssiEntry.getValue());
                 aps.add(ap);
             }
-            dto.setWifiRSSI(wifiRSSI);
+            dto.setWifiRssi(wifiRssi);
         }
         if (measurement.getMagnetometer() != null) {
-            MeasurementDTO.Magnetometer magnetometer = new MeasurementDTO.Magnetometer();
+            MeasurementDto.Magnetometer magnetometer = new MeasurementDto.Magnetometer();
             magnetometer.setXAxis(measurement.getMagnetometer().getxAxis());
             magnetometer.setYAxis(measurement.getMagnetometer().getyAxis());
             magnetometer.setZAxis(measurement.getMagnetometer().getzAxis());
@@ -167,33 +167,33 @@ public class MeasurementController {
             dto.setMagnetometer(magnetometer);
         }
         if (measurement.getBluetoothTags() != null) {
-            MeasurementDTO.BluetoothTags bluetoothTags = new MeasurementDTO.BluetoothTags();
+            MeasurementDto.BluetoothTags bluetoothTags = new MeasurementDto.BluetoothTags();
             bluetoothTags.getBluetoothTag().addAll(measurement.getBluetoothTags().getTags());
             dto.setBluetoothTags(bluetoothTags);
         }
         if (measurement.getGpsCoordinates() != null) {
-            MeasurementDTO.GpsCoordinates gpsCoordinates = new MeasurementDTO.GpsCoordinates();
+            MeasurementDto.GpsCoordinates gpsCoordinates = new MeasurementDto.GpsCoordinates();
             gpsCoordinates.setLatitude(measurement.getGpsCoordinates().getLatitude());
             gpsCoordinates.setLongitude(measurement.getGpsCoordinates().getLongitude());
             gpsCoordinates.setAltitude(measurement.getGpsCoordinates().getAltitude());
             dto.setGpsCoordinates(gpsCoordinates);
         }
         if (measurement.getRfidtags() != null) {
-            MeasurementDTO.Rfidtags rfidTags = new MeasurementDTO.Rfidtags();
+            MeasurementDto.Rfidtags rfidTags = new MeasurementDto.Rfidtags();
             rfidTags.getRfidTag().addAll(measurement.getRfidtags().getTags());
             dto.setRfidtags(rfidTags);
         }
         return dto;
     }
 
-    private PositionDTO assemblePositionDTO(Position position) {
-        PositionDTO result = new PositionDTO();
-        result.setId(position.getUUID().toString());
-        ZoneDTO zone = new ZoneDTO();
+    private PositionDto assemblePositionDto(Position position) {
+        PositionDto result = new PositionDto();
+        result.setId(position.getUuid().toString());
+        ZoneDto zone = new ZoneDto();
         zone.setId(position.getZone().getId().toString());
         zone.setName(position.getZone().getName());
         result.setZone(zone);
-        CoordinateDTO coordinate = new CoordinateDTO();
+        CoordinateDto coordinate = new CoordinateDto();
         coordinate.setX(position.getCoordinate().getX());
         coordinate.setY(position.getCoordinate().getY());
         coordinate.setZ(position.getCoordinate().getZ());
@@ -201,7 +201,7 @@ public class MeasurementController {
         return result;
     }
 
-    private Position dispersePositionDTO(MeasurementRegistrationRequest.Position dto) {
+    private Position dispersePositionDto(MeasurementRegistrationRequest.Position dto) {
         Coordinate coordinate = null;
         Zone zone = null;
         if (dto.getCoordinate() != null) {

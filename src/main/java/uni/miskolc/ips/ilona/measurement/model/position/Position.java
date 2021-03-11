@@ -49,11 +49,11 @@ public class Position {
         this.zone = zone;
     }
 
-    public UUID getUUID() {
+    public UUID getUuid() {
         return this.id;
     }
 
-    public void setUUID(UUID id) {
+    public void setUuid(UUID id) {
         this.id = id;
     }
 

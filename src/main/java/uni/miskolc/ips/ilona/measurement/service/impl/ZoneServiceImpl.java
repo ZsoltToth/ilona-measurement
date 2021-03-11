@@ -3,7 +3,7 @@ package uni.miskolc.ips.ilona.measurement.service.impl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import uni.miskolc.ips.ilona.measurement.model.position.Zone;
-import uni.miskolc.ips.ilona.measurement.persist.ZoneDAO;
+import uni.miskolc.ips.ilona.measurement.persist.ZoneDao;
 import uni.miskolc.ips.ilona.measurement.persist.exceptions.InsertionException;
 import uni.miskolc.ips.ilona.measurement.persist.exceptions.RecordNotFoundException;
 import uni.miskolc.ips.ilona.measurement.service.ZoneService;
@@ -24,7 +24,7 @@ public class ZoneServiceImpl implements ZoneService {
     /**
      * PositionDAO provides an abstract interface to database of Zones.
      */
-    private final ZoneDAO zoneDAO;
+    private final ZoneDao zoneDao;
 
     /**
      * The createZone method insert the given Zone into the database.
@@ -33,7 +33,7 @@ public class ZoneServiceImpl implements ZoneService {
      */
     public final void createZone(final Zone zone) {
         try {
-            zoneDAO.createZone(zone);
+            zoneDao.createZone(zone);
         } catch (InsertionException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -46,7 +46,7 @@ public class ZoneServiceImpl implements ZoneService {
      * @return with the collection of the Zones read from the database.
      */
     public final Collection<Zone> getZones() {
-        return zoneDAO.readZones();
+        return zoneDao.readZones();
     }
 
     /**
@@ -57,7 +57,7 @@ public class ZoneServiceImpl implements ZoneService {
      * @return with the collection of Zones that fulfills the criterion
      */
     public final Collection<Zone> getZones(final String name) throws ZoneNotFoundException {
-        Collection<Zone> result = zoneDAO.readZones(name);
+        Collection<Zone> result = zoneDao.readZones(name);
         if (result == null) {
             throw new ZoneNotFoundException();
         }
@@ -71,7 +71,7 @@ public class ZoneServiceImpl implements ZoneService {
      */
     public final void deleteZone(final Zone zone) throws ZoneNotFoundException {
         try {
-            zoneDAO.deleteZone(zone);
+            zoneDao.deleteZone(zone);
         } catch (RecordNotFoundException e) {
             // TODO Auto-generated catch block
             // e.printStackTrace();
@@ -83,7 +83,7 @@ public class ZoneServiceImpl implements ZoneService {
     public Zone getZone(UUID value) throws DatabaseUnavailableException, ZoneNotFoundException {
         Zone result;
         try {
-            result = zoneDAO.readZone(value);
+            result = zoneDao.readZone(value);
         } catch (RecordNotFoundException e) {
             throw new ZoneNotFoundException();
         }

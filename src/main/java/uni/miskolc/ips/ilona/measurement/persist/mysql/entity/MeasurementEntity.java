@@ -51,7 +51,7 @@ public class MeasurementEntity {
     private Collection<BluetoothTagEntity> bluetoothTags;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "measurement", orphanRemoval = true)
-    private Collection<WifiRSSIEntity> wifiRSSI;
+    private Collection<WifiRssiEntity> wifiRssi;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "measurement", orphanRemoval = true)
     private Collection<RfidTagEntity> rfidTags;

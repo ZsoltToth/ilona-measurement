@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
-import uni.miskolc.ips.ilona.measurement.controller.dto.ZoneDTO;
+import uni.miskolc.ips.ilona.measurement.controller.dto.ZoneDto;
 import uni.miskolc.ips.ilona.measurement.model.position.Zone;
 import uni.miskolc.ips.ilona.measurement.service.ZoneService;
 import uni.miskolc.ips.ilona.measurement.service.exception.DatabaseUnavailableException;
@@ -29,11 +29,11 @@ public class ZoneController {
     private final ZoneService zoneManagerService;
 
     @GetMapping(value = {"", "/"})
-    public Collection<ZoneDTO> listZones() {
+    public Collection<ZoneDto> listZones() {
         try {
-            Collection<ZoneDTO> result = new ArrayList<>();
+            Collection<ZoneDto> result = new ArrayList<>();
             for (Zone zone : this.zoneManagerService.getZones()) {
-                ZoneDTO dto = new ZoneDTO();
+                ZoneDto dto = new ZoneDto();
                 dto.setId(zone.getId().toString());
                 dto.setName(zone.getName());
                 result.add(dto);
@@ -74,10 +74,10 @@ public class ZoneController {
     }
 
     @GetMapping(value = "/{id}")
-    public ZoneDTO getZone(@PathVariable("id") String id) {
+    public ZoneDto getZone(@PathVariable("id") String id) {
         try {
             Zone zone = zoneManagerService.getZone(UUID.fromString(id));
-            return ZoneDTO.builder()
+            return ZoneDto.builder()
                     .id(zone.getId().toString())
                     .name(zone.getName())
                     .build();

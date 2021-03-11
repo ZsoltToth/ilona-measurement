@@ -35,7 +35,7 @@ public class Measurement {
      * Received signal strength indicator is a measurement of the power present in a received radio
      * signal.
      */
-    private WiFiRSSI wifiRSSI;
+    private WifiRssi wifiRssi;
 
     /**
      * It represents the measured values of a Magnetometer. The magnetometer returns values in
@@ -52,12 +52,12 @@ public class Measurement {
     /**
      * The class responsible for the GPS Coordinate of the measurement.
      */
-    private GPSCoordinate gpsCoordinates;
+    private GpsCoordinate gpsCoordinates;
 
     /**
      * The RFIDTags class.
      */
-    private RFIDTags rfidtags;
+    private RfidTags rfidtags;
 
     /**
      * Constructor for the Measurement class.
@@ -69,7 +69,7 @@ public class Measurement {
     /**
      * @param timestamp      represents a specific instant in time, with millisecond.
      * @param position       based on the coordinate, zone and UUID attributes.
-     * @param wifiRSSI       represents the received signal strength indicator.
+     * @param wifiRssi       represents the received signal strength indicator.
      * @param magnetometer   measured values.
      * @param bluetoothTags  represents the measurement of the bluetooth sensor.
      * @param gpsCoordinates defines the latitude, longitude and distance.
@@ -79,16 +79,16 @@ public class Measurement {
     protected Measurement(
             final Date timestamp,
             final Position position,
-            final WiFiRSSI wifiRSSI,
+            final WifiRssi wifiRssi,
             final Magnetometer magnetometer,
             final BluetoothTags bluetoothTags,
-            final GPSCoordinate gpsCoordinates,
-            final RFIDTags rfidTags) {
+            final GpsCoordinate gpsCoordinates,
+            final RfidTags rfidTags) {
         super();
         this.id = UUID.randomUUID();
         this.timestamp = timestamp;
         this.position = position;
-        this.wifiRSSI = wifiRSSI;
+        this.wifiRssi = wifiRssi;
         this.magnetometer = magnetometer;
         this.bluetoothTags = bluetoothTags;
         this.gpsCoordinates = gpsCoordinates;
@@ -100,7 +100,7 @@ public class Measurement {
      *
      * @return the RFID tags.
      */
-    public final RFIDTags getRfidtags() {
+    public final RfidTags getRfidtags() {
         return rfidtags;
     }
 
@@ -109,7 +109,7 @@ public class Measurement {
      *
      * @param rfidtags sets the value of rfidtags.
      */
-    public final void setRfidtags(final RFIDTags rfidtags) {
+    public final void setRfidtags(final RfidTags rfidtags) {
         this.rfidtags = rfidtags;
     }
 
@@ -118,17 +118,17 @@ public class Measurement {
      *
      * @return wifiRSSI gets the measured WiFiRSSI values.
      */
-    public final WiFiRSSI getWifiRSSI() {
-        return wifiRSSI;
+    public final WifiRssi getWifiRssi() {
+        return wifiRssi;
     }
 
     /**
      * WiFiRSSI setter method.
      *
-     * @param wifiRSSI sets the measured WiFIRSSI values.
+     * @param wifiRssi sets the measured WiFIRSSI values.
      */
-    public final void setWifiRSSI(final WiFiRSSI wifiRSSI) {
-        this.wifiRSSI = wifiRSSI;
+    public final void setWifiRssi(final WifiRssi wifiRssi) {
+        this.wifiRssi = wifiRssi;
     }
 
     /**
@@ -172,7 +172,7 @@ public class Measurement {
      *
      * @return gpsCoordinates gets the calculated coordinates.
      */
-    public final GPSCoordinate getGpsCoordinates() {
+    public final GpsCoordinate getGpsCoordinates() {
         return gpsCoordinates;
     }
 
@@ -181,7 +181,7 @@ public class Measurement {
      *
      * @param gpsCoordinates sets the calculated coordinates.
      */
-    public final void setGpsCoordinates(final GPSCoordinate gpsCoordinates) {
+    public final void setGpsCoordinates(final GpsCoordinate gpsCoordinates) {
         this.gpsCoordinates = gpsCoordinates;
     }
 
@@ -257,7 +257,7 @@ public class Measurement {
                 + ", position="
                 + position
                 + ", "
-                + wifiRSSI
+                + wifiRssi
                 + ", "
                 + magnetometer
                 + ", "

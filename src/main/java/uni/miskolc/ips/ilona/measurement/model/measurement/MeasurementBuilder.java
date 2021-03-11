@@ -10,22 +10,22 @@ public class MeasurementBuilder {
 
     private Position position;
 
-    private WiFiRSSI wifiRSSI;
+    private WifiRssi wifiRssi;
 
     private Magnetometer magnetometer;
 
     private BluetoothTags bluetoothTags;
 
-    private GPSCoordinate gpsCoordinates;
+    private GpsCoordinate gpsCoordinates;
 
-    private RFIDTags rfidTags;
+    private RfidTags rfidTags;
 
     public MeasurementBuilder() {
     }
 
     public Measurement build() {
         return new Measurement(
-                new Date(), position, wifiRSSI, magnetometer, bluetoothTags, gpsCoordinates, rfidTags);
+                new Date(), position, wifiRssi, magnetometer, bluetoothTags, gpsCoordinates, rfidTags);
     }
 
     public void unsetPosition() {
@@ -50,12 +50,12 @@ public class MeasurementBuilder {
         this.position.setCoordinate(coordinate);
     }
 
-    public void unsetWifiRSSI() {
-        this.wifiRSSI = null;
+    public void unsetWifiRssi() {
+        this.wifiRssi = null;
     }
 
-    public void setWifiRSSI(final WiFiRSSI wifiRSSI) {
-        this.wifiRSSI = wifiRSSI;
+    public void setWifiRssi(final WifiRssi wifiRssi) {
+        this.wifiRssi = wifiRssi;
     }
 
     public void unsetMagnetometer() {
@@ -74,19 +74,19 @@ public class MeasurementBuilder {
         this.bluetoothTags = bluetoothTags;
     }
 
-    public void unsetGPSCoordinates() {
+    public void unsetGpsCoordinates() {
         this.gpsCoordinates = null;
     }
 
-    public void setGPSCoordinates(GPSCoordinate gpsCoordinates) {
+    public void setGpsCoordinates(GpsCoordinate gpsCoordinates) {
         this.gpsCoordinates = gpsCoordinates;
     }
 
-    public void unsetRFIDTags() {
+    public void unsetRfidTags() {
         this.rfidTags = null;
     }
 
-    public void setRFIDTags(RFIDTags rfidTags) {
+    public void setRfidTags(RfidTags rfidTags) {
         this.rfidTags = rfidTags;
     }
 }

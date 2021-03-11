@@ -8,11 +8,11 @@ import org.apache.logging.log4j.Logger;
  *
  * @author Tamas13
  */
-public class GPSCoordinate {
+public class GpsCoordinate {
     /**
      * The logger.
      */
-    private static final Logger LOG = LogManager.getLogger(GPSCoordinate.class);
+    private static final Logger LOG = LogManager.getLogger(GpsCoordinate.class);
 
     /**
      * The latitude is represented by this attribute.
@@ -36,7 +36,7 @@ public class GPSCoordinate {
      * @param longitude as double
      * @param altitude  as double
      */
-    public GPSCoordinate(final double latitude, final double longitude, final double altitude) {
+    public GpsCoordinate(final double latitude, final double longitude, final double altitude) {
         super();
 
         this.latitude = latitude;
@@ -47,7 +47,7 @@ public class GPSCoordinate {
     /**
      * Empty constructor.
      */
-    public GPSCoordinate() {
+    public GpsCoordinate() {
         super();
     }
 
@@ -121,11 +121,11 @@ public class GPSCoordinate {
      * xmlns="http://www.w3.org/1998/Math/MathML"><mi>&#952;</mi></math> = longitude, <math
      * xmlns="http://www.w3.org/1998/Math/MathML"><mi>&#961;</mi></math> = latitude.
      *
-     * @param otherGPS represents the coordinate to which we want to compare the represented
+     * @param otherGps represents the coordinate to which we want to compare the represented
      *                 coordinate
      * @return the distance of two coordinate as a double value.
      */
-    public final double distance(final GPSCoordinate otherGPS) {
+    public final double distance(final GpsCoordinate otherGps) {
 
         double result = 0;
 
@@ -133,9 +133,9 @@ public class GPSCoordinate {
         double theta1 = this.getLatitude();
         double r1 = this.getAltitude();
 
-        double phi2 = otherGPS.getLongitude();
-        double theta2 = otherGPS.getLatitude();
-        double r2 = otherGPS.getAltitude();
+        double phi2 = otherGps.getLongitude();
+        double theta2 = otherGps.getLatitude();
+        double r2 = otherGps.getAltitude();
 
         result +=
                 Math.pow(r1, 2.0)
@@ -148,7 +148,7 @@ public class GPSCoordinate {
         result = Math.sqrt(result);
         LOG.info(
                 String.format(
-                        "Distance between %s and %s is %f", this.toString(), otherGPS.toString(), result));
+                        "Distance between %s and %s is %f", this.toString(), otherGps.toString(), result));
         return result;
     }
 
@@ -168,7 +168,7 @@ public class GPSCoordinate {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        GPSCoordinate that = (GPSCoordinate) o;
+        GpsCoordinate that = (GpsCoordinate) o;
 
         if (Double.compare(that.latitude, latitude) != 0) return false;
         if (Double.compare(that.longitude, longitude) != 0) return false;

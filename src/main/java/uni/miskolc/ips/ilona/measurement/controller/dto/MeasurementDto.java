@@ -15,22 +15,22 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class MeasurementDTO {
+public class MeasurementDto {
     private String id;
 
     private XMLGregorianCalendar timestamp;
 
-    private PositionDTO position;
+    private PositionDto position;
 
-    private MeasurementDTO.WifiRSSI wifiRSSI;
+    private MeasurementDto.WifiRssi wifiRssi;
 
-    private MeasurementDTO.Magnetometer magnetometer;
+    private MeasurementDto.Magnetometer magnetometer;
 
-    private MeasurementDTO.BluetoothTags bluetoothTags;
+    private MeasurementDto.BluetoothTags bluetoothTags;
 
-    private MeasurementDTO.GpsCoordinates gpsCoordinates;
+    private MeasurementDto.GpsCoordinates gpsCoordinates;
 
-    private MeasurementDTO.Rfidtags rfidtags;
+    private MeasurementDto.Rfidtags rfidtags;
 
     @Builder
     @NoArgsConstructor
@@ -91,8 +91,8 @@ public class MeasurementDTO {
     @Builder
     @NoArgsConstructor
     @AllArgsConstructor
-    public static class WifiRSSI {
-        private List<MeasurementDTO.WifiRSSI.Ap> ap;
+    public static class WifiRssi {
+        private List<MeasurementDto.WifiRssi.Ap> ap;
 
         public List<Ap> getAp() {
             if (ap == null) {

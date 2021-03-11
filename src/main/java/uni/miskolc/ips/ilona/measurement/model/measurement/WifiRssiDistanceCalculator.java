@@ -1,7 +1,7 @@
 package uni.miskolc.ips.ilona.measurement.model.measurement;
 
-public interface WiFiRSSIDistanceCalculator {
+public interface WifiRssiDistanceCalculator {
     double UNKOWN_DISTANCE = -1.0;
 
-    double distance(WiFiRSSI rssA, WiFiRSSI rssB);
+    double distance(WifiRssi rssA, WifiRssi rssB);
 }

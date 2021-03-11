@@ -10,7 +10,7 @@ import java.util.UUID;
 /**
  * @author Zsolt Toth
  */
-public interface ZoneDAO {
+public interface ZoneDao {
 
     void createZone(Zone zone) throws InsertionException;
 

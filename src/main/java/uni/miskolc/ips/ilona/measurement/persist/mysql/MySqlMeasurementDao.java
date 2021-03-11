@@ -5,7 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import uni.miskolc.ips.ilona.measurement.model.measurement.Measurement;
-import uni.miskolc.ips.ilona.measurement.persist.MeasurementDAO;
+import uni.miskolc.ips.ilona.measurement.persist.MeasurementDao;
 import uni.miskolc.ips.ilona.measurement.persist.exceptions.InsertionException;
 import uni.miskolc.ips.ilona.measurement.persist.exceptions.RecordNotFoundException;
 import uni.miskolc.ips.ilona.measurement.persist.mysql.entity.BluetoothTagEntityConverter;
@@ -24,7 +24,7 @@ import java.util.UUID;
 @Service
 @Slf4j
 @RequiredArgsConstructor
-public class MySQLMeasurementDAO implements MeasurementDAO {
+public class MySqlMeasurementDao implements MeasurementDao {
     private final MeasurementRepository repository;
 
     @Override
@@ -82,9 +82,9 @@ public class MySQLMeasurementDAO implements MeasurementDAO {
                         BluetoothTagEntityConverter.convertModelToEntity(measurement)
                 );
             }
-            if (measurement.getWifiRSSI() != null) {
-                oldMeasurement.get().getWifiRSSI().clear();
-                oldMeasurement.get().getWifiRSSI().addAll(
+            if (measurement.getWifiRssi() != null) {
+                oldMeasurement.get().getWifiRssi().clear();
+                oldMeasurement.get().getWifiRssi().addAll(
                         WifiRssiEntityConverter.convertModelToEntity(measurement)
                 );
             }

@@ -10,7 +10,7 @@ import java.util.UUID;
 /**
  * @author Zsolt Toth
  */
-public interface PositionDAO {
+public interface PositionDao {
     void createPosition(Position position) throws InsertionException;
 
     Position getPosition(UUID id) throws RecordNotFoundException;

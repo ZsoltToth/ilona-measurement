@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import uni.miskolc.ips.ilona.measurement.model.position.Zone;
-import uni.miskolc.ips.ilona.measurement.persist.ZoneDAO;
+import uni.miskolc.ips.ilona.measurement.persist.ZoneDao;
 import uni.miskolc.ips.ilona.measurement.persist.exceptions.InsertionException;
 import uni.miskolc.ips.ilona.measurement.persist.exceptions.RecordNotFoundException;
 import uni.miskolc.ips.ilona.measurement.persist.mysql.entity.ZoneEntity;
@@ -18,7 +18,7 @@ import java.util.UUID;
 @Service
 @Slf4j
 @RequiredArgsConstructor
-public class MySQLZoneDAO implements ZoneDAO {
+public class MySqlZoneDao implements ZoneDao {
     private final ZoneRepository repository;
 
     @Override

@@ -13,7 +13,7 @@ import java.io.Serializable;
 @AllArgsConstructor
 @Getter
 @EqualsAndHashCode
-public class WifiRSSIEntityId implements Serializable {
+public class WifiRssiEntityId implements Serializable {
     private String ssid;
 
     private String measId;

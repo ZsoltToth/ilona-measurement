@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import uni.miskolc.ips.ilona.measurement.model.measurement.Measurement;
 import uni.miskolc.ips.ilona.measurement.model.position.Position;
 import uni.miskolc.ips.ilona.measurement.model.position.Zone;
-import uni.miskolc.ips.ilona.measurement.persist.MeasurementDAO;
+import uni.miskolc.ips.ilona.measurement.persist.MeasurementDao;
 import uni.miskolc.ips.ilona.measurement.persist.exceptions.InsertionException;
 import uni.miskolc.ips.ilona.measurement.persist.exceptions.RecordNotFoundException;
 import uni.miskolc.ips.ilona.measurement.service.MeasurementService;
@@ -25,7 +25,7 @@ public class MeasurementServiceImpl implements MeasurementService {
     /**
      * MeasurementDAO provides an abstract interface to database of Measurements.
      */
-    private final MeasurementDAO measurementDAO;
+    private final MeasurementDao measurementDao;
 
     /**
      * The recordMeasurement method insert the given measurement into the database.
@@ -34,7 +34,7 @@ public class MeasurementServiceImpl implements MeasurementService {
      */
     public final void recordMeasurement(final Measurement measurement) {
         try {
-            this.measurementDAO.createMeasurement(measurement);
+            this.measurementDao.createMeasurement(measurement);
         } catch (InsertionException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -47,7 +47,7 @@ public class MeasurementServiceImpl implements MeasurementService {
      * @return with the collection of the Measurement read from the database.
      */
     public final Collection<Measurement> readMeasurements() {
-        return this.measurementDAO.readMeasurements();
+        return this.measurementDao.readMeasurements();
     }
 
     /**
@@ -58,7 +58,7 @@ public class MeasurementServiceImpl implements MeasurementService {
      * @return with the collection of Measurements that fulfills the criterion
      */
     public final Collection<Measurement> readMeasurements(final Zone zone) {
-        Collection<Measurement> wholelist = this.measurementDAO.readMeasurements();
+        Collection<Measurement> wholelist = this.measurementDao.readMeasurements();
 
         Collection<Measurement> resultlist = new ArrayList<>();
 
@@ -79,7 +79,7 @@ public class MeasurementServiceImpl implements MeasurementService {
      * @return with the collection of Measurements that fulfills the criterion
      */
     public final Collection<Measurement> readMeasurements(final Position position) {
-        Collection<Measurement> wholelist = this.measurementDAO.readMeasurements();
+        Collection<Measurement> wholelist = this.measurementDao.readMeasurements();
 
         Collection<Measurement> resultlist = new ArrayList<>();
 
@@ -99,7 +99,7 @@ public class MeasurementServiceImpl implements MeasurementService {
      */
     public final void deleteMeasurement(final Date timestamp) {
         try {
-            this.measurementDAO.deleteMeasurement(timestamp);
+            this.measurementDao.deleteMeasurement(timestamp);
         } catch (RecordNotFoundException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();

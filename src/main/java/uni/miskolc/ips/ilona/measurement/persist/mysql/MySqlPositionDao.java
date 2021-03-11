@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import uni.miskolc.ips.ilona.measurement.model.position.Position;
-import uni.miskolc.ips.ilona.measurement.persist.PositionDAO;
+import uni.miskolc.ips.ilona.measurement.persist.PositionDao;
 import uni.miskolc.ips.ilona.measurement.persist.exceptions.InsertionException;
 import uni.miskolc.ips.ilona.measurement.persist.exceptions.RecordNotFoundException;
 import uni.miskolc.ips.ilona.measurement.persist.mysql.entity.PositionEntity;
@@ -19,7 +19,7 @@ import java.util.UUID;
 @Service
 @Slf4j
 @RequiredArgsConstructor
-public class MySQLPositionDAO implements PositionDAO {
+public class MySqlPositionDao implements PositionDao {
     private final PositionRepository repository;
 
     @Override
@@ -52,7 +52,7 @@ public class MySQLPositionDAO implements PositionDAO {
 
     @Override
     public void updatePosition(Position position) throws RecordNotFoundException {
-        Optional<PositionEntity> oldPosition = repository.findById(position.getUUID().toString());
+        Optional<PositionEntity> oldPosition = repository.findById(position.getUuid().toString());
         if (oldPosition.isPresent()) {
             oldPosition.get().setCoord_X(position.getCoordinate().getX());
             oldPosition.get().setCoord_Y(position.getCoordinate().getY());
@@ -68,9 +68,9 @@ public class MySQLPositionDAO implements PositionDAO {
 
     @Override
     public void deletePosition(Position position) throws RecordNotFoundException {
-        if (repository.findById(position.getUUID().toString()).isEmpty()) {
+        if (repository.findById(position.getUuid().toString()).isEmpty()) {
             throw new RecordNotFoundException();
         }
-        repository.deleteById(position.getUUID().toString());
+        repository.deleteById(position.getUuid().toString());
     }
 }

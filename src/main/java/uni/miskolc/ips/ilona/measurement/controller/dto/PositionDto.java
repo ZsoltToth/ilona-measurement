@@ -11,10 +11,10 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class PositionDTO {
+public class PositionDto {
     private String id;
 
-    private ZoneDTO zone;
+    private ZoneDto zone;
 
-    private CoordinateDTO coordinate;
+    private CoordinateDto coordinate;
 }

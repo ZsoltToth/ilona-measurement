@@ -11,7 +11,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ZoneDTO {
+public class ZoneDto {
     private String id;
 
     private String name;

@@ -92,13 +92,13 @@ public class MeasurementTest {
   public void testSetUnset() {
     Measurement meas = new Measurement();
     meas.setBluetoothTags(new BluetoothTags());
-    meas.setGpsCoordinates(new GPSCoordinate());
+    meas.setGpsCoordinates(new GpsCoordinate());
     meas.setId(UUID.randomUUID());
     meas.setMagnetometer(new Magnetometer());
     meas.setPosition(new Position());
-    meas.setRfidtags(new RFIDTags());
+    meas.setRfidtags(new RfidTags());
     meas.setTimestamp(new Timestamp((new Date()).getTime()));
-    meas.setWifiRSSI(new WiFiRSSI());
+    meas.setWifiRssi(new WifiRssi());
 
     meas.equals(meas);
     meas.equals(new Position());

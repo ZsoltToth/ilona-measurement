@@ -2,31 +2,31 @@ package uni.miskolc.ips.ilona.measurement.model.measurement.wifi;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import uni.miskolc.ips.ilona.measurement.model.measurement.WiFiRSSI;
-import uni.miskolc.ips.ilona.measurement.model.measurement.WiFiRSSIDistanceCalculator;
+import uni.miskolc.ips.ilona.measurement.model.measurement.WifiRssi;
+import uni.miskolc.ips.ilona.measurement.model.measurement.WifiRssiDistanceCalculator;
 
 import java.util.HashSet;
 import java.util.Set;
 
-public class VectorUnionWiFiRSSIDistance implements WiFiRSSIDistanceCalculator {
+public class VectorUnionWifiRssiDistance implements WifiRssiDistanceCalculator {
 
-    private static final Logger LOG = LogManager.getLogger(VectorUnionWiFiRSSIDistance.class);
+    private static final Logger LOG = LogManager.getLogger(VectorUnionWifiRssiDistance.class);
 
-    private final double UNKNOWN_VALUE;
+    private final double unknownValue;
 
-    public VectorUnionWiFiRSSIDistance(double unknownValue) {
+    public VectorUnionWifiRssiDistance(double unknownValue) {
         super();
-        this.UNKNOWN_VALUE = unknownValue;
+        this.unknownValue = unknownValue;
     }
 
     @Override
-    public double distance(WiFiRSSI rssA, WiFiRSSI rssB) {
+    public double distance(WifiRssi rssA, WifiRssi rssB) {
         double result = 0.0;
         Set<String> union = new HashSet<String>();
         union.addAll(rssA.getRssiValues().keySet());
         union.addAll(rssB.getRssiValues().keySet());
         if (union.isEmpty()) {
-            return WiFiRSSIDistanceCalculator.UNKOWN_DISTANCE;
+            return WifiRssiDistanceCalculator.UNKOWN_DISTANCE;
         }
         if (rssA.getRssiValues().isEmpty() || rssB.getRssiValues().isEmpty()) {
             return 1.0;
@@ -34,9 +34,9 @@ public class VectorUnionWiFiRSSIDistance implements WiFiRSSIDistanceCalculator {
 
         for (String each : union) {
             double valA =
-                    rssA.getRssiValues().containsKey(each) ? rssA.getRssiValues().get(each) : UNKNOWN_VALUE;
+                    rssA.getRssiValues().containsKey(each) ? rssA.getRssiValues().get(each) : unknownValue;
             double valB =
-                    rssB.getRssiValues().containsKey(each) ? rssB.getRssiValues().get(each) : UNKNOWN_VALUE;
+                    rssB.getRssiValues().containsKey(each) ? rssB.getRssiValues().get(each) : unknownValue;
             result += Math.pow(valA - valB, 2.0);
         }
         result = Math.sqrt(result);

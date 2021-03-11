@@ -8,7 +8,7 @@ import java.util.UUID;
 public class PositionEntityConverter {
     public static PositionEntity convertModelToEntity(Position position) {
         PositionEntity positionEntity = new PositionEntity();
-        positionEntity.setId(position.getUUID().toString());
+        positionEntity.setId(position.getUuid().toString());
         if (position.getCoordinate() != null) {
             positionEntity.setCoord_X(position.getCoordinate().getX());
             positionEntity.setCoord_Y(position.getCoordinate().getY());
@@ -22,7 +22,7 @@ public class PositionEntityConverter {
 
     public static Position convertEntityToModel(PositionEntity positionEntity) {
         Position position = new Position();
-        position.setUUID(UUID.fromString(positionEntity.getId()));
+        position.setUuid(UUID.fromString(positionEntity.getId()));
         Coordinate coordinate = new Coordinate(
                 positionEntity.getCoord_X(),
                 positionEntity.getCoord_Y(),
