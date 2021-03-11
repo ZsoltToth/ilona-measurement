@@ -151,7 +151,8 @@ public class RfidTags {
         if (tags == null) {
             return result.toString();
         }
-        int i = 1, j;
+        int i = 1;
+        int j;
         for (byte[] each : tags) {
             j = 1;
             result.append("[");

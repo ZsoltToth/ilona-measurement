@@ -39,11 +39,12 @@ public class MeasurementDistanceCalculatorImpl implements MeasurementDistanceCal
 
     public double distance(Measurement measA, Measurement measB) {
         double result;
-        double wifiDistance,
-                bluetoothDistance,
-                magnetometerDistance,
-                gpsCoordinateDistance,
-                rfidDistance;
+        double wifiDistance;
+        double bluetoothDistance;
+        double magnetometerDistance;
+        double gpsCoordinateDistance;
+        double rfidDistance;
+
         wifiDistance =
                 measA.getWifiRssi() != null && measB.getWifiRssi() != null
                         ? wifiDistanceCalculator.distance(measA.getWifiRssi(), measB.getWifiRssi())
