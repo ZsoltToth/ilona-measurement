@@ -18,9 +18,9 @@ public class MeasurementEntityConverter {
         MeasurementEntity measurementEntity = new MeasurementEntity();
         measurementEntity.setId(measurement.getId().toString());
         measurementEntity.setMeasTimestamp(measurement.getTimestamp());
-        measurementEntity.setMagnetometerX(measurement.getMagnetometer().getxAxis());
-        measurementEntity.setMagnetometerY(measurement.getMagnetometer().getyAxis());
-        measurementEntity.setMagnetometerZ(measurement.getMagnetometer().getzAxis());
+        measurementEntity.setMagnetometerX(measurement.getMagnetometer().getAxisX());
+        measurementEntity.setMagnetometerY(measurement.getMagnetometer().getAxisY());
+        measurementEntity.setMagnetometerZ(measurement.getMagnetometer().getAxisZ());
         measurementEntity.setMagnetometerRadian(measurement.getMagnetometer().getRadian());
         measurementEntity.setGpsLatitude(measurement.getGpsCoordinates().getLatitude());
         measurementEntity.setGpsLongitude(measurement.getGpsCoordinates().getLongitude());

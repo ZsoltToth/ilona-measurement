@@ -28,17 +28,17 @@ public class Magnetometer {
     /**
      * The attribute representing the X axis of the magnetometer.
      */
-    private double xAxis;
+    private double axisX;
 
     /**
      * The attribute representing the Y axis of the magnetometer.
      */
-    private double yAxis;
+    private double axisY;
 
     /**
      * The attribute representing the Z axis of the magnetometer.
      */
-    private double zAxis;
+    private double axisZ;
 
     /**
      * The attribute representing the radian of the magnetometer.
@@ -48,17 +48,17 @@ public class Magnetometer {
     /**
      * The constructor of the magnetometer class.
      *
-     * @param xAxis  as double
-     * @param yAxis  as double
-     * @param zAxis  as double
+     * @param axisX  as double
+     * @param axisY  as double
+     * @param axisZ  as double
      * @param radian as double
      */
     public Magnetometer(
-            final double xAxis, final double yAxis, final double zAxis, final double radian) {
+            final double axisX, final double axisY, final double axisZ, final double radian) {
         super();
-        this.xAxis = xAxis;
-        this.yAxis = yAxis;
-        this.zAxis = zAxis;
+        this.axisX = axisX;
+        this.axisY = axisY;
+        this.axisZ = axisZ;
         this.radian = radian;
     }
 
@@ -74,17 +74,17 @@ public class Magnetometer {
      *
      * @return the X axis as double
      */
-    public final double getxAxis() {
-        return xAxis;
+    public final double getAxisX() {
+        return axisX;
     }
 
     /**
      * The setter method of the X axis.
      *
-     * @param xAxis as double.
+     * @param axisX as double.
      */
-    public final void setxAxis(final double xAxis) {
-        this.xAxis = xAxis;
+    public final void setAxisX(final double axisX) {
+        this.axisX = axisX;
     }
 
     /**
@@ -92,17 +92,17 @@ public class Magnetometer {
      *
      * @return the Y axis as double
      */
-    public final double getyAxis() {
-        return yAxis;
+    public final double getAxisY() {
+        return axisY;
     }
 
     /**
      * The setter method of the Z axis.
      *
-     * @param yAxis as double.
+     * @param axisY as double.
      */
-    public final void setyAxis(final double yAxis) {
-        this.yAxis = yAxis;
+    public final void setAxisY(final double axisY) {
+        this.axisY = axisY;
     }
 
     /**
@@ -110,17 +110,17 @@ public class Magnetometer {
      *
      * @return the Z axis as double
      */
-    public final double getzAxis() {
-        return zAxis;
+    public final double getAxisZ() {
+        return axisZ;
     }
 
     /**
      * The setter method of the Z axis.
      *
-     * @param zAxis as double.
+     * @param axisZ as double.
      */
-    public final void setzAxis(final double zAxis) {
-        this.zAxis = zAxis;
+    public final void setAxisZ(final double axisZ) {
+        this.axisZ = axisZ;
     }
 
     /**
@@ -172,7 +172,7 @@ public class Magnetometer {
      */
     private RealVector getRotatedCoordinates() {
         RealVector x =
-                new ArrayRealVector(new double[]{this.getxAxis(), this.getyAxis(), this.getzAxis()});
+                new ArrayRealVector(new double[]{this.getAxisX(), this.getAxisY(), this.getAxisZ()});
         double radian = this.getRadian();
         double[][] d = {
                 {Math.cos(-radian), Math.sin(-radian), 0},
@@ -190,7 +190,7 @@ public class Magnetometer {
      * @return 0.0 if it does not
      */
     private boolean isNull() {
-        RealVector vector = new ArrayRealVector(new Double[]{xAxis, yAxis, zAxis});
+        RealVector vector = new ArrayRealVector(new Double[]{axisX, axisY, axisZ});
         return vector.getL1Norm() == 0.0;
     }
 
@@ -214,11 +214,11 @@ public class Magnetometer {
     @Override
     public final String toString() {
         return "Magnetometer [xAxis="
-                + xAxis
+                + axisX
                 + ", yAxis="
-                + yAxis
+                + axisY
                 + ", zAxis="
-                + zAxis
+                + axisZ
                 + ", radian="
                 + radian
                 + "]";
@@ -231,9 +231,9 @@ public class Magnetometer {
 
         Magnetometer that = (Magnetometer) o;
 
-        if (Double.compare(that.xAxis, xAxis) != 0) return false;
-        if (Double.compare(that.yAxis, yAxis) != 0) return false;
-        if (Double.compare(that.zAxis, zAxis) != 0) return false;
+        if (Double.compare(that.axisX, axisX) != 0) return false;
+        if (Double.compare(that.axisY, axisY) != 0) return false;
+        if (Double.compare(that.axisZ, axisZ) != 0) return false;
         return Double.compare(that.radian, radian) == 0;
     }
 
@@ -241,11 +241,11 @@ public class Magnetometer {
     public int hashCode() {
         int result;
         long temp;
-        temp = Double.doubleToLongBits(xAxis);
+        temp = Double.doubleToLongBits(axisX);
         result = (int) (temp ^ (temp >>> 32));
-        temp = Double.doubleToLongBits(yAxis);
+        temp = Double.doubleToLongBits(axisY);
         result = 31 * result + (int) (temp ^ (temp >>> 32));
-        temp = Double.doubleToLongBits(zAxis);
+        temp = Double.doubleToLongBits(axisZ);
         result = 31 * result + (int) (temp ^ (temp >>> 32));
         temp = Double.doubleToLongBits(radian);
         result = 31 * result + (int) (temp ^ (temp >>> 32));

@@ -160,9 +160,9 @@ public class MeasurementController {
         }
         if (measurement.getMagnetometer() != null) {
             MeasurementDto.Magnetometer magnetometer = new MeasurementDto.Magnetometer();
-            magnetometer.setXAxis(measurement.getMagnetometer().getxAxis());
-            magnetometer.setYAxis(measurement.getMagnetometer().getyAxis());
-            magnetometer.setZAxis(measurement.getMagnetometer().getzAxis());
+            magnetometer.setXAxis(measurement.getMagnetometer().getAxisX());
+            magnetometer.setYAxis(measurement.getMagnetometer().getAxisY());
+            magnetometer.setZAxis(measurement.getMagnetometer().getAxisZ());
             magnetometer.setRadian(measurement.getMagnetometer().getRadian());
             dto.setMagnetometer(magnetometer);
         }

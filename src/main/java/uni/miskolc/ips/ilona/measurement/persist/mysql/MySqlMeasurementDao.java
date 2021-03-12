@@ -61,9 +61,9 @@ public class MySqlMeasurementDao implements MeasurementDao {
         if (oldMeasurement.isPresent()) {
             oldMeasurement.get().setMeasTimestamp(new Date(System.currentTimeMillis()));
             if (measurement.getMagnetometer() != null) {
-                oldMeasurement.get().setMagnetometerX(measurement.getMagnetometer().getxAxis());
-                oldMeasurement.get().setMagnetometerY(measurement.getMagnetometer().getyAxis());
-                oldMeasurement.get().setMagnetometerZ(measurement.getMagnetometer().getzAxis());
+                oldMeasurement.get().setMagnetometerX(measurement.getMagnetometer().getAxisX());
+                oldMeasurement.get().setMagnetometerY(measurement.getMagnetometer().getAxisY());
+                oldMeasurement.get().setMagnetometerZ(measurement.getMagnetometer().getAxisZ());
                 oldMeasurement.get().setMagnetometerRadian(measurement.getMagnetometer().getRadian());
             }
             if (measurement.getGpsCoordinates() != null) {

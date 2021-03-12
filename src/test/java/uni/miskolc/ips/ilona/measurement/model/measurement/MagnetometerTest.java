@@ -10,9 +10,9 @@ public class MagnetometerTest {
   public void testdistanceFromItself() {
     Magnetometer magneto = new Magnetometer();
     magneto.setRadian(20.0);
-    magneto.setxAxis(1.0);
-    magneto.setyAxis(1.0);
-    magneto.setzAxis(1.0);
+    magneto.setAxisX(1.0);
+    magneto.setAxisY(1.0);
+    magneto.setAxisZ(1.0);
     double expected = 0.0;
     double actual = magneto.distance(magneto);
     assertEquals(expected, actual, 1e-10);
