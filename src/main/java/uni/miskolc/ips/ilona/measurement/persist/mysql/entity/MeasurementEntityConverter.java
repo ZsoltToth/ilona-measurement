@@ -36,10 +36,10 @@ public class MeasurementEntityConverter {
         Measurement measurement = new Measurement();
         measurement.setId(UUID.fromString(measurementEntity.getId()));
         measurement.setTimestamp(measurementEntity.getMeasTimestamp());
-        if (measurementEntity.getMagnetometerX() != null &&
-                measurementEntity.getMagnetometerY() != null &&
-                measurementEntity.getMagnetometerZ() != null &&
-                measurementEntity.getMagnetometerRadian() != null
+        if (measurementEntity.getMagnetometerX() != null
+                && measurementEntity.getMagnetometerY() != null
+                && measurementEntity.getMagnetometerZ() != null
+                && measurementEntity.getMagnetometerRadian() != null
         ) {
             measurement.setMagnetometer(new Magnetometer(
                     measurementEntity.getMagnetometerX(),
@@ -48,9 +48,9 @@ public class MeasurementEntityConverter {
                     measurementEntity.getMagnetometerRadian()
             ));
         }
-        if (measurementEntity.getGpsAltitude() != null &&
-                measurementEntity.getGpsLatitude() != null &&
-                measurementEntity.getGpsLongitude() != null
+        if (measurementEntity.getGpsAltitude() != null
+                && measurementEntity.getGpsLatitude() != null
+                && measurementEntity.getGpsLongitude() != null
         ) {
             measurement.setGpsCoordinates(new GpsCoordinate(
                     measurementEntity.getGpsLatitude(),
