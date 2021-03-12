@@ -37,36 +37,40 @@ public class MeasurementDistanceCalculatorImpl implements MeasurementDistanceCal
         this.rfidDistanceWeight = rfidDistanceWeight;
     }
 
+    //CHECKSTYLE:OFF
+    // TODO: #54
     public double distance(Measurement measA, Measurement measB) {
-        double result;
         double wifiDistance;
-        double bluetoothDistance;
-        double magnetometerDistance;
-        double gpsCoordinateDistance;
-        double rfidDistance;
-
         wifiDistance =
                 measA.getWifiRssi() != null && measB.getWifiRssi() != null
                         ? wifiDistanceCalculator.distance(measA.getWifiRssi(), measB.getWifiRssi())
                         : UNKNOWN_DISTANCE;
+
+        double bluetoothDistance;
         bluetoothDistance =
                 measA.getBluetoothTags() != null && measB.getBluetoothTags() != null
                         ? measA.getBluetoothTags().distance(measB.getBluetoothTags())
                         : UNKNOWN_DISTANCE;
+
+        double magnetometerDistance;
         magnetometerDistance =
                 measA.getMagnetometer() != null && measB.getMagnetometer() != null
                         ? measA.getMagnetometer().distance(measB.getMagnetometer())
                         : UNKNOWN_DISTANCE;
+
+        double gpsCoordinateDistance;
         gpsCoordinateDistance =
                 measA.getGpsCoordinates() != null && measB.getGpsCoordinates() != null
                         ? measA.getGpsCoordinates().distance(measB.getGpsCoordinates())
                         : UNKNOWN_DISTANCE;
+
+        double rfidDistance;
         rfidDistance =
                 measA.getRfidtags() != null && measB.getRfidtags() != null
                         ? measA.getRfidtags().distance(measB.getRfidtags())
                         : UNKNOWN_DISTANCE;
 
-        result = 0.0;
+        double result = 0.0;
         double denominator = 0.0;
 
         if (wifiDistance != WifiRssiDistanceCalculator.UNKOWN_DISTANCE) {
@@ -104,4 +108,5 @@ public class MeasurementDistanceCalculatorImpl implements MeasurementDistanceCal
                         "Distance between %s and %s is %f", measA.toString(), measB.toString(), result));
         return result;
     }
+    //CHECKSTYLE:ON
 }

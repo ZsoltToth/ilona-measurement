@@ -85,9 +85,9 @@ public class BluetoothTags {
      * @return result double as distance
      */
     public final double distance(final BluetoothTags other) {
-        double result;
+        double result = 0.0;
         if (this.getTags().isEmpty() && other.getTags().isEmpty()) {
-            return 0;
+            return result;
         }
         Set<String> intersection = new HashSet<>(this.getTags());
         intersection.retainAll(other.getTags());
