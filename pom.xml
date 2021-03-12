@@ -301,6 +301,7 @@
 					<consoleOutput>true</consoleOutput>
 					<violationSeverity>warning</violationSeverity>
 					<configLocation>${project.basedir}/src/main/resources/checkstyle.xml</configLocation>
+					<suppressionsLocation>${project.basedir}/src/main/resources/checkstyle-suppressions.xml</suppressionsLocation>
 				</configuration>
 			</plugin>
 			<!-- TODO: 52 JaCoCo Configuration Issue -->
