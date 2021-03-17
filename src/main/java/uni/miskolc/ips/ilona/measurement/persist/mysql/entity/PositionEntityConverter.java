@@ -10,9 +10,9 @@ public class PositionEntityConverter {
         PositionEntity positionEntity = new PositionEntity();
         positionEntity.setId(position.getUuid().toString());
         if (position.getCoordinate() != null) {
-            positionEntity.setCoord_X(position.getCoordinate().getX());
-            positionEntity.setCoord_Y(position.getCoordinate().getY());
-            positionEntity.setCoord_Z(position.getCoordinate().getZ());
+            positionEntity.setCoordinateX(position.getCoordinate().getX());
+            positionEntity.setCoordinateY(position.getCoordinate().getY());
+            positionEntity.setCoordinateZ(position.getCoordinate().getZ());
         }
         if (position.getZone() != null) {
             positionEntity.setZone(ZoneEntityConverter.convertModelToEntity(position.getZone()));
@@ -24,9 +24,9 @@ public class PositionEntityConverter {
         Position position = new Position();
         position.setUuid(UUID.fromString(positionEntity.getId()));
         Coordinate coordinate = new Coordinate(
-                positionEntity.getCoord_X(),
-                positionEntity.getCoord_Y(),
-                positionEntity.getCoord_Z()
+                positionEntity.getCoordinateX(),
+                positionEntity.getCoordinateY(),
+                positionEntity.getCoordinateZ()
         );
         position.setCoordinate(coordinate);
         position.setZone(ZoneEntityConverter.convertEntityToModel(positionEntity.getZone()));

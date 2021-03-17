@@ -26,11 +26,14 @@ public class PositionEntity {
     @Column(name = "posId")
     private String id;
 
-    private double coord_X;
+    @Column(name = "coord_X")
+    private double coordinateX;
 
-    private double coord_Y;
+    @Column(name = "coord_Y")
+    private double coordinateY;
 
-    private double coord_Z;
+    @Column(name = "coord_Z")
+    private double coordinateZ;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "zoneId", referencedColumnName = "zoneId")

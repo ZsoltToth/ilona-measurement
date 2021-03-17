@@ -54,9 +54,9 @@ public class MySqlPositionDao implements PositionDao {
     public void updatePosition(Position position) throws RecordNotFoundException {
         Optional<PositionEntity> oldPosition = repository.findById(position.getUuid().toString());
         if (oldPosition.isPresent()) {
-            oldPosition.get().setCoord_X(position.getCoordinate().getX());
-            oldPosition.get().setCoord_Y(position.getCoordinate().getY());
-            oldPosition.get().setCoord_Z(position.getCoordinate().getZ());
+            oldPosition.get().setCoordinateX(position.getCoordinate().getX());
+            oldPosition.get().setCoordinateY(position.getCoordinate().getY());
+            oldPosition.get().setCoordinateZ(position.getCoordinate().getZ());
             if (position.getZone() != null) {
                 oldPosition.get().setZone(ZoneEntityConverter.convertModelToEntity(position.getZone()));
             }
