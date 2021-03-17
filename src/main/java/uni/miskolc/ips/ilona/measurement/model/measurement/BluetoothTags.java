@@ -1,10 +1,11 @@
 package uni.miskolc.ips.ilona.measurement.model.measurement;
 
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.HashSet;
-import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -12,67 +13,35 @@ import java.util.Set;
  *     Represents the measurement of the bluetooth sensor and
  *     calculates the distance of two bluetooth sensor measurement
  */
+@ToString
+@EqualsAndHashCode
 public class BluetoothTags {
 
-    /**
-     * The logger class.
-     */
     private static final Logger LOG = LogManager.getLogger(BluetoothTags.class);
 
-    /**
-     * The collection of the bluetooth tags.
-     */
     private Set<String> tags;
 
-    /**
-     * Empty constructor for the bluetooth tags.
-     */
     public BluetoothTags() {
         super();
     }
 
-    /**
-     * BluetoothTags constructor.
-     *
-     * @param tags as set
-     */
     public BluetoothTags(final Set<String> tags) {
         super();
         this.tags = tags;
     }
 
-    /**
-     * Get method.
-     *
-     * @return set
-     */
     public final Set<String> getTags() {
         return tags;
     }
 
-    /**
-     * Set method.
-     *
-     * @param tags as set
-     */
     public final void setTags(final Set<String> tags) {
         this.tags = tags;
     }
 
-    /**
-     * Method to add a new tag to the set.
-     *
-     * @param tag as String
-     */
     public final void addTag(final String tag) {
         this.tags.add(tag);
     }
 
-    /**
-     * Method used to remove a tag.
-     *
-     * @param tag as string
-     */
     public final void removeTag(final String tag) {
         this.tags.remove(tag);
     }
@@ -102,23 +71,5 @@ public class BluetoothTags {
                         "Distance between %s and %s is %f", this.toString(), other.toString(), result));
 
         return result;
-    }
-
-    @Override
-    public final String toString() {
-        return "BluetoothTags [tags=" + tags + "]";
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        BluetoothTags that = (BluetoothTags) o;
-        return Objects.equals(tags, that.tags);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(tags);
     }
 }

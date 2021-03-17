@@ -1,8 +1,15 @@
 package uni.miskolc.ips.ilona.measurement.model.measurement;
 
+import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+
 import java.util.HashMap;
 import java.util.Map;
 
+@ToString
+@EqualsAndHashCode
+@AllArgsConstructor
 public class WifiRssi {
 
     private Map<String, Double> rssiValues;
@@ -10,11 +17,6 @@ public class WifiRssi {
     public WifiRssi() {
         super();
         this.rssiValues = new HashMap<>();
-    }
-
-    public WifiRssi(Map<String, Double> rssiValues) {
-        super();
-        this.rssiValues = rssiValues;
     }
 
     public void setRssi(String ssid, double rssi) {
@@ -35,27 +37,5 @@ public class WifiRssi {
 
     public void setRssiValues(Map<String, Double> rssiValues) {
         this.rssiValues = rssiValues;
-    }
-
-    @Override
-    public String toString() {
-        return "WiFiRSSI rssiValues = " + rssiValues;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        WifiRssi wifiRssi = (WifiRssi) o;
-
-        return rssiValues != null
-                ? rssiValues.equals(wifiRssi.rssiValues)
-                : wifiRssi.rssiValues == null;
-    }
-
-    @Override
-    public int hashCode() {
-        return rssiValues != null ? rssiValues.hashCode() : 0;
     }
 }

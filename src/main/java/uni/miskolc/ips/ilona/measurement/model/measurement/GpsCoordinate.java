@@ -1,5 +1,7 @@
 package uni.miskolc.ips.ilona.measurement.model.measurement;
 
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -8,34 +10,17 @@ import org.apache.logging.log4j.Logger;
  *
  * @author Tamas13
  */
+@ToString
+@EqualsAndHashCode
 public class GpsCoordinate {
-    /**
-     * The logger.
-     */
     private static final Logger LOG = LogManager.getLogger(GpsCoordinate.class);
 
-    /**
-     * The latitude is represented by this attribute.
-     */
     private double latitude;
 
-    /**
-     * The longitude is represented by this attribute.
-     */
     private double longitude;
 
-    /**
-     * The altitude is represented by this attribute.
-     */
     private double altitude;
 
-    /**
-     * The Constructor of the GPS Coordinate class.
-     *
-     * @param latitude  as double
-     * @param longitude as double
-     * @param altitude  as double
-     */
     public GpsCoordinate(final double latitude, final double longitude, final double altitude) {
         super();
 
@@ -44,63 +29,30 @@ public class GpsCoordinate {
         this.altitude = altitude;
     }
 
-    /**
-     * Empty constructor.
-     */
     public GpsCoordinate() {
         super();
     }
 
-    /**
-     * Latitude getter function.
-     *
-     * @return the Latitude value of the coordinate.
-     */
     public final double getLatitude() {
         return latitude;
     }
 
-    /**
-     * The setter of the latitude attribute.
-     *
-     * @param latitude double as the new value.
-     */
     public final void setLatitude(final double latitude) {
         this.latitude = latitude;
     }
 
-    /**
-     * Longitude getter function.
-     *
-     * @return the Longitude value of the coordinate.
-     */
     public final double getLongitude() {
         return longitude;
     }
 
-    /**
-     * The setter of the latitude attribute.
-     *
-     * @param longitude double as the new value.
-     */
     public final void setLongitude(final double longitude) {
         this.longitude = longitude;
     }
 
-    /**
-     * Altitude getter function.
-     *
-     * @return the Altitude value of the coordinate.
-     */
     public final double getAltitude() {
         return altitude;
     }
 
-    /**
-     * The setter of the latitude attribute.
-     *
-     * @param altitude double as the new value.
-     */
     public final void setAltitude(final double altitude) {
         this.altitude = altitude;
     }
@@ -149,42 +101,6 @@ public class GpsCoordinate {
         LOG.info(
                 String.format(
                         "Distance between %s and %s is %f", this.toString(), otherGps.toString(), result));
-        return result;
-    }
-
-    @Override
-    public final String toString() {
-        return "GPSCoordinate [latitude="
-                + latitude
-                + ", longitude="
-                + longitude
-                + ", altitude="
-                + altitude
-                + "]";
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        GpsCoordinate that = (GpsCoordinate) o;
-
-        if (Double.compare(that.latitude, latitude) != 0) return false;
-        if (Double.compare(that.longitude, longitude) != 0) return false;
-        return Double.compare(that.altitude, altitude) == 0;
-    }
-
-    @Override
-    public int hashCode() {
-        int result;
-        long temp;
-        temp = Double.doubleToLongBits(latitude);
-        result = (int) (temp ^ (temp >>> 32));
-        temp = Double.doubleToLongBits(longitude);
-        result = 31 * result + (int) (temp ^ (temp >>> 32));
-        temp = Double.doubleToLongBits(altitude);
-        result = 31 * result + (int) (temp ^ (temp >>> 32));
         return result;
     }
 }

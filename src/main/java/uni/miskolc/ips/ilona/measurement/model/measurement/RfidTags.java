@@ -1,5 +1,6 @@
 package uni.miskolc.ips.ilona.measurement.model.measurement;
 
+import lombok.EqualsAndHashCode;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -7,6 +8,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
+@EqualsAndHashCode
 public class RfidTags {
 
     private static final Logger LOG = LogManager.getLogger(RfidTags.class);
@@ -57,21 +59,6 @@ public class RfidTags {
                 String.format(
                         "Distance between %s and %s is %f", this.toString(), other.toString(), result));
         return result;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        RfidTags rfidTags = (RfidTags) o;
-
-        return tags.equals(rfidTags.tags);
-    }
-
-    @Override
-    public int hashCode() {
-        return tags != null ? tags.hashCode() : 0;
     }
 
     protected Set<byte[]> union(RfidTags other) {
