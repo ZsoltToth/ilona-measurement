@@ -1,5 +1,6 @@
 package uni.miskolc.ips.ilona.measurement.model.measurement;
 
+import lombok.ToString;
 import uni.miskolc.ips.ilona.measurement.model.position.Position;
 
 import java.util.Date;
@@ -12,6 +13,7 @@ import java.util.UUID;
  *
  * @author zsolt
  */
+@ToString
 public class Measurement {
 
     /**
@@ -246,26 +248,5 @@ public class Measurement {
         }
 
         return this.id.equals(((Measurement) obj).id);
-    }
-
-    @Override
-    public final String toString() {
-        return "Measurement [id="
-                + id
-                + ", timestamp="
-                + timestamp
-                + ", position="
-                + position
-                + ", "
-                + wifiRssi
-                + ", "
-                + magnetometer
-                + ", "
-                + bluetoothTags
-                + ", "
-                + gpsCoordinates
-                + ", "
-                + rfidtags
-                + "]";
     }
 }
