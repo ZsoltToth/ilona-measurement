@@ -8,8 +8,9 @@ import java.util.Objects;
 import java.util.Set;
 
 /**
- * @author Tamas13, comment made by kun3 Represents the measurement of the bluetooth sensor and
- * calculates the distance of two bluetooth sensor measurement
+ * @author Tamas13, comment made by kun3
+ *     Represents the measurement of the bluetooth sensor and
+ *     calculates the distance of two bluetooth sensor measurement
  */
 public class BluetoothTags {
 
