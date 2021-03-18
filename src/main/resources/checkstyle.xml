@@ -16,6 +16,7 @@ Checkstyle configuration that checks the Google coding conventions from Google J
     <property name="fileExtensions" value="java, properties, xml"/>
     <module name="TreeWalker">
         <module name="UnusedImports"/>
+        <module name="SuppressionCommentFilter"/>
         <module name="OuterTypeFilename"/>
         <module name="IllegalTokenText">
             <property name="format"

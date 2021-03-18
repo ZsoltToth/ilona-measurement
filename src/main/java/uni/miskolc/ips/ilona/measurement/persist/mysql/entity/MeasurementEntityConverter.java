@@ -32,6 +32,8 @@ public class MeasurementEntityConverter {
         return measurementEntity;
     }
 
+    //CHECKSTYLE:OFF
+    // TODO: #57
     public static Measurement convertEntityToModel(MeasurementEntity measurementEntity) {
         Measurement measurement = new Measurement();
         measurement.setId(UUID.fromString(measurementEntity.getId()));
