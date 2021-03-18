@@ -2,12 +2,11 @@ package uni.miskolc.ips.ilona.measurement.model.measurement;
 
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.math.linear.Array2DRowRealMatrix;
 import org.apache.commons.math.linear.ArrayRealVector;
 import org.apache.commons.math.linear.RealMatrix;
 import org.apache.commons.math.linear.RealVector;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 /**
  * It represents the measured values of a Magnetometer. The magnetometer returns values in Cartesian
@@ -15,6 +14,7 @@ import org.apache.logging.log4j.Logger;
  *
  * @author zsolt
  */
+@Slf4j
 @ToString
 @EqualsAndHashCode
 public class Magnetometer {
@@ -22,9 +22,7 @@ public class Magnetometer {
     /**
      * The constant default value of the unknown distance.
      */
-    public static final double UNKNOW_DISTANCE = -1.0;
-
-    private static final Logger LOG = LogManager.getLogger(Magnetometer.class);
+    public static final double UNKNOWN_DISTANCE = -1.0;
 
     private double axisX;
 
@@ -89,7 +87,7 @@ public class Magnetometer {
         double result;
         double cos;
         if (this.isNull() || other.isNull()) {
-            result = UNKNOW_DISTANCE;
+            result = UNKNOWN_DISTANCE;
             return result;
         }
         RealVector x1 = this.getRotatedCoordinates();
@@ -97,17 +95,12 @@ public class Magnetometer {
         cos = cosine(x1, x2);
         cos = Math.acos(cos);
         result = cos / Math.PI;
-        LOG.info(
+        log.info(
                 String.format(
                         "Distance between %s and %s is %f", this.toString(), other.toString(), result));
         return result;
     }
 
-    /**
-     * Calculates the rotated coordinates from the original ones.
-     *
-     * @return the rotated vector
-     */
     private RealVector getRotatedCoordinates() {
         RealVector x =
                 new ArrayRealVector(new double[]{this.getAxisX(), this.getAxisY(), this.getAxisZ()});

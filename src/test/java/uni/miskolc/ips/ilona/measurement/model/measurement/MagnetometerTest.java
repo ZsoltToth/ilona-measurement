@@ -29,7 +29,7 @@ public class MagnetometerTest {
   public void testdistanceFromNullVector() {
     Magnetometer magneto1 = new Magnetometer(1, 0, 0, 0.7);
     Magnetometer magneto2 = new Magnetometer(0, 0, 0, 0.8);
-    double expected = Magnetometer.UNKNOW_DISTANCE;
+    double expected = Magnetometer.UNKNOWN_DISTANCE;
     double actual = magneto1.distance(magneto2);
     assertEquals(expected, actual, 1e-10);
   }
@@ -56,7 +56,7 @@ public class MagnetometerTest {
   public void testNullVectors() {
     Magnetometer magneto1 = new Magnetometer(0, 0, 0, 0);
     Magnetometer magneto2 = new Magnetometer(0, 0, 0, 0);
-    assertEquals(Magnetometer.UNKNOW_DISTANCE, magneto1.distance(magneto2), 1e-10);
+    assertEquals(Magnetometer.UNKNOWN_DISTANCE, magneto1.distance(magneto2), 1e-10);
   }
 
   @Test

@@ -1,13 +1,11 @@
 package uni.miskolc.ips.ilona.measurement.model.measurement;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 public class MeasurementDistanceCalculatorImpl implements MeasurementDistanceCalculator {
 
     private static final double UNKNOWN_DISTANCE = -1.0;
-
-    private static final Logger LOG = LogManager.getLogger(MeasurementDistanceCalculatorImpl.class);
 
     private final WifiRssiDistanceCalculator wifiDistanceCalculator;
 
@@ -83,7 +81,7 @@ public class MeasurementDistanceCalculatorImpl implements MeasurementDistanceCal
             denominator += bluetoothDistanceWeight;
         }
 
-        if (magnetometerDistance != Magnetometer.UNKNOW_DISTANCE) {
+        if (magnetometerDistance != Magnetometer.UNKNOWN_DISTANCE) {
             result += magnetometerDistanceWeight * Math.pow(magnetometerDistance, 2.0);
             denominator += magnetometerDistanceWeight;
         }
@@ -103,7 +101,7 @@ public class MeasurementDistanceCalculatorImpl implements MeasurementDistanceCal
         }
 
         result = Math.sqrt(result / denominator);
-        LOG.info(
+        log.info(
                 String.format(
                         "Distance between %s and %s is %f", measA.toString(), measB.toString(), result));
         return result;

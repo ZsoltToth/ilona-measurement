@@ -1,18 +1,16 @@
 package uni.miskolc.ips.ilona.measurement.model.measurement.wifi;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import lombok.extern.slf4j.Slf4j;
 import uni.miskolc.ips.ilona.measurement.model.measurement.WifiRssi;
 import uni.miskolc.ips.ilona.measurement.model.measurement.WifiRssiDistanceCalculator;
 
 import java.util.HashSet;
 import java.util.Set;
 
+@Slf4j
 public class VectorIntersectionWifiRssiDistance implements WifiRssiDistanceCalculator {
 
     public static final double UNKNOWN_DISTANCE = -1;
-
-    private static final Logger LOG = LogManager.getLogger(VectorIntersectionWifiRssiDistance.class);
 
     @Override
     public double distance(WifiRssi rssA, WifiRssi rssB) {
@@ -23,7 +21,7 @@ public class VectorIntersectionWifiRssiDistance implements WifiRssiDistanceCalcu
             return result;
         }
         result = 1 - Math.abs(correlation(rssA, rssB, intersection));
-        LOG.info(
+        log.info(
                 String.format(
                         "Distance between %s and %s is %f", rssA.toString(), rssB.toString(), result));
         return result;

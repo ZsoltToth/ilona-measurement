@@ -2,19 +2,17 @@ package uni.miskolc.ips.ilona.measurement.model.measurement;
 
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * The class responsible for the GPS Coordinate of the measurement.
  *
  * @author Tamas13
  */
+@Slf4j
 @ToString
 @EqualsAndHashCode
 public class GpsCoordinate {
-    private static final Logger LOG = LogManager.getLogger(GpsCoordinate.class);
-
     private double latitude;
 
     private double longitude;
@@ -98,7 +96,7 @@ public class GpsCoordinate {
                         * (Math.sin(theta1) * Math.sin(theta2) * Math.cos(phi1 - phi2)
                         + Math.cos(theta1) * Math.cos(theta2)));
         result = Math.sqrt(result);
-        LOG.info(
+        log.info(
                 String.format(
                         "Distance between %s and %s is %f", this.toString(), otherGps.toString(), result));
         return result;

@@ -2,8 +2,7 @@ package uni.miskolc.ips.ilona.measurement.model.measurement;
 
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -13,11 +12,10 @@ import java.util.Set;
  *     Represents the measurement of the bluetooth sensor and
  *     calculates the distance of two bluetooth sensor measurement
  */
+@Slf4j
 @ToString
 @EqualsAndHashCode
 public class BluetoothTags {
-
-    private static final Logger LOG = LogManager.getLogger(BluetoothTags.class);
 
     private Set<String> tags;
 
@@ -66,7 +64,7 @@ public class BluetoothTags {
         union.addAll(other.getTags());
 
         result = 1 - ((double) intersection.size() / (double) union.size());
-        LOG.info(
+        log.info(
                 String.format(
                         "Distance between %s and %s is %f", this.toString(), other.toString(), result));
 

@@ -1,17 +1,15 @@
 package uni.miskolc.ips.ilona.measurement.model.measurement;
 
 import lombok.EqualsAndHashCode;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
+@Slf4j
 @EqualsAndHashCode
 public class RfidTags {
-
-    private static final Logger LOG = LogManager.getLogger(RfidTags.class);
 
     private Set<byte[]> tags;
 
@@ -55,7 +53,7 @@ public class RfidTags {
         Set<byte[]> union = this.union(other);
 
         result = 1 - ((double) intersection.size() / (double) union.size());
-        LOG.info(
+        log.info(
                 String.format(
                         "Distance between %s and %s is %f", this.toString(), other.toString(), result));
         return result;
