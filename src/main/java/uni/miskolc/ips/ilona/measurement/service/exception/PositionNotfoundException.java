@@ -7,6 +7,8 @@ package uni.miskolc.ips.ilona.measurement.service.exception;
  */
 public class PositionNotfoundException extends Exception {
 
-  /** */
-  private static final long serialVersionUID = -523518923359643780L;
+    /**
+     *
+     */
+    private static final long serialVersionUID = -523518923359643780L;
 }

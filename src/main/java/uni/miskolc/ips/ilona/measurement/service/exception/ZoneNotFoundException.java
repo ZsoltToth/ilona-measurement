@@ -1,4 +1,5 @@
 package uni.miskolc.ips.ilona.measurement.service.exception;
+
 /**
  * Check if the Zone exists.
  *
@@ -6,6 +7,8 @@ package uni.miskolc.ips.ilona.measurement.service.exception;
  */
 public class ZoneNotFoundException extends Exception {
 
-  /** */
-  private static final long serialVersionUID = 2539588989884533194L;
+    /**
+     *
+     */
+    private static final long serialVersionUID = 2539588989884533194L;
 }

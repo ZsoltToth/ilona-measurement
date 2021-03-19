@@ -18,15 +18,15 @@ public class MeasurementBuilderTest {
     measb.unsetPosition();
 
     measb.setBluetoothTags(new BluetoothTags());
-    measb.setGPSCoordinates(new GPSCoordinate());
+    measb.setGpsCoordinates(new GpsCoordinate());
     measb.setMagnetometer(new Magnetometer());
-    measb.setRFIDTags(new RFIDTags());
-    measb.setWifiRSSI(new WiFiRSSI());
+    measb.setRfidTags(new RfidTags());
+    measb.setWifiRssi(new WifiRssi());
 
     measb.unsetBluetoothTags();
-    measb.unsetGPSCoordinates();
+    measb.unsetGpsCoordinates();
     measb.unsetMagnetometer();
-    measb.unsetRFIDTags();
-    measb.unsetWifiRSSI();
+    measb.unsetRfidTags();
+    measb.unsetWifiRssi();
   }
 }

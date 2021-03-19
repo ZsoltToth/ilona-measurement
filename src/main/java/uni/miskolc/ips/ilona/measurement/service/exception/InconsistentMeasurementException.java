@@ -7,6 +7,8 @@ package uni.miskolc.ips.ilona.measurement.service.exception;
  */
 public class InconsistentMeasurementException extends Exception {
 
-  /** */
-  private static final long serialVersionUID = -1684105473685784848L;
+    /**
+     *
+     */
+    private static final long serialVersionUID = -1684105473685784848L;
 }

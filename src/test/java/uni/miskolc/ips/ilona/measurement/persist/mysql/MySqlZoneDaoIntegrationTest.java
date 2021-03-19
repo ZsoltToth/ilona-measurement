@@ -19,9 +19,9 @@ import static org.junit.Assert.assertThat;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(classes = MeasurementApp.class)
-public class MySQLZoneDAOIntegrationTest extends SetupIntegrationTest {
+public class MySqlZoneDaoIntegrationTest extends SetupIntegrationTest {
     @Autowired
-    private MySQLZoneDAO zoneDAO;
+    private MySqlZoneDao zoneDAO;
 
     @Test
     public void createZone() throws InsertionException, RecordNotFoundException {
