@@ -1,5 +1,9 @@
 package uni.miskolc.ips.ilona.measurement.model.position;
 
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+
 import java.util.UUID;
 
 /**
@@ -7,6 +11,9 @@ import java.util.UUID;
  *
  * @author zsolt
  */
+@Getter
+@Setter
+@EqualsAndHashCode
 public class Zone {
 
     public static final Zone UNKNOWN_POSITION;
@@ -21,6 +28,7 @@ public class Zone {
      */
     private UUID id;
 
+    @EqualsAndHashCode.Exclude
     private String name;
 
     public Zone() {
@@ -30,36 +38,6 @@ public class Zone {
         super();
         this.id = UUID.randomUUID();
         this.name = name;
-    }
-
-    public void addInternalZone(Zone internal) {
-        if (internal == null) {
-            return;
-        }
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public UUID getId() {
-        return id;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (!(obj instanceof Zone)) {
-            return false;
-        }
-        return this.id.equals(((Zone) obj).id);
     }
 
     @Override

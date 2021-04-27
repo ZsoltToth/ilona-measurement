@@ -1,9 +1,10 @@
 package uni.miskolc.ips.ilona.measurement.model.position;
 
-import static org.junit.Assert.*;
+import org.junit.Test;
 
 import java.util.UUID;
-import org.junit.Test;
+
+import static org.junit.Assert.assertFalse;
 
 public class ZoneTest {
 
@@ -16,9 +17,9 @@ public class ZoneTest {
     zone.setName(name);
     if (zone.getId().compareTo(uuid) == 0 && zone.getName().equals(name)) {
       String zoneString = zone.toString();
-      zone.addInternalZone(Zone.UNKNOWN_POSITION);
+//      zone.addInternalZone(Zone.UNKNOWN_POSITION);
     }
-    zone.addInternalZone(null);
+//    zone.addInternalZone(null);
 
     assertFalse(zone.equals(uuid));
   }
