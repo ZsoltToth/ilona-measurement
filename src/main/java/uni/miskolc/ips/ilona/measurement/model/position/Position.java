@@ -1,14 +1,23 @@
 package uni.miskolc.ips.ilona.measurement.model.position;
 
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+
 import java.util.UUID;
 
+@Getter
+@Setter
+@EqualsAndHashCode
 public class Position {
 
+    @EqualsAndHashCode.Exclude
     private Coordinate coordinate;
 
+    @EqualsAndHashCode.Exclude
     private Zone zone;
 
-    private UUID id;
+    private UUID uuid;
 
     public Position() {
         super();
@@ -18,59 +27,23 @@ public class Position {
         super();
         this.coordinate = coordinate;
         this.zone = zone;
-        this.id = UUID.randomUUID();
+        this.uuid = UUID.randomUUID();
     }
 
     public Position(Zone zone) {
         super();
         this.zone = zone;
-        this.id = UUID.randomUUID();
+        this.uuid = UUID.randomUUID();
     }
 
     public Position(Coordinate coordinate) {
         super();
         this.coordinate = coordinate;
-        this.id = UUID.randomUUID();
-    }
-
-    public Coordinate getCoordinate() {
-        return coordinate;
-    }
-
-    public void setCoordinate(Coordinate coordinate) {
-        this.coordinate = coordinate;
-    }
-
-    public Zone getZone() {
-        return zone;
-    }
-
-    public void setZone(Zone zone) {
-        this.zone = zone;
-    }
-
-    public UUID getUuid() {
-        return this.id;
-    }
-
-    public void setUuid(UUID id) {
-        this.id = id;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (!(obj instanceof Position)) {
-            return false;
-        }
-        /*
-         * return this.coordinate.equals(((Position) obj).coordinate) &&
-         * this.zone.equals(((Position) obj).zone);
-         */
-        return this.id.equals(((Position) obj).id);
+        this.uuid = UUID.randomUUID();
     }
 
     @Override
     public String toString() {
-        return "Position [coordinate=" + coordinate + ", zone=" + zone + ", id=" + id + "]";
+        return "Position [coordinate=" + coordinate + ", zone=" + zone + ", id=" + uuid + "]";
     }
 }
