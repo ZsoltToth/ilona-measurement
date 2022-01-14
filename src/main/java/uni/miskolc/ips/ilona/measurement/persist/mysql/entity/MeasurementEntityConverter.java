@@ -32,17 +32,11 @@ public class MeasurementEntityConverter {
         return measurementEntity;
     }
 
-    //CHECKSTYLE:OFF
-    // TODO: #57
     public static Measurement convertEntityToModel(MeasurementEntity measurementEntity) {
         Measurement measurement = new Measurement();
         measurement.setId(UUID.fromString(measurementEntity.getId()));
         measurement.setTimestamp(measurementEntity.getMeasTimestamp());
-        if (measurementEntity.getMagnetometerX() != null
-                && measurementEntity.getMagnetometerY() != null
-                && measurementEntity.getMagnetometerZ() != null
-                && measurementEntity.getMagnetometerRadian() != null
-        ) {
+        if (!isMagnetometerNull(measurementEntity)) {
             measurement.setMagnetometer(new Magnetometer(
                     measurementEntity.getMagnetometerX(),
                     measurementEntity.getMagnetometerY(),
@@ -50,10 +44,7 @@ public class MeasurementEntityConverter {
                     measurementEntity.getMagnetometerRadian()
             ));
         }
-        if (measurementEntity.getGpsAltitude() != null
-                && measurementEntity.getGpsLatitude() != null
-                && measurementEntity.getGpsLongitude() != null
-        ) {
+        if (!isGpsNull(measurementEntity)) {
             measurement.setGpsCoordinates(new GpsCoordinate(
                     measurementEntity.getGpsLatitude(),
                     measurementEntity.getGpsLongitude(),
@@ -87,5 +78,18 @@ public class MeasurementEntityConverter {
             measurement.setRfidtags(rfidTags);
         }
         return measurement;
+    }
+
+    private static boolean isMagnetometerNull(MeasurementEntity measurementEntity) {
+        return measurementEntity.getMagnetometerX() == null
+                || measurementEntity.getMagnetometerY() == null
+                || measurementEntity.getMagnetometerZ() == null
+                || measurementEntity.getMagnetometerRadian() == null;
+    }
+
+    private static boolean isGpsNull(MeasurementEntity measurementEntity) {
+        return measurementEntity.getGpsAltitude() == null
+                || measurementEntity.getGpsLatitude() == null
+                || measurementEntity.getGpsLongitude() == null;
     }
 }
