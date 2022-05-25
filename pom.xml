@@ -14,7 +14,7 @@
 		<junit.version>4.13.1</junit.version>
 		<gov.nist.math.version>1.0.3</gov.nist.math.version>
 		<org.apache.commons.version>2.2</org.apache.commons.version>
-		<spring.version>5.3.14</spring.version>
+		<spring.version>5.3.20</spring.version>
 		<org.springframework.version>${spring.version}</org.springframework.version>
 		<spring.boot.version>2.1.8.RELEASE</spring.boot.version>
 		<spring.security.version>${spring.version}</spring.security.version>
